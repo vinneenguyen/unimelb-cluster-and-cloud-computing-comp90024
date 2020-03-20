@@ -1,12 +1,6 @@
-# README #
-
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This [Cluster and Cloud Computing (COMP90024)](https://handbook.unimelb.edu.au/2020/subjects/comp90024) course is taught at the [University of Melbourne](https://www.unimelb.edu.au/).
 
 ### How do I get set up? ###
 
