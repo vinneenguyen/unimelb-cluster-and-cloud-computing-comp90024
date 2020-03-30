@@ -1,0 +1,47 @@
+14:16:52	 From --- : I had a question regarding the language counting task. I see there were mentions using "iso_language_code" but there is another field "lang" in the outer level of the json which as per the twitter documentation is the language of the tweet. The difference is "lang" uses BCP47. Would any of these fields be fine (to use)?
+14:17:51	 From Richard Sinnott : As usual - it is fine but document it in your report.
+14:18:10	 From --- : Ok. To summarise use->document to be safe.
+14:18:17	 From --- : Thank you.
+14:18:47	 From Richard Sinnott : Yes
+14:25:40	 From --- : so cores = processes?
+14:27:03	 From Richard Sinnott : A core is the physical processing unit that exists on SPARTAN. Processes are the activities/tasks that run on them. For you - life is simple. You will use 8 cores and have 8 separate processes running on them
+14:27:31	 From --- : Noted.
+14:28:34	 From Richard Sinnott : Python or other languages that work with MPI are ok - just not Java!
+14:28:36	 From Alwyn Pan : On you own computer, it might be different, you may have a 2-core computer, but you can run 4 processes, you have two threads per core (usually)
+14:28:40	 From Richard Sinnott : e.g. C, C++ etc
+14:41:47	 From --- : Is it necessary to include "-np 4" in the mpirun command when the number of tasks needed is already mentioned?
+14:42:17	 From Lev Lafayette : module avail Python/
+14:44:28	 From Richard Sinnott : @Devin - pretty sure that it is not necessary. Belt and braces as they say!
+14:44:45	 From --- : what about pip freeze? is there a difference?
+14:44:50	 From --- : oh ok
+14:45:51	 From Alwyn Pan : Freezing is a process where pip reads the versions of all installed packages in a local virtual environment and then produces a text file with the package version for each python package specified.
+14:46:15	 From Alwyn Pan : Usually, it is named `requirements.txt`
+14:47:54	 From Alwyn Pan : So next time, you can use `pip install -r requirements.txt` to install all the dependencies you need.
+14:49:02	 From --- : so you do pip freeze > requirements.txt
+14:49:04	 From --- : right?
+14:50:41	 From Alwyn Pan : You can just do `pip freeze` the default file name will be `requirements.txt`
+14:50:53	 From --- : what's the significance of the cores being all on the same node or split between nodes? e.g. 1 node with 8 cores or 2 nodes with 4 cores each?
+14:50:59	 From Alwyn Pan : If you want to output to some other file, you can do `pip freeze -r someotherfile.txt`
+14:51:32	 From Richard Sinnott : Your assignment should explore this. You might think they should be exactly the same… are they!?
+14:51:40	 From Alwyn Pan : Try in your assignment and tell us in your report :)
+14:52:45	 From --- : what about in terms of MPI, will they get ranks from 0-7 in both?
+14:52:51	 From Richard Sinnott  To  Lev Lafayette(privately) : Can you advise if/when Farzad’s jobs finish?
+14:53:14	 From Richard Sinnott  To  Lev Lafayette(privately) : They will get ranks 0-7
+14:53:34	 From --- : does the syntax of message passing work the same?
+14:53:42	 From Richard Sinnott : They will get ranks 0-7 - even if you had run them across 8 nodes with 1 core each
+14:54:15	 From Richard Sinnott : Yup - that is the key to MPI. Local/remote processes communicate in the exact same way…
+14:57:08	 From Alwyn Pan : @Saket, I think I misunderstood your question, yes, if you want to generate the requirement file, you shall run `pip freeze > requirements.txt`.
+14:57:40	 From --- : @Alwyn yes thanks.
+15:02:25	 From --- : what is the difference between gather and reduce
+15:02:31	 From --- : does the Scatter only work with arrays?
+15:02:48	 From --- : so the master process need to load all data first before scatter it to all other process ?
+15:04:06	 From Lev Lafayette  To  Richard Sinnott(privately) : One job ran, the other queue is completely full!
+15:04:13	 From --- : how to we time a job?
+15:04:15	 From --- : *do 
+15:04:37	 From Richard Sinnott : The master process should not load all the data first - this will result in a bottleneck. If the master tried to read in ALL of the data then it will crash as it can’t
+15:05:34	 From Alwyn Pan : @Shmuli do you mean set a wall time or time the job itself? i.e. how long did it run?
+15:05:55	 From Richard Sinnott : For timing there are two choices. In your code or in the script, e.g. using Unix time
+15:06:59	 From Lev Lafayette : Hi Shumli, By testing. You can make educated guess how long it will take, but ultimately be a bit generous on the walltime offered.
+15:07:47	 From Lev Lafayette : Always check the queue before launching if time is an issue.
+
+showq -p $queuname | less

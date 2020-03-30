@@ -1,0 +1,75 @@
+15:16:19	 From --- : I can't hear Farzad as clearly as Richard.
+15:17:44	 From Farzad Khodadadi : I won’t be talking today, just here to answer your questions in chat :)
+15:18:01	 From Richard Sinnott : I assume you mean Lev not Farzad?
+15:19:08	 From --- : sry， I mean llafayette
+15:19:31	 From Richard Sinnott : Should be ok now - yes?
+15:20:11	 From --- : a little better now
+15:20:24	 From Richard Sinnott : all good!
+15:35:45	 From Richard Sinnott : I just dropped out of session - just me?
+15:35:52	 From Farzad Khodadadi : same here
+15:35:57	 From --- : me too
+15:35:57	 From --- : same
+15:35:57	 From --- : me to
+15:35:57	 From --- : me 2
+15:36:00	 From --- : me 2
+15:36:00	 From --- : me too
+15:36:02	 From --- : +1
+15:36:03	 From --- : me too
+15:36:04	 From --- : me too
+15:36:05	 From --- : not me
+15:36:17	 From Richard Sinnott : Back ok now…
+15:36:25	 From --- : yes
+15:36:27	 From --- : yes
+15:36:32	 From --- : Yes
+15:36:51	 From Richard Sinnott : Let’s see how this pans out - too many outages and I guess we’ll just have to record offline and upload video
+15:37:30	 From --- : windows 10 natively supports ssh now
+15:37:57	 From Farzad Khodadadi  To  Richard Sinnott(privately) : May I suggest that you temporarily turn off your video? maybe it helps to reduce the overall consumed bandwidth of this session
+15:38:25	 From Richard Sinnott  To  Farzad Khodadadi(privately) : if I do then I drop out of the session completely…
+15:38:45	 From Farzad Khodadadi  To  Richard Sinnott(privately) : Oh, ok then
+15:38:59	 From Richard Sinnott  To  Farzad Khodadadi(privately) : Unless I unmute - in which case background noises will happen - dogs barking etc etc
+15:39:26	 From Farzad Khodadadi  To  Richard Sinnott(privately) : gotcha
+15:50:18	 From --- : What’s the difference between multi-core and multi-node system？
+15:51:08	 From Richard Sinnott : A node generally refers to a server that can have many cores
+15:51:30	 From Richard Sinnott : Thus SPARTAN has multiple, multi-core nodes
+15:52:18	 From --- : I see.  Thank you.
+16:03:02	 From --- : Regarding the resource calculating deamons on the compute nodes (HPC Arch) - don't these degrade the performance of the compute nodes, since they regularly use resources for reporting & calculation? Is there no better way of calculating available resources on compute nodes?
+16:04:16	 From Richard Sinnott : Monitoring daemons have minimal impact compared to the heavy lifting done by HPC code/applications
+16:05:15	 From Richard Sinnott : You’ll see in a tick how the SPARTAN scheduler does this…
+16:05:29	 From --- : Given they perform an essential duty I assume we just accept that impact?
+16:05:46	 From --- Chopra : Cool, thanks Richard
+16:05:47	 From Richard Sinnott : (Jumping the gun - the users say how long they expect the job to run and allocates resources accordingly!)
+16:06:23	 From Richard Sinnott : * allocates - the scheduler allocates
+16:07:05	 From Richard Sinnott : It is also not a fine grained as you might imagine… you ask for N cores/nodes and get them for a specified time
+16:08:05	 From Farzad Khodadadi : There are two mainstream approaches for monitoring resources: Push-based, where the server (node) updates listeners through an agent, and pull-based, where you ask the active running agent on the server about its load
+16:15:22	 From --- : Is java allowed for the assignment?
+16:16:12	 From Richard Sinnott : I would suggest not to use Java as the MPI libraries are not great (MPJ). They don’t parallelise as they should…
+16:16:22	 From Richard Sinnott : This is pretty old tech too!
+16:17:17	 From --- : ok, thank you!
+16:26:56	 From --- : What is RasberyPi? does this has any relation with spartan?
+16:27:39	 From Richard Sinnott : A RaspberryPi is just a very small micro-processor that you can buy for a few dollars
+16:28:01	 From --- : ohh ok
+16:28:04	 From Alwyn Pan : https://www.raspberrypi.org/
+16:28:10	 From Richard Sinnott : It has no relation with SPARTAN - but you could make a mini-cluster from multiple micro-processors
+16:28:30	 From --- : yupp understood
+16:41:47	 From --- : I am new to spartan, from where can I read more about it to get familiar with it ?
+16:42:19	 From Richard Sinnott : Ssh onto it and look at the help files/manuals (see the info on the terminal window that pops up)
+16:42:45	 From --- : okay
+16:42:48	 From Alwyn Pan : The Spartan Documentation may also help: https://dashboard.hpc.unimelb.edu.au/
+16:42:55	 From Richard Sinnott : There are not that many commands you need to know… indeed arguably just one (sbatch)
+16:46:51	 From Farzad Khodadadi : You’ll also see most of these commands repeated in the MPI tutorial tomorrow, so don’t worry, you’ll master the required commands
+16:49:50	 From --- : Which partition should we use for our assignment or does that not matter?
+16:50:41	 From Richard Sinnott : Cloud for 1 node and physical for multiple node - I’ll check with Lev as things might have changed (there are LOTS more queues now!)
+16:51:11	 From --- : Oh alright thank you
+16:51:25	 From --- : Is there a baseline (time) for parsing the big file (completing the task) ?
+16:51:40	 From Richard Sinnott : Nope
+16:52:58	 From --- : I noticed cloud ran slower.
+16:57:40	 From --- : How should we estimate the time required for our job (in this case big file)?
+16:57:53	 From --- : For requesting the resources.
+16:58:34	 From Richard Sinnott : Test how long it takes on the tiny/small files and then estimate how long based on this. Suggest to over-estimate
+16:59:04	 From Richard Sinnott : Note if you don’t allocate enough time then the scheduler will kill your job!
+16:59:30	 From --- : Yes I just got that from the job output.
+17:01:54	 From Richard Sinnott : To note that we will go thru what the contents of an MPI program looks like tomorrow (Lev is looking mostly at the scripting side and how to submit jobs to the queue)
+17:02:06	 From --- : I don't know if this is only the case for me, I need to specify project (#SBATCH --account) while running or else it gives an error of Invalid qos specification.
+17:02:38	 From Richard Sinnott : Post the error to the LMS - there are likely fixes we can suggest
+17:02:44	 From --- : Noted. Thank you
+17:18:36	 From --- : Is there a chance that a script to the commands demonstrated in terminal today to be published?
