@@ -1,0 +1,2 @@
+srun: error: spartan-bm027: task 0: Exited with exit code 2
+slurmstepd: error: execve(): main: No such file or directory
