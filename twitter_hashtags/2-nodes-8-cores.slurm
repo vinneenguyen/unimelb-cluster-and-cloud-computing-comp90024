@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=4
 
 # Load required modules
-module purge # restore default modules
+#module purge # restore default modules
 module load Python/3 # latest Python 3
 
 # Launch multiple process python code
