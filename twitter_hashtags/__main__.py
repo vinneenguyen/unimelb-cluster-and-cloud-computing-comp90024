@@ -17,9 +17,9 @@ def main():
 
     # Run processes
     hashcounts, langcounts = process_chunk(DATAFILE, SIZE, RANK)  # 2 Counters returned
-    print(hashcounts)
-    COMM.barrier()
-    print(langcounts)
+    # print(hashcounts)
+    # COMM.barrier()
+    # print(langcounts)
 
     # Gather results
     hashcounts = COMM.gather(hashcounts, root=root)  # list of Counters for root RANK
