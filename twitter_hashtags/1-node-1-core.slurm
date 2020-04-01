@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=00:02:00
-#SBATCH --output=results/1-node-1-core-%j.out
+#SBATCH --output=results/%x-%j.out
 
 # Load required modules
 module load Python/3 # latest Python 3
