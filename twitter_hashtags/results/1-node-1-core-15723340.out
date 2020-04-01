@@ -1,0 +1,15 @@
+
+The following have been reloaded with a version change:
+  1) GCC/6.2.0 => GCC/8.1.0
+
+Traceback (most recent call last):
+  File "__main__.py", line 37, in <module>
+    main()
+  File "__main__.py", line 19, in main
+    hashcounts, langcounts = process_chunk(DATAFILE, SIZE, RANK)  # 2 Counters returned
+  File "/home/vinh/unimelb-cluster-and-cloud-computing-comp90024-2020-sm1/twitter_hashtags/utils/process.py", line 55, in process_chunk
+    size = os.path.getsize(filename)
+  File "/usr/local/easybuild/software/Python/3.7.3-spartan_gcc-8.1.0/lib/python3.7/genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [Errno 2] No such file or directory: '-i'
+srun: error: spartan-rc158: task 0: Exited with exit code 1

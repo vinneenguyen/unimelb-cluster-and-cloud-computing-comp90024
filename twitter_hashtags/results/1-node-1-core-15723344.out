@@ -1,0 +1,26 @@
+
+The following have been reloaded with a version change:
+  1) GCC/6.2.0 => GCC/8.1.0
+
+Counter({'climatechange': 6, 'scottyfrommarketing': 6, 'auspol': 6, 'australiaburns': 5, 'sonicmovie': 4, 'bushfiresnsw': 3, 'nswfires': 3, 'sydnye': 2, 'sydney': 2, 'climate': 2, 'happynewyear': 2, 'australianfires': 2, 'fireworks': 2, 'nye2020': 2, 'canberra': 2, 'เป๊กผลิตโชค': 2, 'liarfromtheshire': 2, 'morrisonfires': 2, 'countdown2020withpeck': 2, 'nye': 2, 'configmgr': 1, 'ilovesydney': 1, 'sideproject': 1, 'makers': 1, 'bulltitts': 1, 'fatca': 1, 'decadechallenge': 1, '2010vs2020': 1, 'abc': 1, 'priorities': 1, 'stowaway': 1, 'joseout': 1, 'duindorp': 1, 'gardening': 1, 'urbangardens': 1, 'newyearsday2020': 1, 'smoko': 1, 'youvestolenmychildhood': 1, 'howdareyou': 1, 'peoplearedying': 1, 'coalman': 1, 'brisbane': 1, 'labor': 1, 'loveislandau': 1, 'cheers': 1, 'skål': 1, 'avstwitterpsychic': 1, 'goavsgo': 1, 'climatecriminals': 1, '9news': 1, 'theirabc': 1, 'primeminister': 1, 'sackfomo': 1, 'sackscummo': 1, 'southcoastfires': 1, 'bushfires': 1, 'nswpol': 1, 'peckpalitchoke': 1, 'torvsmin': 1, 'workout': 1, 'aisbangkokcountdown2020xpeck': 1, 'เค้าท์ดาวน์2020กับพี่เป๊ก': 1, 'fe3h': 1, 'sylvix': 1, 'bloodsun': 1, 'energyaccess': 1, 'bringbacktony': 1, 'newyearresolutions': 1, 'เคาท์ดาวน์2020กับพี่เป๊ก': 1, 'my': 1, 'twitter': 1, 'hacked': 1, 'yay': 1, 'freaking': 1, 'nigeria': 1, 'deniers': 1, 'burnnewscorp': 1, 'littlemanmorrison': 1, 'adapt': 1, 'hongkongprotest': 1, 'denierfromtheshire': 1, 'อิจฉาจ้า': 1, 'เศร้า': 1, '500daysofsummer': 1, 'nowplaying': 1, 'scottyfommarketing': 1, 'aliens': 1, 'area51': 1, 'hny2020': 1, 'ausmedia': 1, 'msm': 1, 'victoriafires': 1, 'wankpuffin': 1, 'lockhimup': 1, 'quote': 1, 'tesla': 1, 'israel': 1, 'electriccar': 1, 'australia': 1, 'happynewyear2020': 1, 'bolsonaromaisforteem2020': 1, 'scottludlum': 1, 'koalakiller': 1, 'climateemergency': 1, 'adventure': 1, 'bedaring': 1, 'rbd': 1, 'bilpin': 1, 'riseofskywalker': 1, 'texperkins': 1, 'thefinger': 1})
+Counter({'en': 832, 'und': 69, 'fr': 18, 'pt': 17, 'es': 16, 'th': 9, 'tl': 6, 'ar': 4, 'zh': 4, 'de': 4, 'ja': 3, 'in': 2, 'et': 2, 'fa': 2, 'ht': 2, 'ko': 2, 'cy': 1, 'tr': 1, 'nl': 1, 'ro': 1, 'pl': 1, 'hu': 1, 'ru': 1})
+[('climatechange', 6),
+ ('scottyfrommarketing', 6),
+ ('auspol', 6),
+ ('australiaburns', 5),
+ ('sonicmovie', 4),
+ ('bushfiresnsw', 3),
+ ('nswfires', 3),
+ ('sydnye', 2),
+ ('sydney', 2),
+ ('climate', 2)]
+[('en', 832),
+ ('und', 69),
+ ('fr', 18),
+ ('pt', 17),
+ ('es', 16),
+ ('th', 9),
+ ('tl', 6),
+ ('ar', 4),
+ ('zh', 4),
+ ('de', 4)]
