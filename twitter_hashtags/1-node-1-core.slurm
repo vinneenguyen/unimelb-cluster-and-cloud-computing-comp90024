@@ -10,5 +10,5 @@
 module load Python/3 # latest Python 3
 
 # Launch multiple process python code
-srun -n 1 python3 __main__.py -i tinyTwitter.json
-# time srun -n 1 python3 __main__.py -i bigTwitter.json
+srun -n 1 python3 __main__.py -i data/tinyTwitter.json
+# time srun -n 1 python3 __main__.py -i data/bigTwitter.json
