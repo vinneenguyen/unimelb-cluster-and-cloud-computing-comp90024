@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from collections import Counter
 
-from twitter import Tweet
+from utils.twitter import Tweet
 
 
 def read_lines(filename, start=0, end=-1):
@@ -52,7 +52,7 @@ def process_chunk(filename, chunks=1, number=0):
     number (starting 0): current chunk number, defaults to first chunk number
     """
 
-    size = os.path.getsize(datafile)
+    size = os.path.getsize(filename)
     start = int(number / chunks * size)  # start byte position
     end = int((number + 1) / chunks * size)  # end byte position
     hashcounts, langcounts = count_hashtags_langs(filename, start, end)
