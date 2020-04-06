@@ -1,0 +1,16 @@
+14:15:40	 From Farzad Khodadadi : Yes YP it’s looking fine now
+14:18:05	 From Farzad Khodadadi : Font size looks fine to me YP
+14:18:33	 From Richard Sinnott : To note that the videos have been uploaded already
+14:18:54	 From Richard Sinnott : The Ansible scripts are also available on Canvas
+14:29:49	 From --- : is there any folder structure for playbook?
+14:30:40	 From Farzad Khodadadi : Yes, the files need to be organised in a particular way so that Ansible can parse and execute them
+14:31:31	 From --- : alright
+14:31:34	 From --- : thankss
+14:36:18	 From --- : Can explain more on state variable
+14:36:28	 From --- : wat values it can take?
+14:37:36	 From --- : okkk, thankss
+14:52:29	 From Farzad Khodadadi  To  Richard Sinnott(privately) : Please remind them to log in to MRC
+14:54:30	 From --- : without nectar how do we do handson with ansible
+14:54:33	 From --- : alright thanks all guys
+14:55:43	 From Farzad Khodadadi : You can install Ansible locally and try it, also you can try it with your personal pt-* project
+14:56:29	 From --- : okkk thankss
