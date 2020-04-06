@@ -1,0 +1,45 @@
+- hosts: localhost
+  vars:
+    sg_name: question_1
+    sg_description: "Question 1"
+    sg_protocol: tcp
+    sg_port_min: 3306
+    sg_port_max: 3306
+    sg_remote_group: '{{ sg_name }}'
+    instance_names:
+      - name: demo-01
+      - name: demo-02
+    instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166
+    instance_key_name: id_alwyn
+    instance_flavor: uom.general.1c4g
+    instance_az: melbourne-qh2-uom
+
+  tasks:
+  - name: Create a security group
+    os_security_group:
+      name: '{{ sg_name }}'
+      description: '{{ sg_description }}'
+      state: present
+
+  - name: Create security group rules
+    os_security_group_rule:
+      security_group: '{{ sg_name }}'
+      protocol: '{{ sg_protocol }}'
+      port_range_min: '{{ sg_port_min }}'
+      port_range_max: '{{ sg_port_max }}'
+      remote_group: '{{ sg_remote_group }}'
+      state: present
+
+  - name: Add security group to instance
+    os_server:
+      name: '{{ item.name }}'
+      image: '{{ instance_image }}'
+      key_name: '{{ instance_key_name }}'
+      flavor: '{{ instance_flavor }}'
+      availability_zone: '{{ instance_az }}'
+      security_groups:
+        - '{{ sg_name }}'
+        - demo_ssh
+      timeout: 600
+      state: present
+    loop: '{{ instance_names }}'

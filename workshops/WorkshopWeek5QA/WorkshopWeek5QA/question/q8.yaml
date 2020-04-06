@@ -1,0 +1,20 @@
+- hosts: localhost
+  gather_facts: false
+  vars:
+    instance_name: q8
+    instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166
+    instance_key_name: id_alwyn
+    instance_flavor: uom.general.1c4g
+    instance_az: melbourne-qh2-uom
+
+  tasks:
+  - name: Create an instance with specific network provider (qh2-uom-internal)
+    os_server:
+      name: '{{ instance_name }}'
+      image: '{{ instance_image }}'
+      key_name: '{{ instance_key_name }}'
+      flavor: '{{ instance_flavor }}'
+      availability_zone: '{{ instance_az }}'
+      network: qh2-uom-internal
+      timeout: 600
+      state: present
