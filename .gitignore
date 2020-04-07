@@ -1,2 +1,5 @@
-twitter_hashtags/.idea/
+# Pycharm project configurations
+.idea/
+
+# Windows config files
 *desktop.ini
