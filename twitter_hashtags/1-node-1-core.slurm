@@ -1,19 +1,18 @@
 #!/bin/bash
 #SBATCH --partition=physical
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --time=00:20:00
-#SBATCH --output=results/%x-%j.out
 
 # Load required modules
 module load Python/3 # latest Python 3
 
 # Launch multiple process python code
-time srun -n 1 python3 __main__.py "$DATAFILE"  # $DATAFILE passed from sbatch command
+time srun -n $SLURM_NTASKS python3 __main__.py "$DATAFILE"  # $DATAFILE passed from sbatch command
 
 
-# Use these commands to run script on different data files w/o modifying the script
+# Use these commands to run job script on with different parameters
 # mkdir -p results  # create output directory if not exist
-# script=<path to slurm script>
+# nodes=<number of nodes>
+# ntasks=<number of tasks>
+# time=<time limit for job>
 # file=<path to data file>
-# sbatch --job-name=${script##*/}-${file##*/} --export=ALL,DATAFILE=$file $script
+# script=<path to job script>
+# sbatch --nodes=$nodes --ntasks=$ntasks --time=$time --export=ALL,DATAFILE=$file --output=results/$nodes-n-$ntasks-c-${file##*/}-%j.out $script
