@@ -15,4 +15,4 @@ time srun -n $SLURM_NTASKS python3 __main__.py "$DATAFILE"  # $DATAFILE passed f
 # time=<time limit for job>
 # file=<path to data file>
 # script=<path to job script>
-# sbatch --nodes=$nodes --ntasks=$ntasks --time=$time --export=ALL,DATAFILE=$file --output=results/$nodes-n-$ntasks-c-${file##*/}-%j.out $script
+# sbatch --nodes=$nodes --ntasks=$ntasks --time=$time --export=ALL,DATAFILE=$file --output=results/${nodes}n${ntasks}c-${file##*/}-%j.out $script
