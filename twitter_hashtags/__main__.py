@@ -29,7 +29,6 @@ def main():
     hashcounts = COMM.gather(hashcounts, root=root)  # list of Counters for root RANK
     langcounts = COMM.gather(langcounts, root=root)  # list of Counters for root RANK
 
-
     # Export results
     if RANK != root:
         return
