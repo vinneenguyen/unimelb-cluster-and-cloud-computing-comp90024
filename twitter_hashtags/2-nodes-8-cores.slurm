@@ -2,6 +2,7 @@
 #SBATCH --partition=cloud
 #SBATCH --nodes=2
 #SBATCH --ntasks=8
+#SBATCH --cpus-per-task=4
 #SBATCH --time=00:02:00
 #SBATCH --output=results/%x-%j.out
 
