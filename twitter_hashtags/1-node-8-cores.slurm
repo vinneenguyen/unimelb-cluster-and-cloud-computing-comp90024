@@ -13,5 +13,5 @@ time srun -n 8 python3 __main__.py "$DATAFILE"  # $DATAFILE passed from sbatch c
 
 
 # Use this command to run script on different data files w/o modifying the script
-# sbatch --export=ALL,DATAFILE=$file --job-name=$script-${file##*/} $script
+# sbatch --export=ALL,DATAFILE=$file --job-name=${script##*/}-${file##*/} $script
 # where file=<path to data file>; script=<path to slurm script>
