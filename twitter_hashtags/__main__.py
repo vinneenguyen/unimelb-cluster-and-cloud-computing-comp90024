@@ -1,6 +1,5 @@
 from mpi4py import MPI
 import sys
-from pprint import pprint
 
 from utils.process import process_chunk
 from utils.collect import sum_counters
@@ -15,27 +14,33 @@ def main():
     root = 0  # root process to gather results to
     top = 10  # number of most common observations
 
-    #Compute process time
-    t1 = MPI.Wtime()
+    # #Compute process time
+    # t1 = MPI.Wtime()
+
     # Run processes
-    hashcounts, langcounts = process_chunk(DATAFILE, SIZE, RANK)  # 2 Counters returned
+    hashcounts, langcounts, nlines = process_chunk(DATAFILE, SIZE, RANK)  # (Counter, Counter, number of lines) returned
     # print(hashcounts)
     # COMM.barrier()
     # print(langcounts)
-    t2 = MPI.Wtime()
-    wt = t2 - t1
-    print("Elapsed time: ",wt," for rank: ", RANK)
+
+    # t2 = MPI.Wtime()
+    # wt = t2 - t1
+    # print("Elapsed time: ",wt," for rank: ", RANK)
+
     # Gather results
     hashcounts = COMM.gather(hashcounts, root=root)  # list of Counters for root RANK
     langcounts = COMM.gather(langcounts, root=root)  # list of Counters for root RANK
+    nlines = COMM.gather(nlines, root=root)  # list of numbers for root RANK
 
     # Export results
     if RANK != root:
         return
     hashcounts_all = sum_counters(hashcounts)
     langcounts_all = sum_counters(langcounts)
-    pprint(hashcounts_all.most_common(top))
-    pprint(langcounts_all.most_common(top))
+    nlines_all = sum(nlines)
+    print(f"Top {top} most common hashtags:", *hashcounts_all, sep="\n", end="\n\n")
+    print(f"Top {top} most common languages:", *langcounts_all, sep="\n", end="\n\n")
+    print(f"Number of valid lines: {nlines_all}")
 
 
 main()
