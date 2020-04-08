@@ -24,8 +24,8 @@ def main():
     # print(langcounts)
     t2 = MPI.Wtime()
     wt = t2 - t1
-    for rank in range(size):
-        print("Elapsed time: ",wt," for rank: ", rank)
+    for rank in range(SIZE):
+        print("Elapsed time: ",wt," for rank: ", RANK)
     # Gather results
     hashcounts = COMM.gather(hashcounts, root=root)  # list of Counters for root RANK
     langcounts = COMM.gather(langcounts, root=root)  # list of Counters for root RANK
