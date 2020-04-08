@@ -38,8 +38,8 @@ def main():
     hashcounts_all = sum_counters(hashcounts)
     langcounts_all = sum_counters(langcounts)
     nlines_all = sum(nlines)
-    print(f"Top {top} most common hashtags:", *hashcounts_all, sep="\n", end="\n\n")
-    print(f"Top {top} most common languages:", *langcounts_all, sep="\n", end="\n\n")
+    print(f"Top {top} most common hashtags:", *hashcounts_all.most_common(top), sep="\n", end="\n\n")
+    print(f"Top {top} most common languages:", *langcounts_all.most_common(top), sep="\n", end="\n\n")
     print(f"Number of valid lines: {nlines_all}")
 
 
