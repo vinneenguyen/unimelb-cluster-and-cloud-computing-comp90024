@@ -3,6 +3,7 @@ import sys
 
 from utils.process import process_chunk
 from utils.collect import sum_counters
+from utils.export import print_hashcounts, print_langcounts
 
 DATAFILE = sys.argv[1]  # json tweet data
 COMM = MPI.COMM_WORLD
@@ -38,8 +39,10 @@ def main():
     hashcounts_all = sum_counters(hashcounts)
     langcounts_all = sum_counters(langcounts)
     nlines_all = sum(nlines)
-    print(f"Top {top} most common hashtags:", *hashcounts_all.most_common(top), sep="\n", end="\n\n")
-    print(f"Top {top} most common languages:", *langcounts_all.most_common(top), sep="\n", end="\n\n")
+    print_hashcounts(hashcounts_all, top)
+    print()
+    print_langcounts(langcounts_all, top)
+    print()
     print(f"Number of valid lines: {nlines_all}")
 
 
