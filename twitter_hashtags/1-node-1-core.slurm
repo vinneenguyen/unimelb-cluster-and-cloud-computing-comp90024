@@ -9,7 +9,8 @@
 module load Python/3 # latest Python 3
 
 # Launch multiple process python code
-time srun -n 1 python3 __main__.py "$DATAFILE"  # $DATAFILE passed from sbatch command
+#time srun -n 1 python3 __main__.py "$DATAFILE"  # $DATAFILE passed from sbatch command
+time srun -n 1 python3 __main__.py data/tinyTwitter.json  # $DATAFILE passed from sbatch command
 
 
 # Use this command to run script on different data files w/o modifying the script
