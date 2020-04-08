@@ -2,7 +2,7 @@
 #SBATCH --partition=physical
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --time=00:02:00
+#SBATCH --time=00:20:00
 #SBATCH --output=results/%x-%j.out
 
 # Load required modules
