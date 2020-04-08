@@ -9,6 +9,8 @@ import numpy as np
 from collections import Counter
 # Import pprint
 from pprint import pprint
+# Import time
+from time import process_time_ns 
 
 
 def remove_trails(text):
@@ -133,6 +135,8 @@ def sum_counter(htcounts_all):
 
 def main(argv):
 
+	t1 = process_time()
+
 	filename = read_arguments(argv)
 
 	comm = MPI.COMM_WORLD
@@ -151,6 +155,11 @@ def main(argv):
 		pprint(overall_htcounts.most_common(10))
 		pprint(overall_langcounts.most_common(10))
 
+	t2 = process_time() 
+
+	print("Elapsed time:", t1, t2) 
+   
+	print("Elapsed time during the whole program in nanoseconds:", t1-t2)
 
 def read_arguments(argv):
 	# Initialise Variables

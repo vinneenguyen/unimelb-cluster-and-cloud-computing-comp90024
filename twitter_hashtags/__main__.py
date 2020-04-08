@@ -15,15 +15,20 @@ def main():
     root = 0  # root process to gather results to
     top = 10  # number of most common observations
 
+    #Compute process time
+    t1 = MPI_Wtime()
     # Run processes
     hashcounts, langcounts = process_chunk(DATAFILE, SIZE, RANK)  # 2 Counters returned
     # print(hashcounts)
     # COMM.barrier()
     # print(langcounts)
-
+    t2 = MPI_Wtime()
+    for rank in range(size):
+        print("Elapsed time: ",t2-t1," for rank: ", rank)
     # Gather results
     hashcounts = COMM.gather(hashcounts, root=root)  # list of Counters for root RANK
     langcounts = COMM.gather(langcounts, root=root)  # list of Counters for root RANK
+
 
     # Export results
     if RANK != root:
