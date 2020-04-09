@@ -15,8 +15,8 @@ def main():
     root = 0  # root process to gather results to
     top = 10  # number of most common observations
 
-    #Compute process time
-    t1 = MPI.Wtime()
+    # Compute process time
+    # t1 = MPI.Wtime()
 
     # Run processes
     hashcounts, langcounts, nlines = process_chunk(DATAFILE, SIZE, RANK)  # (Counter, Counter, number of lines) returned
@@ -24,18 +24,14 @@ def main():
     # COMM.barrier()
     # print(langcounts)
 
-    # t2 = MPI.Wtime()
-    # wt = t2 - t1
-    # print("Elapsed time: ",wt," for rank: ", RANK)
-
     # Gather results
     hashcounts = COMM.gather(hashcounts, root=root)  # list of Counters for root RANK
     langcounts = COMM.gather(langcounts, root=root)  # list of Counters for root RANK
     nlines = COMM.gather(nlines, root=root)  # list of numbers for root RANK
 	
-    t2 = MPI.Wtime()
-    wt = t2 - t1
-    print("Elapsed time: ",wt," for rank: ", RANK)
+    # t2 = MPI.Wtime()
+    # wt = t2 - t1
+    # print("Elapsed time: ",wt," for rank: ", RANK)
 
     # Export results
     if RANK != root:
@@ -48,6 +44,5 @@ def main():
     print_langcounts(langcounts_all, top)
     print()
     print(f"Number of valid lines: {nlines_all}")
-
-
+   
 main()

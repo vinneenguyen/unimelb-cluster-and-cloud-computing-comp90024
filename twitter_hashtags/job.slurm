@@ -1,8 +1,9 @@
 #!/bin/bash
 #SBATCH --partition=physical
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=8
+#SBATCH --ntasks=8
 #SBATCH --time=00:02:00
+#SBATCH --constraint=physg4
 
 # Load required modules
 module load Python/3 # latest Python 3

@@ -1,0 +1,126 @@
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm057
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+[spartan-bm057.hpc.unimelb.edu.au:72631] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm057
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm057
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm057
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+[spartan-bm057.hpc.unimelb.edu.au:72634] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm057.hpc.unimelb.edu.au:72633] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm057.hpc.unimelb.edu.au:72632] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm060
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm060
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+[spartan-bm060.hpc.unimelb.edu.au:71370] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm060.hpc.unimelb.edu.au:71371] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm060
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm060
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+[spartan-bm060.hpc.unimelb.edu.au:71372] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm060.hpc.unimelb.edu.au:71373] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+Elapsed time:  112.56892910972238  for rank:  2
+Elapsed time:  112.56900665350258  for rank:  3
+Elapsed time:  112.56271219812334  for rank:  4
+Elapsed time:  112.56928114034235  for rank:  1
+Elapsed time:  112.56325734313577  for rank:  5
+Elapsed time:  112.56379535188898  for rank:  6
+Elapsed time:  112.56416067900136  for rank:  7
+Elapsed time:  112.60640741325915  for rank:  0
+Top 10 most common hashtags:
+1. auspol, 19878
+2. coronavirus, 10110
+3. มาพ่องเพิ่งอะไร, 7531
+4. firefightaustralia, 6812
+5. oldme, 6418
+6. sydney, 6196
+7. scottyfrommarketing, 5185
+8. grammys, 5085
+9. assange, 4689
+10. sportsrorts, 4516
+
+Top 10 most common languages:
+1. English (en), 3107115
+2. Undefined (und), 252117
+3. Thai (th), 134571
+4. Portuguese (pt), 125858
+5. Spanish (es), 74028
+6. Japanese (ja), 49929
+7. Undefined (tl), 44560
+8. Undefined (in), 42296
+9. French (fr), 38098
+10. Arabic (ar), 24501
+
+Number of valid lines: 4057522
+Elapsed time:  112.65784346498549  for rank:  0
+
+real	1m53.597s
+user	0m0.015s
+sys	0m0.012s
