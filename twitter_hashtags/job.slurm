@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=physical
 #SBATCH --nodes=2
-#SBATCH --ntasks=8
+#SBATCH --ntasks-per-node=8
 #SBATCH --time=00:02:00
 
 # Load required modules
