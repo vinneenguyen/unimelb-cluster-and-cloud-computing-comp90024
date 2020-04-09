@@ -9,3 +9,32 @@ support) will be disabled for this port.
   CPCs attempted:       rdmacm
 --------------------------------------------------------------------------
 [spartan-bm055.hpc.unimelb.edu.au:17147] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+Top 10 most common hashtags:
+1. auspol, 19878
+2. coronavirus, 10110
+3. มาพ่องเพิ่งอะไร, 7531
+4. firefightaustralia, 6812
+5. oldme, 6418
+6. sydney, 6196
+7. scottyfrommarketing, 5185
+8. grammys, 5085
+9. assange, 4689
+10. sportsrorts, 4516
+
+Top 10 most common languages:
+1. English (en), 3107115
+2. Undefined (und), 252117
+3. Thai (th), 134571
+4. Portuguese (pt), 125858
+5. Spanish (es), 74028
+6. Japanese (ja), 49929
+7. Undefined (tl), 44560
+8. Undefined (in), 42296
+9. French (fr), 38098
+10. Arabic (ar), 24501
+
+Number of valid lines: 4057522
+
+real	12m12.330s
+user	0m0.009s
+sys	0m0.010s
