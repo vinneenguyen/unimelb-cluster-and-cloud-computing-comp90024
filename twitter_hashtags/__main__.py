@@ -43,6 +43,6 @@ def main():
     print()
     print_langcounts(langcounts_all, top)
     print()
-    print(f"Number of valid lines: {nlines_all}")
+    print(f"Number of processed lines (tweets): {nlines_all}")
    
 main()
