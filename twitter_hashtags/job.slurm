@@ -5,11 +5,11 @@
 #SBATCH --time=00:02:00
 #SBATCH --constraint=physg4
 
-# Load required modules
+# Load modules
 module load Python/3 # latest Python 3
 
-# Launch multiple process python code
-time srun -n $SLURM_NTASKS python3 __main__.py "$DATAFILE"  # $DATAFILE passed from sbatch command
+# Launch Python application
+time srun -n $SLURM_NTASKS python3 __main__.py "$DATAFILE"  # $DATAFILE passed thru sbatch command
 
 
 # Use these commands to run job script with different parameters
