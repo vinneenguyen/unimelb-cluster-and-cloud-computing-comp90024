@@ -1,0 +1,5 @@
+srun: error: Unable to create step for job 15911416: More processors requested than permitted
+
+real	0m2.126s
+user	0m0.008s
+sys	0m0.004s

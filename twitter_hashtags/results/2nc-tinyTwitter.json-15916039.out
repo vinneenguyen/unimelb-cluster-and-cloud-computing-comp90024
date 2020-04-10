@@ -1,0 +1,57 @@
+--------------------------------------------------------------------------
+No OpenFabrics connection schemes reported that they were able to be
+used on a specific port.  As such, the openib BTL (OpenFabrics
+support) will be disabled for this port.
+
+  Local host:           spartan-bm061
+  Local device:         mlx5_bond_0
+  Local port:           1
+  CPCs attempted:       rdmacm
+--------------------------------------------------------------------------
+[spartan-bm061.hpc.unimelb.edu.au:19859] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm061.hpc.unimelb.edu.au:19860] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm061.hpc.unimelb.edu.au:19861] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm061.hpc.unimelb.edu.au:19862] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm057.hpc.unimelb.edu.au:44477] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm057.hpc.unimelb.edu.au:44480] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm057.hpc.unimelb.edu.au:44478] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+[spartan-bm057.hpc.unimelb.edu.au:44479] pml_ucx.c:223 Error: UCP worker does not support MPI_THREAD_MULTIPLE
+Elapsed time:  0.04277174174785614  for rank:  3
+Elapsed time:  0.035625459626317024  for rank:  4
+Elapsed time:  0.03562541306018829  for rank:  5
+Elapsed time:  0.03562229126691818  for rank:  6
+Elapsed time:  0.035621171817183495  for rank:  7
+Elapsed time:  0.05280664376914501  for rank:  0
+Top 10 most common hashtags:
+1. climatechange, 6
+2. scottyfrommarketing, 6
+3. auspol, 6
+4. australiaburns, 5
+5. sonicmovie, 4
+6. bushfiresnsw, 3
+7. nswfires, 3
+8. sydnye, 2
+9. sydney, 2
+10. climate, 2
+
+Top 10 most common languages:
+1. English (en), 832
+2. Undefined (und), 69
+3. French (fr), 18
+4. Portuguese (pt), 17
+5. Spanish (es), 16
+6. Thai (th), 9
+7. Undefined (tl), 6
+8. Arabic (ar), 4
+9. Undefined (zh), 4
+10. German (de), 4
+
+Number of valid lines: 999
+Elapsed time:  0.046062594279646873  for rank:  1
+Elapsed time:  0.05265808664262295  for rank:  2
+[spartan-bm057.hpc.unimelb.edu.au:44465] 7 more processes have sent help message help-mpi-btl-openib-cpc-base.txt / no cpcs for port
+[spartan-bm057.hpc.unimelb.edu.au:44465] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m0.823s
+user	0m0.337s
+sys	0m0.271s

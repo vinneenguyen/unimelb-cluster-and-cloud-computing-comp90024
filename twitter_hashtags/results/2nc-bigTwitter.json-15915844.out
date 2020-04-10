@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 8 slots
+that were requested by the application:
+  python
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+
+real	0m0.536s
+user	0m0.054s
+sys	0m0.073s
