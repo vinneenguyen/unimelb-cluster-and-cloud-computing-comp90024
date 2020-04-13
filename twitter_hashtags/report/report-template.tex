@@ -42,11 +42,11 @@ The single process design allows for a high level of independence between the pa
 
 For job submission, the user needs to run the following shell command:
 \begin{flushleft}
-\t sbatch --nodes=\$nodes --ntasks=\$ntasks --time=\$time --export=ALL,DATAFILE=\$file\\ --output=results/\$\{nodes\}n\$\{ntasks\}c-\\\$\{file\#\#*/\}-\%j.out \$script
+\t sbatch {-}-nodes=\$nodes {-}-ntasks=\$ntasks {-}-time=\$time {-}-export=ALL,DATAFILE=\$file\\ {-}-output=results/\$\{nodes\}n\$\{ntasks\}c-\\\$\{file\#\#*/\}-\%j.out \$script
 \end{flushleft}
-with the pre-defined variables: \$nodes = number of nodes (e.g 1), \$ntasks = number of tasks (e.g 8), \$time = time limit for job (depending on file size), \$file = path to data file (data/bigTwitter.json), \$script = path to job script (job.slurm).
+with the pre-defined variables: \$nodes = number of nodes (e.g 1), \$ntasks = number of tasks (e.g 8), \$time = time limit for job (e.g 00:02:00), \$file = path to data file (e.g /data/projects/COMP90024/bigTwitter.json), \$script = path to job script (job.slurm).
 
-Inside the slurm script, our application is invoked via the \t srun command. Output files are stored in folder 'results', named after the number of nodes, number of tasks and the data filename that we have used.
+Inside the slurm script, our application is invoked via the \t srun command. Output files are stored in the existing folder 'results', named after the number of nodes, number of tasks and the data filename that we have used.
 
 \section{Experiment}
 
