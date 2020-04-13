@@ -5,8 +5,7 @@
 \usepackage{url}
 \bibliographystyle{abbrvnat}
 \setcitestyle{authoryear,open={(},close={)}}
-\usepackage{pgfplots}
-\pgfplotsset{width=6.5cm,compat=2.0}
+\usepackage{graphicx}
 \sloppy
 
 \title{Cluster and Cloud Computing - HPC Twitter Processing}
@@ -23,7 +22,7 @@
 
 \section{Objective}
 
-The goal of this assignment is to implement a simple, parallelise application leveraging the University of Melbourne HPC facility SPARTAN. The application will be used on a large Twitter data set to identify the top 10 most commonly used hashtags and most commonly used languages. 
+The goal of this assignment is to implement a simple, parallelise application leveraging the University of Melbourne High-Performance Computing (HPC) facility SPARTAN. The application will be used on a large Twitter data set to identify the top 10 most commonly used hashtags and most commonly used languages.
 
 \section{Twitter Data Set}
 The big twitter dataset comes in JSON format and has 4057522 rows of tweets from Sydney with a size of 19.34 GB. Every Tweet object\footnote{a.k.a Tweet Data Dictionary} includes an \textit{entities} section and a \textit{lang} section which provide metadata such as hashtags and language respectively. We decided to extract and count this readily available metadata. 
@@ -45,54 +44,43 @@ For job submission, the user needs to run the following shell command:
 \begin{flushleft}
 \t sbatch --nodes=\$nodes --ntasks=\$ntasks --time=\$time --export=ALL,DATAFILE=\$file\\ --output=results/\$\{nodes\}n\$\{ntasks\}c-\\\$\{file\#\#*/\}-\%j.out \$script
 \end{flushleft}
-where: \$nodes = number of nodes (e.g 1), \$ntasks = number of tasks (e.g 8), \$time = time limit for job (dependent), \$file = path to data file (data/bigTwitter.json), \$script = path to job script (job.slurm).
+with the pre-defined variables: \$nodes = number of nodes (e.g 1), \$ntasks = number of tasks (e.g 8), \$time = time limit for job (depending on file size), \$file = path to data file (data/bigTwitter.json), \$script = path to job script (job.slurm).
 
-Inside the slurm script, our application is invoked via the \t srun command. Output files are stored in folder 'results'.
+Inside the slurm script, our application is invoked via the \t srun command. Output files are stored in folder 'results', named after the number of nodes, number of tasks and the data filename that we have used.
 
-\section{Experiments}
+\section{Experiment}
 
-Theoretically, Cloud nodes are comparatively slower, especially on multiple node jobs because the communication between Cloud nodes is slower than Physical nodes. In contrast, Physical nodes are connected by high-speed 25Gb networking with 1.15 µsec latency which is preferable for multi-node jobs. When experimenting on small and tiny twitter files, Cloud partition execution time is faster than Physical partition. The reason could be the traffic wasn't that bad; therefore, it has lower latency and outperforms Physical nodes.  However, since both small and tiny Twitter file sizes are relatively small compared to big Twitter, Physical partition is used when running application on the big Twitter file. In order to have a proper comparison, Intel(R) Xeon(R) Gold 6154 CPU @ 3.00GHz nodes were used.
+Theoretically, Cloud nodes are comparatively slower, especially on multiple node jobs because the communication between Cloud nodes is slower than Physical nodes. In contrast, Physical nodes are connected by high-speed 25GB networking with 1.15 µsec latency which is preferable for multi-node jobs. When experimenting on small and tiny twitter files, Cloud partition execution time is faster than Physical partition. The reason could be the traffic was not too intense; therefore, it has lower latency and outperforms Physical nodes.  However, since both small and tiny Twitter file sizes are relatively small compared to big Twitter, Physical partition is used when running application on the big Twitter file. In order to have a proper comparison, Intel(R) Xeon(R) Gold 6154 CPU @ 3.00GHz nodes were used.
 
-We run our application in various modes in order to evaluate changes in performance (runtime) when there is a change in number of tweets processed and computing resources (nodes and cores).
+We run our application in various modes in order to evaluate changes in performance (runtime) when there is a change in the number of tweets processed and computing resources (nodes and cores).
 
 \begin{table}[h]
  \begin{center}
 \begin{tabular}{|l|l|l|l|l|}
 
       \hline
-       &1N1C & 1N8C & 2N8C  \\
+       File & Tweets &1N1C & 1N8C & 2N8C  \\
       \hline\hline
-      999 & 0.586s & 0.734s & 0.823s \\
-      4999 & 1.092s & 2.1s & 1.4s \\
-      4057522 & 12m12s & 1m38s & 1m36.6s \\
+      Tiny & 999 & 0.586s & 0.734s & 0.823s \\
+      Small & 4999 & 1.092s & 2.1s & 1.4s \\
+      Big & 4057522 & 13m37s & 1m43.6s & 1m45s \\
 
      \hline
 
 \end{tabular}
-\caption{Runtime on different resources across different amounts of tweets}\label{table2}
+\caption{Run-time on different resources across different amounts of tweets}\label{table1}
  \end{center}
 \end{table}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=7.5cm, height=7cm]{twitter_hashtags/report/chart.png}
+\caption[Caption for LOF]{Execution time for twitter files under different resources\protect\footnotemark}
 
-\begin{tikzpicture}
-\begin{axis}[
-    ybar,
-    enlargelimits=0.15,
-    legend style={at={(0.5,-0.15)},
-      anchor=north,legend columns=-1},
-    ylabel={Time(s)},
-    symbolic x coords={1N1C,1N8C,2N8C},
-    xtick=data,
-    nodes near coords,
-    nodes near coords align={vertical},
-    ]
-\addplot coordinates {(1N1C,817.306) (1N8C,103.585) (2N8C,105.09)};
-\end{axis}
-\end{tikzpicture}
+\end{figure}
 
-These results are obtained from attached 1n1c-bigTwitter.json-15909060.out 1n8c-bigTwitter.json-15909058.out and 2n8c-bigTwitter.json-15909059.out slurm outputs.
+Regardless of what resources we use, we also found the same results for the 10 most common hashtags and languages used in the big Twitter file (shown in Table 2 and 3). (Note that some languages other than English may not be displayed properly)
 
-Regardless of what resources we use, we 
 \begin{table}[h]
  \begin{center}
 \begin{tabular}{|l|l|l|l|l|}
@@ -114,7 +102,7 @@ Regardless of what resources we use, we
      \hline
 
 \end{tabular}
-\caption{Top 10 most common hashtags}\label{table1}
+\caption{Top 10 most common hashtags}\label{table2}
  \end{center}
 \end{table}
 
@@ -140,10 +128,20 @@ Regardless of what resources we use, we
      \hline
 
 \end{tabular}
-\caption{Top 10 most common languages}\label{table2}
+\caption{Top 10 most common languages}\label{table3}
  \end{center}
 \end{table}
 
+
+\section{Discussion}
+\subsection{Difference between file sizes}
+The experiment (Figure 1) shows that the amount of time it takes to process a data file highly correlates with the number of tweets that file has, but not necessarily in a linear manner. For example, for 1 node 1 core the runtime ratio of the big Twitter file to the small file is in magnitude of hundreds, while that for 2 nodes 8 cores is not nearly a hundred. In other words, the amount of runtime declines at a higher rate than the increase in number of cores being used. This phenomenon may be a reflection of the fact that besides the actual processing time which can be optimized, there is also time required for communication between resources, which cannot be changed.
+
+\subsection{Difference between computing resources}
+
+Figure 1 shows the time spent to run the application under different resources. As expected the amount of time to run the application using 8 cores would be quicker than single-core. 2 Nodes 8 Cores is slightly slower than 1 Node 8 Cores because there is a communication time between 2 Nodes. 
+\footnotetext{Results in output files 1n1c-bigTwitter.json-15909060.out, 1n8c-bigTwitter.json-15909058.out and 2n8c-bigTwitter.json-15909059.out slurm}
+\newpage
 
 \begin{table}[h]
  \begin{center}
@@ -164,28 +162,16 @@ Regardless of what resources we use, we
      \hline
 
 \end{tabular}
-\caption{Top 10 most common languages}\label{table2}
+\caption{Execution time of each core}\label{table2}
  \end{center}
 \end{table}
 
-\section{Discussion}
-
-Figure 1 shows the time spent to run the application under different resources. As expected the amount of time to run the application using 8 cores would be quicker than single-core. 2 Nodes 8 Cores is slightly slower than 1 Node 8 Cores because there is a communication time between 2 Nodes. 
-
-From Table 1, execution time on each cores were recorded to ensure tasks were evenly distributed among all processes. Rank 0 took slightly longer as it has to gather all the counts from each processes and computed the total count. 
-
- 
+From Table 4, execution time on each core was recorded to ensure tasks were evenly distributed among all processes. Rank 0 took slightly longer as it had to gather all the counts from each process and compute the total count. 
 
 
 \section{Conclusion}
 
-
-
-\section{INCLUDE OR NOT}
-
-
-
-\bibliography{references}
+This project demonstrated one of the main benefits of HPC supported by parallelization, which is the performance (speed). Although the procedure for requesting resources and submitting jobs are rather simple and highly automated for the user, a question may still remain regarding how we have the necessary resources distributed in order to maximize their usage. As we realize that there may be a significantly different consequence resulting from us choosing to utilize 2 nodes 8 cores instead of 1 nodes 8 cores (or vice versa), we need to make a conscious decision. For that matter, we opt for a less resource-centralized solution, where the total cores are evenly distributed over multiple nodes (rather than single node) for the reasons being higher fault tolerance and possible shorter queuing time. As a common logic, having all required computing resources spread over different places (nodes) makes our operation less vulnerable to system failure, apart from our request being easier to be granted.
 
 
 \end{document}
