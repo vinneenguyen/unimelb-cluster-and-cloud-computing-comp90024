@@ -1,0 +1,48 @@
+---
+# Create an instance on NeCTAR
+- name: Create an instance            
+  os_server:                            #Create/Delete Compute Instances from OpenStack
+    name: '{{ item.name }}'             #These are all defined in the host_vars (item.name because loop through number of name)
+    image: '{{ instance_image }}'
+    key_name: '{{ instance_key_name }}'
+    flavor: '{{ instance_flavor }}'
+    availability_zone: '{{ availability_zone }}'
+    network: qh2-uom-internal           # internal instead of public where resources is limited
+    security_groups: '{{ sg_names }}'   
+    volumes: '{{ item.volumes }}'
+    auto_floating_ip: yes               # Get the ip address
+    wait: yes                           # wait till the vm created up to 10 mins
+    timeout: 600
+    state: present                      # absent to delete vm
+  loop: '{{ instances }}'               # loop through instances
+  register: os_instance                 # register outcome to os_instance
+
+- debug:                                
+    msg: "Instance {{ item.openstack.name }} has been created. IP address is {{ item.openstack.public_v4 }}"
+  loop: '{{ os_instance.results }}'
+  when: item.openstack is defined       #loop through the result and print out instance name and ip address only there is item.openstack entity
+
+- name: Wait for connection             # Test if Vm is ready
+  wait_for:
+    host: "{{ item.openstack.public_v4 }}"
+    port: 22                            # Ping to port 22
+    timeout: 120
+    search_regex: OpenSSH               # if result contains OpenSSH then Vm is ready
+  loop: '{{ os_instance.results }}'
+  when: item.openstack is defined
+
+# Add hosts to Ansible in-memory inventory
+- name: Add host                        # When obtained ip addresses, we can place ip addresses into in-memory inventory
+  add_host:                             
+    name: '{{ item.openstack.public_v4 }}'
+    groups: prototype                  
+  loop: '{{ os_instance.results }}'
+  when: item.openstack is defined
+
+#similar to creating inventory file that contains
+#[COMP90024]
+
+#IP1
+#IP2
+
+#If there are more roles run specify host to install softwares or deploy packages

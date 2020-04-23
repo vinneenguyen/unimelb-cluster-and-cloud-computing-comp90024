@@ -1,0 +1,41 @@
+---
+- name: Add proxy in etc/environment
+  become: yes
+  blockinfile:
+    path: /etc/environment
+    block:  |
+      HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      HTTPS_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      http_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      https_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      no_proxy="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au"
+
+# Not the best way of doing this
+- name: Create directory for docker proxy settings
+  become: true
+  shell: |
+    mkdir -p /etc/systemd/system/docker.service.d
+    echo >>/etc/systemd/system/docker.service.d/http-proxy.conf [Service]
+    echo >>/etc/systemd/system/docker.service.d/http-proxy.conf Environment="HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/"
+    echo >>/etc/systemd/system/docker.service.d/http-proxy.conf Environment="NO_PROXY="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au""
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker
+
+- name: Wait 600 seconds
+  wait_for_connection:
+    delay: 60
+
+- name: Pull wordpress
+  become: true
+  shell: |
+    sudo docker pull wordpress
+
+- name: Wait 600 seconds
+  wait_for_connection:
+    delay: 60
+
+- name: Reboot a machine
+  become: yes
+  reboot:
+    reboot_timeout: 600
+

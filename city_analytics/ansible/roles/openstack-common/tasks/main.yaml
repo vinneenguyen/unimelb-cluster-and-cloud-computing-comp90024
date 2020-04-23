@@ -1,0 +1,24 @@
+---
+# Install dependencies on the host
+- name: Install pip
+  become: yes                             #activate privilege escalation (execute tasks with root privileges)
+  apt:                                    #Manages apt packages (such as for Debian/Ubuntu).
+    name: ['python3-pip'] 
+    state: latest
+    update_cache: yes                     # sudo apt-get update; sudo apt-get install python-pip
+  when: ansible_distribution == "Ubuntu"  #if os is Ubuntu then will run this
+
+
+- name: Update pip
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+# pip install --upgrade pip
+
+- name: Install openstacksdk              #to connect localhost to the openstack api
+  become: yes
+  pip:
+    name: ['openstacksdk']
+    state: latest
+# pip install openstacksdk
