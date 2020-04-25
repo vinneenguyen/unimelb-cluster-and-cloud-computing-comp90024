@@ -1,0 +1,45 @@
+- hosts: localhost
+  vars:
+    sg_name: CouchDB_group
+    sg_description: "CouchDB security group"
+    sg_protocol: tcp
+    sg_port_min: 5984
+    sg_port_max: 5984
+    sg_remote_group: '{{ sg_name }}'
+    instance_names:
+      - name: prototype-1
+      - name: prototype-2
+    instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166
+    instance_key_name: Adam
+    instance_flavor: uom.mse.2c9g
+    instance_az: melbourne-qh2-uom
+
+  tasks:
+  - name: Create a security group
+    os_security_group:
+      name: '{{ sg_name }}'
+      description: '{{ sg_description }}'
+      state: present
+
+  - name: Create security group rules
+    os_security_group_rule:
+      security_group: '{{ sg_name }}'
+      protocol: '{{ sg_protocol }}'
+      port_range_min: '{{ sg_port_min }}'
+      port_range_max: '{{ sg_port_max }}'
+      remote_group: '{{ sg_remote_group }}'
+      state: present
+
+  - name: Add security group to instance
+    os_server:
+      name: '{{ item.name }}'
+      image: '{{ instance_image }}'
+      key_name: '{{ instance_key_name }}'
+      flavor: '{{ instance_flavor }}'
+      availability_zone: '{{ instance_az }}'
+      security_groups:
+        - '{{ sg_name }}'
+        - demo_ssh
+      timeout: 600
+      state: present
+    loop: '{{ instance_names }}'
