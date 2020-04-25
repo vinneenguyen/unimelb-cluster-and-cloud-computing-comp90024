@@ -10,32 +10,75 @@
       https_proxy=http://wwwproxy.unimelb.edu.au:8000/
       no_proxy="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au"
 
-# Not the best way of doing this
-- name: Create directory for docker proxy settings
-  become: true
-  shell: |
-    mkdir -p /etc/systemd/system/docker.service.d
-    echo >>/etc/systemd/system/docker.service.d/http-proxy.conf [Service]
-    echo >>/etc/systemd/system/docker.service.d/http-proxy.conf Environment="HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/"
-    echo >>/etc/systemd/system/docker.service.d/http-proxy.conf Environment="NO_PROXY="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au""
-    sudo systemctl daemon-reload
-    sudo systemctl restart docker
 
-- name: Wait 600 seconds
-  wait_for_connection:
-    delay: 60
+# Add proxy configuration 
+- name: Create directory /etc/systemd/system/docker.service.d
+  become: yes
+  file:
+    path: /etc/systemd/system/docker.service.d
+    recurse: yes
+    state: directory
+   
 
-- name: Pull wordpress
-  become: true
-  shell: |
-    sudo docker pull wordpress
+- name: copy http-proxy.conf 
+  become: yes
+  copy: 
+    src: /Volumes/GoogleDrive/My Drive/Masters/Cluster_Cloud_Computing/UniMelb---Cluster-and-Cloud-Computing-COMP90024-2020-SM1/city_analytics/ansible/http-proxy.conf
+    dest: /etc/systemd/system/docker.service.d
+  
+- name: reload daemon-reload
+  become: yes
+  systemd: 
+    daemon-reload: yes
 
-- name: Wait 600 seconds
-  wait_for_connection:
-    delay: 60
+
+# - name: Flush changes and Restart the docker 
+#   become: yes
+#   service:
+#     name: docker
+#     state: restarted
+    
 
 - name: Reboot a machine
   become: yes
   reboot:
     reboot_timeout: 600
+  
+
+
+
+
+
+
+
+
+# Not the best way of doing this
+
+# - name: Create directory for docker proxy settings
+#   become: true
+#   shell: |
+#     mkdir -p /etc/systemd/system/docker.service.d
+#     echo >>/etc/systemd/system/docker.service.d/http-proxy.conf [Service]
+#     echo >>/etc/systemd/system/docker.service.d/http-proxy.conf Environment="HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/"
+#     echo >>/etc/systemd/system/docker.service.d/http-proxy.conf Environment="NO_PROXY="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au""
+#     sudo systemctl daemon-reload
+#     sudo systemctl restart docker
+
+# - name: Wait 600 seconds
+#   wait_for_connection:
+#     delay: 60
+
+# - name: Pull wordpress
+#   become: true
+#   shell: |
+#     sudo docker pull wordpress
+
+# - name: Wait 600 seconds
+#   wait_for_connection:
+#     delay: 60
+
+# - name: Reboot a machine
+#   become: yes
+#   reboot:
+#     reboot_timeout: 600
 

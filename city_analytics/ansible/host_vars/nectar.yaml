@@ -8,6 +8,10 @@ volumes:
     vol_size: 10
   - vol_name: prototype-vol-1-2
     vol_size: 10
+  - vol_name: prototype-vol-2-1
+    vol_size: 10
+  - vol_name: prototype-vol-2-2
+    vol_size: 10  
 
 #Create Security Group
 security_groups:
@@ -28,9 +32,12 @@ security_groups:
 instances:
   - name: prototype-1
     volumes: ['prototype-vol-1-1', 'prototype-vol-1-2']
+  - name: prototype-2
+    volumes: ['prototype-vol-2-1', 'prototype-vol-2-2']
   
 
 instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166 #image id for Ubuntu
 instance_key_name: Adam     #key pair 
 instance_flavor: uom.mse.2c9g #Flavor - 2VCPUS RAM 9GB
+
 
