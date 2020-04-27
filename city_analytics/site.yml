@@ -1,0 +1,6 @@
+---
+# Deploy entire application
+
+
+- import_playbook: volumes.yml  # create volumes
+- import_playbook: instances.yml  # launch instances
