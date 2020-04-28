@@ -43,9 +43,10 @@ ansible-playbook instances.yml
 ```
 
 ### Delete instances ###
+___Warning: this command should be used with high caution as it will delete all instances currently available in connected
+cloud projet.___
+
 ```shell script
 nova list | awk '$2 && $2 != "ID" {print $2}' | xargs -n1 nova delete
 ```
-See [Openstack -Delete Bulk Instances](https://maestropandy.wordpress.com/2016/08/24/openstack-delete-bulk-instances/)  
-
-
+Source: [Openstack - Delete Bulk Instances](https://maestropandy.wordpress.com/2016/08/24/openstack-delete-bulk-instances/)  
