@@ -50,3 +50,11 @@ cloud projet.___
 nova list | awk '$2 && $2 != "ID" {print $2}' | xargs -n1 nova delete
 ```
 Source: [Openstack - Delete Bulk Instances](https://maestropandy.wordpress.com/2016/08/24/openstack-delete-bulk-instances/)  
+
+### One-go operation ###
+Execute the following series of orchestrations (described in playbooks):  
+\- Create volumes  
+\- Launch instances
+```shell script
+ansible-playbook site.yml
+```
