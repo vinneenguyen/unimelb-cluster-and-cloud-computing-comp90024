@@ -4,14 +4,14 @@
 
 availability_zone: melbourne-qh2-uom
 image: 215f9775-483c-4e0a-b703-d21a5c966f2e  # NeCTAR Ubuntu 18.04 LTS (Bionic) amd64 (with Docker)
-flavor: uom.general.1c4g  # 1 CPU, 4GB RAM, 30GB Drive, Private
+flavor: uom.mse.2c9g  # 2CPUs, 9GB RAM, 30GB Root Disk, Private
 network: qh2-uom-internal  # internal instead of public where resources is limited
 key_name: common  # pre-created key pair
-vol_size: 10  # GB
+vol_size: 30  # GB  # size of volume to create
 
 instances:
   - name: thinkbox1
-    vol_name: vol1
+    vol_name: thinkvol1  # name of volume to create and/or attach to instance
     availability_zone: "{{ availability_zone }}"
     image: "{{ image }}"
     flavor: "{{ flavor }}"
@@ -20,7 +20,25 @@ instances:
     vol_size: "{{ vol_size }}"
 
   - name: thinkbox2
-    vol_name: vol2
+    vol_name: thinkvol2
+    availability_zone: "{{ availability_zone }}"
+    image: "{{ image }}"
+    flavor: "{{ flavor }}"
+    network: "{{ network }}"
+    key_name: "{{ key_name }}"
+    vol_size: "{{ vol_size }}"
+
+  - name: thinkbox3
+    vol_name: thinkvol3
+    availability_zone: "{{ availability_zone }}"
+    image: "{{ image }}"
+    flavor: "{{ flavor }}"
+    network: "{{ network }}"
+    key_name: "{{ key_name }}"
+    vol_size: "{{ vol_size }}"
+
+  - name: thinkbox4
+    vol_name: thinkvol4
     availability_zone: "{{ availability_zone }}"
     image: "{{ image }}"
     flavor: "{{ flavor }}"
