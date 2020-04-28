@@ -23,13 +23,13 @@
 # https://github.com/openstack/os-client-config
 # This means it will either:
 #  - Respect normal OS_* environment variables like other OpenStack tools
-#  - Read values from a clouds-template.yaml file.
-# If you want to configure via clouds-template.yaml, you can put the file in:
+#  - Read values from a clouds_template.yaml file.
+# If you want to configure via clouds_template.yaml, you can put the file in:
 #  - Current directory
-#  - ~/.config/openstack/clouds-template.yaml
-#  - /etc/openstack/clouds-template.yaml
+#  - ~/.config/openstack/clouds_template.yaml
+#  - /etc/openstack/clouds_template.yaml
 #  - /etc/ansible/openstack.yml
-# The clouds-template.yaml file can contain entries for multiple clouds and multiple
+# The clouds_template.yaml file can contain entries for multiple clouds and multiple
 # regions of those clouds. If it does, this inventory module will by default
 # connect to all of them and present them as one contiguous inventory.  You
 # can limit to one cloud by passing the `--cloud` parameter, or use the
@@ -68,7 +68,7 @@ import openstack as sdk
 from openstack.cloud import inventory as sdk_inventory
 from openstack.config import loader as cloud_config
 
-CONFIG_FILES = ['/etc/ansible/clouds-template.yaml', '/etc/ansible/openstack.yml']
+CONFIG_FILES = ['/etc/ansible/clouds_template.yaml', '/etc/ansible/openstack.yml']
 
 
 def get_groups_from_server(server_vars, namegroup=True):

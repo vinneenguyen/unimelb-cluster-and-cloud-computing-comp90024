@@ -2,17 +2,17 @@
 # tasks file for instance
 
 
-- name: launch instance
+- name: launch instance and attach volume  # meant to be used in loop
   os_server:
-    state: present  # create instance
+    state: present
     name: "{{ item.name }}"
     availability_zone: "{{ item.availability_zone }}"
     image: "{{ item.image }}"
     flavor: "{{ item.flavor }}"
     network: "{{ item.network }}"
-    security_groups: default
-    key_name: "{{ item.key_name }}"  # key pair name
-    volumes: ["{{ item.vol_name }}"]  # names of volumes to attach
+    security_groups: "{{ item.security_groups }}"
+    key_name: "{{ item.key_name }}"
+    volumes: "{{ item.volumes }}"
     auto_ip: yes  # automatic floating IP
     wait: yes  # wait till the instance created
     timeout: 600  #  max waiting time (sec)

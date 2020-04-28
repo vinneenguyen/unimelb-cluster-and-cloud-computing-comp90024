@@ -4,9 +4,6 @@
   tasks:
     - include_vars: host_vars/all.yml
     - name: create volumes
-      os_volume:
-        state: present
-        availability_zone: "{{ item.availability_zone }}"
-        size: "{{ item.vol_size }}"
-        display_name: "{{ item.vol_name }}"
-      loop: "{{ instances }}"
+      include_role:
+        name: volume
+      loop: "{{ volumes }}"

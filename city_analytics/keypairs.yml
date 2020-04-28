@@ -1,0 +1,9 @@
+---
+- name: create keypairs
+  hosts: localhost
+  tasks:
+    - include_vars: host_vars/all.yml
+    - name: create keypairs
+      include_role:
+        name: keypair
+      loop: "{{ keypaths.values() | list }}"

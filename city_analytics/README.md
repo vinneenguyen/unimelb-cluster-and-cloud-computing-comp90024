@@ -20,7 +20,7 @@ One way to input credentials is through environment variables.
 source credentials/openrc.sh  # set credentials to environment variables
 ```
 
-Alternatively, `credentials/clouds-template.yaml` can be used. See the documentation inside file for details.  
+Alternatively, `credentials/clouds_template.yaml` can be used. See the documentation inside file for details.  
 
 ### Enable use of dynamic inventory ###
 Dynamic inventory is available with the use of script `inventories/openstack_all.py`. For comprehensive demonstration,
@@ -32,20 +32,33 @@ chmod +x inventories/openstack_all.py  # make script executable
 inventories/openstack_all.py --list
 ```
 
+### Create security groups ###
+```shell script
+ansible-playbook security_groups.yml
+```
+Parameters set for security groups are defined in `host_vars/all.yml`, under variable `security_groups`.  
+
+### Generate keypairs ###
+```shell script
+ansible-playbook keypairs.yml
+```
+Parameters set for keypairs are defined in `host_vars/all.yml`, under variable `keypaths`.  
+
 ### Create volumes ###
 ```shell script
 ansible-playbook volumes.yml
 ```
+Parameters set for volumes are defined in `host_vars/all.yml`, under variable `volumes`.  
 
-### Launch compute instances ###
+### Launch compute instances, add to security groups and attach volumes ###
 ```shell script
 ansible-playbook instances.yml
 ```
+Parameters set for instances are defined in `host_vars/all.yml`, under variable `instances`.  
 
 ### Delete instances ###
 ___Warning: this command should be used with high caution as it will delete all instances currently available in connected
 cloud projet.___
-
 ```shell script
 nova list | awk '$2 && $2 != "ID" {print $2}' | xargs -n1 nova delete
 ```
@@ -53,6 +66,8 @@ Source: [Openstack - Delete Bulk Instances](https://maestropandy.wordpress.com/2
 
 ### One-go operation ###
 Execute the following series of orchestrations (described in playbooks):  
+\- Create security groups  
+\- Generate keypairs  
 \- Create volumes  
 \- Launch instances
 ```shell script

@@ -2,5 +2,7 @@
 # Deploy entire application
 
 
+- import_playbook: security_groups.yml  # create security groups
+- import_playbook: keypairs.yml  # generate keypairs
 - import_playbook: volumes.yml  # create volumes
 - import_playbook: instances.yml  # launch instances

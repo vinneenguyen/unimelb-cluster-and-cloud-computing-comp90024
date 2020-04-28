@@ -1,0 +1,10 @@
+---
+# tasks file for volume
+
+
+- name: create volume  # meant to be used in loop
+  os_volume:
+    state: present
+    availability_zone: "{{ item.availability_zone }}"
+    size: "{{ item.size }}"
+    display_name: "{{ item.display_name }}"

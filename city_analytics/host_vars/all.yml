@@ -2,46 +2,92 @@
 # variables for all hosts
 
 
+# Common parameters
 availability_zone: melbourne-qh2-uom
+network: qh2-uom-internal  # internal instead of public where resources is limited
 image: 215f9775-483c-4e0a-b703-d21a5c966f2e  # NeCTAR Ubuntu 18.04 LTS (Bionic) amd64 (with Docker)
 flavor: uom.mse.2c9g  # 2CPUs, 9GB RAM, 30GB Root Disk, Private
-network: qh2-uom-internal  # internal instead of public where resources is limited
-key_name: common  # pre-created key pair
-vol_size: 30  # GB  # size of volume to create
+size: 30  # GB  # volume size
 
+# Parameters for creating and adding rules to security groups
+security_groups:
+  - name: ssh_prototype
+    description: "Security group for SSH access"
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0  # Need to change later
+
+  - name: http_prototype
+    description: "Security group for HTTP access"
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+
+  - name: couchdb
+    description: "Security group for CouchDB access"
+    protocol: tcp
+    port_range_min: 5984
+    port_range_max: 5984
+    remote_ip_prefix: 0.0.0.0/0
+
+# Parameters for creating keypairs
+keypaths:
+  common: credentials/common  # local private key file
+
+# Parameters for creating volumes
+volumes:
+  - display_name: thinkvol1
+    availability_zone: "{{ availability_zone }}"
+    size: "{{ size }}"
+
+  - display_name: thinkvol2
+    availability_zone: "{{ availability_zone }}"
+    size: "{{ size }}"
+
+  - display_name: thinkvol3
+    availability_zone: "{{ availability_zone }}"
+    size: "{{ size }}"
+
+  - display_name: thinkvol4
+    availability_zone: "{{ availability_zone }}"
+    size: "{{ size }}"
+
+# Parameters for launching instances, attaching volumes and adding to security groups
 instances:
   - name: thinkbox1
-    vol_name: thinkvol1  # name of volume to create and/or attach to instance
+    volumes: [thinkvol1]  # volumes to attach
     availability_zone: "{{ availability_zone }}"
+    network: "{{ network }}"
+    security_groups: "{{ security_groups | map(attribute='name') | list }}"  # add to all security groups
+    key_name: "{{ keypaths.common | basename }}"  # remote public key created with same name as local private key
     image: "{{ image }}"
     flavor: "{{ flavor }}"
-    network: "{{ network }}"
-    key_name: "{{ key_name }}"
-    vol_size: "{{ vol_size }}"
 
   - name: thinkbox2
-    vol_name: thinkvol2
+    volumes: [thinkvol2]
     availability_zone: "{{ availability_zone }}"
+    network: "{{ network }}"
+    security_groups: "{{ security_groups | map(attribute='name') | list }}"
+    key_name: "{{ keypaths.common | basename }}"
     image: "{{ image }}"
     flavor: "{{ flavor }}"
-    network: "{{ network }}"
-    key_name: "{{ key_name }}"
-    vol_size: "{{ vol_size }}"
 
   - name: thinkbox3
-    vol_name: thinkvol3
+    volumes: [thinkvol3]
     availability_zone: "{{ availability_zone }}"
+    network: "{{ network }}"
+    security_groups: "{{ security_groups | map(attribute='name') | list }}"
+    key_name: "{{ keypaths.common | basename }}"
     image: "{{ image }}"
     flavor: "{{ flavor }}"
-    network: "{{ network }}"
-    key_name: "{{ key_name }}"
-    vol_size: "{{ vol_size }}"
 
   - name: thinkbox4
-    vol_name: thinkvol4
+    volumes: [thinkvol4]
     availability_zone: "{{ availability_zone }}"
+    network: "{{ network }}"
+    security_groups: "{{ security_groups | map(attribute='name') | list }}"
+    key_name: "{{ keypaths.common | basename }}"
     image: "{{ image }}"
     flavor: "{{ flavor }}"
-    network: "{{ network }}"
-    key_name: "{{ key_name }}"
-    vol_size: "{{ vol_size }}"
