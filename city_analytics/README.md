@@ -88,7 +88,7 @@ Since instances were created with dynamic IP addresses, it is necessary to obtai
 (e.g establishing SSH connection).  
 ```shell script
 ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml inventory_export.yaml
-ansible -i inventories/hosts_auto.ini webservers -u ubuntu -m ping  # test by pinging instances for response
+ansible -i inventories/hosts_auto.ini webservers -m ping  # test by pinging instances for response
 ```
 *Note: New inventory file is stored at `inventories/hosts_auto.ini`*  
 
