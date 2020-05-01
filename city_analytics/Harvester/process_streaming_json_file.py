@@ -8,11 +8,22 @@ import time
 # 2. get most recent 200 tweets from those users (see function get_and_write_user_tweet_by_user_id)
 # 3. get recent followers of those users, store the followers' id
 # 4. repeat step 2 for the followers
-# problems: require lots of key, each key can only request around 200 follower id.
+# we assume the users' followers are all in Australia
+
+# results: - It took 3 hours using 20 keys to get most recent 50 followers about 800 specific users.
+#          - It took another several hours to get tweets from their followers
+#          - A 70 MB streaming file can generate approximately 3 GB tweets in total.
+
+# problems: - Require lots of key, each key can only request around 250 follower id in one period. The above test was
+#             done using 20 developer accounts.
+#           - We have to do the same process everyday otherwise we won't have enough time to analyse the streaming
+#             files.
 
 key_list = []
-input_file="27-Apr-1000am-aws.json"
-output_file = "out.json"
+input_file = "27-Apr-1000am-aws.json"
+output_file = "out2.json" # store tweets
+# our keys
+# 0
 key_list.append({"consumer_key": "1IN6rVE2D5fXZ3uUSkaKj6sH7",
                  "consumer_secret": "wjHCDcwOlCnTNAoSsdrppK3bUz47BskNwq4GkpdU5qpMHmrqvo",
                  "access_token": "775994541954347008-jANS08q8Nx38WaVIgfJi7eL6u0yWC9h",
@@ -34,7 +45,7 @@ def set_authentication_key(key_list, n):
     consumer_key = current_key["consumer_key"]
     consumer_secret = current_key["consumer_secret"]
     access_token = current_key["access_token"]
-    access_token_secret = current_key["access_secret"]
+    access_token_secret = current_key["access_token_secret"]
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
@@ -64,7 +75,7 @@ def load_json():
                     user_id.append(json_str["user"]["id"])
             except Exception:
                 pass
-    print("total " + str(len(user_id))+ " ids in this file")
+    print("total " + str(len(user_id)) + " ids in this file")
     f.close()
     return user_id
 
@@ -86,12 +97,11 @@ def get_and_write_user_tweet_by_user_id(users_id):
             except tweepy.RateLimitError:
                 if key_index == len(key_list) - 1:
                     key_index = 0
-                    api = set_authentication_key(key_list, key_index)
                 else:
                     key_index += 1
-                    api = set_authentication_key(key_list, key_index)
-                    time.sleep(1000/len(key_list)+1)
-                    print("restart with new key")
+                print("try to restart with new key")
+                api = set_authentication_key(key_list, key_index)
+                time.sleep(1000 / (len(key_list) - 1) + 1)
             except tweepy.error.TweepError or Exception:
                 pass
 
@@ -107,7 +117,7 @@ def get_user_followers_id(users_id):
     users_followers_id = []
     for user_id in users_id:
         try:
-            for user in tweepy.Cursor(api.followers, user_id=user_id).items():
+            for user in tweepy.Cursor(api.followers, user_id=user_id).items(50):
                 i += 1
                 print(i)
                 print(user._json["id"])
@@ -115,12 +125,11 @@ def get_user_followers_id(users_id):
         except tweepy.RateLimitError:
             if key_index == len(key_list) - 1:
                 key_index = 0
-                api = set_authentication_key(key_list, key_index)
             else:
                 key_index += 1
-                api = set_authentication_key(key_list, key_index)
-                time.sleep(1000/len(key_list)+1)
-                print("restart with new key")
+            print("try to restart with new key")
+            api = set_authentication_key(key_list, key_index)
+            time.sleep(1000 / (len(key_list) - 1) + 1)
         except tweepy.error.TweepError or Exception:
             pass
     return users_followers_id
@@ -129,6 +138,9 @@ def get_user_followers_id(users_id):
 users_id = load_json()
 print(users_id)
 get_and_write_user_tweet_by_user_id(users_id)
+print("finish writing user tweets")
+print("start to get followers")
 followers_id = get_user_followers_id(users_id);
+print("finish getting followers")
 get_and_write_user_tweet_by_user_id(followers_id)
 print("finished")
