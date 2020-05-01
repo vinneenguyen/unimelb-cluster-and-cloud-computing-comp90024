@@ -1,0 +1,8 @@
+---
+
+# Couchdb variables
+db_dir: couchdb
+database_user: admin
+database_password: password
+couchdb_secret: mysecret
+nodename: var=ansible_default_ipv4.address

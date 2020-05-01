@@ -8,3 +8,5 @@ image: 215f9775-483c-4e0a-b703-d21a5c966f2e  # NeCTAR Ubuntu 18.04 LTS (Bionic) 
 flavor: uom.mse.2c9g  # 2CPUs, 9GB RAM, 30GB Root Disk, Private
 size: 50  # volume size (GB)
 prefix: vol-  # prepend instance name to make volume name
+ansible_user: ubuntu #SSH user
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'  # remove the need of typing 'yes'

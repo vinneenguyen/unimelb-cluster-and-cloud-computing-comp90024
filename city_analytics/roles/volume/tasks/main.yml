@@ -9,3 +9,4 @@
     display_name: "{{ item.prefix + item.inventory_hostname }}"
     availability_zone: "{{ item.availability_zone }}"
     size: "{{ item.size }}"
+- debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']

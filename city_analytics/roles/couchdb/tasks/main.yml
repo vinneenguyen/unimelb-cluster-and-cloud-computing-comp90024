@@ -1,0 +1,48 @@
+---
+- name: Create couchdb directory
+  tags: 'directory'
+  become: yes
+  file:
+    path: "{{ db_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+
+- name: Configure compose
+  tags: 'configure'  # to be able to run only a specific part of it rather than running everything in the playbook
+  become: yes
+  template:
+    src:  docker-compose.yaml.j2
+    dest: "{{ db_dir }}/docker-compose.yaml"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Run docker compose to build couchdb
+  tags: 'run_couch_db'
+  become: yes
+  docker_compose:
+    project_src: "{{ db_dir }}"
+    pull: yes
+    state: present
+    remove_orphans: yes  #Remove containers for services not defined in the Compose file.
+    recreate: always   #Recreate containers
+    # register: output
+
+# - debug:
+#     var: output
+
+
+
+  #   - name: Run docker compose
+  # tags: 'wordpress'
+  # become: yes
+  # docker_compose:
+  #   project_src: "{{ wp_dir }}"
+  #   pull: yes
+  #   state: present
+  #   remove_orphans: yes
+  #   recreate: always
+
+

@@ -1,4 +1,5 @@
 ---
+
 - name: Add proxy in etc/environment
   become: yes
   blockinfile:
@@ -11,7 +12,7 @@
       no_proxy="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au"
 
 
-# Add proxy configuration 
+# Add proxy configuration for docker
 - name: Create directory /etc/systemd/system/docker.service.d
   become: yes
   file:
@@ -25,6 +26,7 @@
   copy: 
     src: vars/http-proxy.conf
     dest: /etc/systemd/system/docker.service.d
+ 
   
 - name: reload daemon-reload
   become: yes

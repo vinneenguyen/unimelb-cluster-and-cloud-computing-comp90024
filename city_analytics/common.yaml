@@ -1,0 +1,10 @@
+---
+# Add common applications
+- name: add applications
+  hosts: webservers
+  
+  tasks:
+    - name: add applications
+      include_role:
+        name: common
+      

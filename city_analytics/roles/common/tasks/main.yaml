@@ -1,0 +1,29 @@
+---
+- name: Gather facts of remote host
+  setup:
+    gather_subset: all
+
+- name: Install pip
+  become: yes                             #activate privilege escalation (execute tasks with root privileges)
+  apt:                                    #Manages apt packages (such as for Debian/Ubuntu).
+    name: ['python3-pip'] 
+    state: latest
+    update_cache: yes                     # sudo apt-get update; sudo apt-get install python-pip
+  when: ansible_distribution == "Ubuntu"
+
+- name: Update pip
+  tags: always
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+- name: Install dependencies
+  tags: always
+  become: yes
+  apt:
+    name: ['apt-transport-https', 'build-essential', 'ca-certificates', 'curl', 'git', 'software-properties-common', 'unzip', 'vim']
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
