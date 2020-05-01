@@ -10,11 +10,15 @@ other operating systems (like Mac, Windows), commands might not work as expected
 ---
 
 ### Dependencies ###
-[Python 3](https://www.python.org/downloads/)  
+[pip - The Python Package Installer](https://pip.pypa.io/en/stable/)  
+[Python](https://www.python.org/)  
 [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)  
 [OpenStack Client](https://docs.openstack.org/newton/user-guide/common/cli-install-openstack-command-line-clients.html)  
 [OpenStack Compute (nova)](https://docs.openstack.org/nova/latest/#installation)  
 [OpenStack SDK](https://docs.openstack.org/openstacksdk/latest/user/)  
+*Note: Installing [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) with*
+*[pip](https://pip.pypa.io/en/stable/) may be simpler and thus the more preferable way than*
+ *some other methods.*  
 
 On servers:  
 [Docker](https://docs.docker.com/get-docker/)  
@@ -84,6 +88,7 @@ Since instances were created with dynamic IP addresses, it is necessary to obtai
 (e.g establishing SSH connection).  
 ```shell script
 ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml inventory_export.yaml
+ansible -i inventories/hosts_auto.ini webservers -u ubuntu -m ping  # test by pinging instances for response
 ```
 *Note: New inventory file is stored at `inventories/hosts_auto.ini`*  
 
@@ -119,5 +124,6 @@ Execute the following series of orchestrations (described in playbooks):
 ---
 
 ### References ###
+[Running Ansible within Windows](https://www.jeffgeerling.com/blog/running-ansible-within-windows)  
 [chmod WSL (Bash) doesn't work](https://stackoverflow.com/questions/46610256/chmod-wsl-bash-doesnt-work)  
 [Playbooks, Roles and Ansible Galaxy](https://azurecitadel.com/automation/packeransible/lab4/)  
