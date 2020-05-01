@@ -9,4 +9,4 @@ ansible-playbook -i inventories/hosts.yaml instances.yaml  # launch compute inst
 ansible-playbook -i inventories/hosts.yaml volumes.yaml  # create volumes
 ansible-playbook -i inventories/hosts.yaml volumes_attach.yaml  # attach volumes to instances
 ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml inventory_export.yaml  # generate inventory file with IP addresses
-ansible-playbook -i inventories/hosts.yaml proxy_config.yaml  # Add proxy to etc/environment and docker environment
+ansible-playbook -i hosts proxy_config.yaml  # Add proxy to etc/environment and docker environment
