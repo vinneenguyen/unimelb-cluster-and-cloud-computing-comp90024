@@ -136,3 +136,4 @@ Execute the following series of orchestrations (described in playbooks):
 [Running Ansible within Windows](https://www.jeffgeerling.com/blog/running-ansible-within-windows)  
 [chmod WSL (Bash) doesn't work](https://stackoverflow.com/questions/46610256/chmod-wsl-bash-doesnt-work)  
 [Playbooks, Roles and Ansible Galaxy](https://azurecitadel.com/automation/packeransible/lab4/)  
+[How to install apps remotely with Ansible](https://www.techrepublic.com/article/how-to-install-apps-remotely-with-ansible/)  
