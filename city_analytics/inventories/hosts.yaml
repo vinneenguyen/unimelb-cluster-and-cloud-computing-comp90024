@@ -18,13 +18,9 @@ all:
   children:
     webservers:
       hosts:
-<<<<<<< Updated upstream
-        thinkbox[1:1]:
-#        prototype-[1:2]:
-=======
         thinkbox[1:4]:
  #       prototype-[1:2]:
->>>>>>> Stashed changes
+
 
 # Ex 1: Ungrouped hosts, put them in 'all' or 'ungrouped' group, defines 4 hosts, one with 2 variables
 ##all:

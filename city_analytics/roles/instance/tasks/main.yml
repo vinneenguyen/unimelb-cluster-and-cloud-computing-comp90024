@@ -16,3 +16,4 @@
     auto_ip: yes  # automatic floating IP
     wait: yes  # wait till the instance created
     timeout: 600  #  max waiting time (sec)
+
