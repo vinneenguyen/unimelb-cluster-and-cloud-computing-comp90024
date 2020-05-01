@@ -14,6 +14,7 @@ other operating systems (like Mac, Windows), commands might not work as expected
 [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)  
 [OpenStack Client](https://docs.openstack.org/newton/user-guide/common/cli-install-openstack-command-line-clients.html)  
 [OpenStack Compute (nova)](https://docs.openstack.org/nova/latest/#installation)  
+[OpenStack SDK](https://docs.openstack.org/openstacksdk/latest/user/)  
 
 On servers:  
 [Docker](https://docs.docker.com/get-docker/)  

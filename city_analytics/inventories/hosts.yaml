@@ -18,7 +18,7 @@ all:
   children:
     webservers:
       hosts:
-        thinkbox[1:2]:
+        thinkbox[1:1]:
 #        prototype-[1:2]:
 
 # Ex 1: Ungrouped hosts, put them in 'all' or 'ungrouped' group, defines 4 hosts, one with 2 variables
