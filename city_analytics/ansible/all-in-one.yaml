@@ -1,6 +1,6 @@
 - hosts: localhost              # run tasks on local host
   vars_files:
-    - host_vars/instances.yaml
+    - host_vars/nectar.yaml
   gather_facts: true            # This module takes care of executing the configured facts modules, 
                                 # the default is to use the setup module. 
                                 # Because of the condition set when ansible_distribution == "Ubuntu"

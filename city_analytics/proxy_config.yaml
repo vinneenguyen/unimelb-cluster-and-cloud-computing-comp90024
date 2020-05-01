@@ -1,0 +1,10 @@
+---
+- name: add proxy
+  hosts: webservers
+  vars_files:
+    - vars/proxy.yaml
+  tasks:
+    - name: add proxy
+      include_role:
+        name: proxy
+      

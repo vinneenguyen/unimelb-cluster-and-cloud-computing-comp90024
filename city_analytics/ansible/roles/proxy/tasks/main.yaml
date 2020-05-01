@@ -23,7 +23,7 @@
 - name: copy http-proxy.conf 
   become: yes
   copy: 
-    src: /Volumes/GoogleDrive/My Drive/Masters/Cluster_Cloud_Computing/UniMelb---Cluster-and-Cloud-Computing-COMP90024-2020-SM1/city_analytics/ansible/http-proxy.conf
+    src: /vars/http-proxy.conf
     dest: /etc/systemd/system/docker.service.d
   
 - name: reload daemon-reload

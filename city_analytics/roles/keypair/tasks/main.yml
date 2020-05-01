@@ -15,4 +15,4 @@
   when: keypair.key.private_key
 
 - name: change access permission of private key file
-  shell: sudo chmod 600 "{{ item.value }}"
+  shell: sudo chmod 600 "{{ item.value }}" 
