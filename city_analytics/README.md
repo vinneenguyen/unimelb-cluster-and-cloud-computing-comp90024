@@ -88,9 +88,17 @@ Since instances were created with dynamic IP addresses, it is necessary to obtai
 (e.g establishing SSH connection).  
 ```shell script
 ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml inventory_export.yaml
-ansible -i inventories/hosts_auto.ini webservers -m ping  # test by pinging instances for response
+ansible -i inventories/hosts_auto.ini all -m ping  # test by pinging instances for response
 ```
 *Note: New inventory file is stored at `inventories/hosts_auto.ini`*  
+
+### Install dependencies ###
+The following packages are installed on servers:  
+\- [pip](https://pip.pypa.io/en/stable/)  
+\- [Docker](https://docs.docker.com/get-docker/)  
+```shell script
+ansible-playbook -i inventories/hosts_auto.ini dependencies.yaml
+```
 
 ### Detach volumes from instances ###
 ```shell script
@@ -117,6 +125,7 @@ Execute the following series of orchestrations (described in playbooks):
 \- Create volumes  
 \- Attach volumes  
 \- Generate inventory file with IP addresses  
+\- Install dependencies
 ```shell script
 ./setup.sh
 ```
