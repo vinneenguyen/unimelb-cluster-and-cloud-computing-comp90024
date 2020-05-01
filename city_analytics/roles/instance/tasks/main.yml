@@ -1,18 +1,18 @@
 ---
 # tasks file for instance
+# Meant to be used in loop with item holding parameters for instance
 
 
-- name: launch instance and attach volume  # meant to be used in loop
+- name: launch/remove instance
   os_server:
-    state: present
-    name: "{{ item.name }}"
+    state: "{{ state }}"  # present/absent: launch/remove
+    name: "{{ item.inventory_hostname }}"
     availability_zone: "{{ item.availability_zone }}"
     image: "{{ item.image }}"
     flavor: "{{ item.flavor }}"
     network: "{{ item.network }}"
     security_groups: "{{ item.security_groups }}"
     key_name: "{{ item.key_name }}"
-    volumes: "{{ item.volumes }}"
     auto_ip: yes  # automatic floating IP
     wait: yes  # wait till the instance created
     timeout: 600  #  max waiting time (sec)

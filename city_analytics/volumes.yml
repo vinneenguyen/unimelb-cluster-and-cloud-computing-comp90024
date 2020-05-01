@@ -1,9 +1,0 @@
----
-- name: create volumes
-  hosts: localhost
-  tasks:
-    - include_vars: host_vars/all.yml
-    - name: create volumes
-      include_role:
-        name: volume
-      loop: "{{ volumes }}"

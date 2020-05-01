@@ -1,0 +1,10 @@
+---
+- name: create volumes
+  hosts: localhost
+  vars:
+    - state: present
+  tasks:
+    - name: create volumes
+      include_role:
+        name: volume
+      loop: "{{ hostvars.values() | list }}"  # instances defined in inventories passed thru command line

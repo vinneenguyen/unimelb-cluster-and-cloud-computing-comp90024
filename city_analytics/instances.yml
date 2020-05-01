@@ -1,9 +1,0 @@
----
-- name: launch instances
-  hosts: localhost
-  tasks:
-    - include_vars: host_vars/all.yml
-    - name: launch instances
-      include_role:
-        name: instance
-      loop: "{{ instances }}"

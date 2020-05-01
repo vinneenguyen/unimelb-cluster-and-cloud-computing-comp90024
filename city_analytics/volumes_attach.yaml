@@ -1,0 +1,10 @@
+---
+- name: attach volumes
+  hosts: localhost
+  vars:
+    state: present
+  tasks:
+    - name: attach volumes
+      include_role:
+        name: server_volume
+      loop: "{{ hostvars.values() | list }}"  # instances defined in inventories passed thru command line

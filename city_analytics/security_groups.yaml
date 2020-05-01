@@ -1,8 +1,9 @@
 ---
 - name: create security groups
   hosts: localhost
+  vars_files:
+    - vars/security.yaml
   tasks:
-    - include_vars: host_vars/all.yml
     - name: create security groups
       include_role:
         name: security_group

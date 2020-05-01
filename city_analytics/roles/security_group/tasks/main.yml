@@ -1,14 +1,15 @@
 ---
 # tasks file for security_group
+# Meant to be used in a loop with item holding parameters for security group
 
 
-- name: create security group  # meant to be used in a loop
+- name: create security group
   os_security_group:
     state: present
     name: "{{ item.name }}"
     description: "{{ item.description }}"
 
-- name: add rule to security group  # meant to be used in a loop
+- name: add rule to security group
   os_security_group_rule:
     security_group: "{{ item.name }}"
     protocol: "{{ item.protocol }}"

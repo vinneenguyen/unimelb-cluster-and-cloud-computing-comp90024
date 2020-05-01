@@ -1,16 +1,18 @@
 ---
 # tasks file for keypair
+# Meant to be used in loop with item holding parameters for keypair
 
-
-# Meant to be used in loop with item as local private key filepath
 
 - name: add cloud public key if not exist
   os_keypair:
     state: present
-    name: "{{ item | basename }}"  # keypair name same as filename
+    name: "{{ item.key }}"  # keypair name same as filename
   register: keypair
 
 - name: save local private key if new keypair created
-  copy: content="{{ keypair.key.private_key }}" dest="{{ item }}.pem"
+  copy: content="{{ keypair.key.private_key }}" dest="{{ item.value }}"
   delegate_to: localhost
   when: keypair.key.private_key
+
+- name: change access permission of private key file
+  shell: sudo chmod 600 "{{ item.value }}"

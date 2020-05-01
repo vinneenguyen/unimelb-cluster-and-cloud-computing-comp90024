@@ -1,0 +1,9 @@
+---
+# tasks file for server_volume
+# Meant to be used in loop with item holding attributes of volume
+
+- name: attach/detach volume
+  os_server_volume:
+    state: "{{ state }}"  # present/absent: attach/detach
+    server: "{{ item.inventory_hostname }}"
+    volume: "{{ item.prefix + item.inventory_hostname }}"

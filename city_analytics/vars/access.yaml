@@ -1,0 +1,4 @@
+---
+# Parameters for creating keypairs
+keypaths:
+  common: credentials/common.pem  # local path to store private key file

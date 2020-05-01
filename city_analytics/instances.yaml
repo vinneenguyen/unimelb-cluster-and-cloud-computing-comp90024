@@ -1,0 +1,10 @@
+---
+- name: launch/remove instances
+  hosts: localhost
+  vars:
+    - state: present
+  tasks:
+    - name: launch/remove instances
+      include_role:
+        name: instance
+      loop: "{{ hostvars.values() | list }}"  # instances defined in inventories passed thru command line

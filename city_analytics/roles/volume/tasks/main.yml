@@ -1,10 +1,11 @@
 ---
 # tasks file for volume
+# Meant to be used in loop with item holding parameters for volume
 
 
-- name: create volume  # meant to be used in loop
+- name: create/delete volume
   os_volume:
-    state: present
+    state: "{{ state }}"  # present/absent: create/delete
+    display_name: "{{ item.prefix + item.inventory_hostname }}"
     availability_zone: "{{ item.availability_zone }}"
     size: "{{ item.size }}"
-    display_name: "{{ item.display_name }}"

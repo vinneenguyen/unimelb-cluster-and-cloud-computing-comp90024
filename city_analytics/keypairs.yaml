@@ -1,9 +1,10 @@
 ---
 - name: create keypairs
   hosts: localhost
+  vars_files:
+    - vars/access.yaml
   tasks:
-    - include_vars: host_vars/all.yml
     - name: create keypairs
       include_role:
         name: keypair
-      loop: "{{ keypaths.values() | list }}"
+      loop: "{{ keypaths|dict2items }}"

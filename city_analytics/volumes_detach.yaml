@@ -1,0 +1,10 @@
+---
+- name: detach volumes
+  hosts: localhost
+  vars:
+    state: absent
+  tasks:
+    - name: detach volumes
+      include_role:
+        name: server_volume
+      loop: "{{ hostvars.values() | list }}"  # instances defined in inventories passed thru command line

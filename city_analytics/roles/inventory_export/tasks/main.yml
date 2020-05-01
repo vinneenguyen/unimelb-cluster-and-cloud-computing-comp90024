@@ -1,0 +1,25 @@
+---
+# tasks file for inventory_export
+# Template out inventory file with ip addresses
+
+
+- name: list hosts
+  os_server_info:
+    filters:
+      vm_state: active
+  register: result
+
+- name: collect host ip addresses
+  set_fact:
+    addresses: "{{ addresses|default({}) | combine({ item.name: item.interface_ip }) }}"  # dictionary
+  loop: "{{ result.openstack_servers }}"
+
+- name: collect host groups
+  set_fact:
+    host_groups: "{{ host_groups|default([]) | union( hostvars[item].group_names ) | unique }}"  # list
+  loop: "{{ addresses.keys() | list }}"
+
+- name: export inventory file
+  template:
+    src: hosts.j2
+    dest: "{{ destination }}"

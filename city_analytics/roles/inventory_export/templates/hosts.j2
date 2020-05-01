@@ -1,0 +1,7 @@
+{# inventory file ini style #}
+{% for g in host_groups %}
+[{{ g }}]
+{% for host in groups[g] %}
+{{ host }} ansible_host={{ addresses[host] }}
+{%   endfor %}
+{% endfor %}

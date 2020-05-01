@@ -1,0 +1,7 @@
+- hosts: localhost
+  vars:
+    - destination: inventories/hosts_auto.ini
+  tasks:
+    - name: export inventory file with ip addresses
+      include_role:
+        name: inventory_export

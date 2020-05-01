@@ -1,0 +1,14 @@
+---
+# Install applications on servers
+
+
+- name: install docker, docker SDK
+  hosts: webservers
+  become: yes
+  vars:
+    pip_package: python3-pip
+    pip_install_packages:
+      - name: docker  # docker SDK
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker  # docker
