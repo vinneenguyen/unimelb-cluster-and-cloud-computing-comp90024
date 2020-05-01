@@ -3,8 +3,8 @@ availability_zone: melbourne-qh2-uom
 network: qh2-uom-internal  # internal instead of public where resources is limited
 security_groups: [ssh_prototype, http_prototype, couchdb]
 key_name: common  # name used to generate keypair
-ansible_user: ubuntu  # remote user
 ansible_ssh_private_key_file: credentials/common.pem  # local path to store private key (see vars/access.yaml)
+ansible_user: ubuntu  # remote user
 image: 215f9775-483c-4e0a-b703-d21a5c966f2e  # NeCTAR Ubuntu 18.04 LTS (Bionic) amd64 (with Docker)
 flavor: uom.mse.2c9g  # 2CPUs, 9GB RAM, 30GB Root Disk, Private
 size: 50  # volume size (GB)
