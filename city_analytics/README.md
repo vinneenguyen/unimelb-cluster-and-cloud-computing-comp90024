@@ -10,8 +10,9 @@ other operating systems (like Mac, Windows), commands might not work as expected
 ---
 
 ### Dependencies ###
-[pip - The Python Package Installer](https://pip.pypa.io/en/stable/)  
+On control:  
 [Python](https://www.python.org/)  
+[pip - The Python Package Installer](https://pip.pypa.io/en/stable/)  
 [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)  
 [OpenStack Client](https://docs.openstack.org/newton/user-guide/common/cli-install-openstack-command-line-clients.html)  
 [OpenStack Compute (nova)](https://docs.openstack.org/nova/latest/#installation)  
@@ -21,6 +22,8 @@ other operating systems (like Mac, Windows), commands might not work as expected
  *some other methods.*  
 
 On servers:  
+[Python 3](https://www.python.org/downloads/)  
+[pip](https://pip.pypa.io/en/stable/) (Python 3)  
 [Docker](https://docs.docker.com/get-docker/)  
 [Docker SDK for Python](https://docker-py.readthedocs.io/en/stable/)  
 
