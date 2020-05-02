@@ -11,8 +11,8 @@
 # ansible-playbook -i inventories/hosts.yaml volumes_attach.yaml  # attach volumes to instances
 # ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml inventory_export.yaml  # generate inventory file with IP addresses
 # ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml proxy_config.yaml  # Add proxy to etc/environment and docker environment
-ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml common.yaml
-ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml docker.yaml
+# ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml common.yaml
+# ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml docker.yaml 
 ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml couchdb_setup.yaml
 
 

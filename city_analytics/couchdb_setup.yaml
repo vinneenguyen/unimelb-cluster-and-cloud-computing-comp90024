@@ -1,6 +1,6 @@
 ---
 - name: install couchdb using docker
-  hosts: webservers
+  hosts: couchdbgroup
   vars_files:
     - vars/couchdb.yaml
   tasks:

@@ -1,4 +1,10 @@
 ---
+- name: Recursively remove directory
+  become: yes
+  file:
+    path: "{{ db_dir }}"
+    state: absent
+
 - name: Create couchdb directory
   tags: 'directory'
   become: yes
@@ -19,6 +25,7 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
+
 - name: Run docker compose to build couchdb
   tags: 'run_couch_db'
   become: yes
@@ -27,22 +34,49 @@
     pull: yes
     state: present
     remove_orphans: yes  #Remove containers for services not defined in the Compose file.
-    recreate: always   #Recreate containers
-    # register: output
+    recreate: always   #force Recreate containers
 
-# - debug:
-#     var: output
+# Replace configuration on name and cookie for Couchdb cluster setup
+- name: Replace vm.args    
+  become: yes
+  template: 
+    src: vm.args.j2
+    dest: "{{db_dir}}/vm.args"
+
+- name: Replace vm.args into existing container
+  shell: sudo docker cp {{db_dir}}/vm.args couchdb_couchdb_1:/opt/couchdb/etc
 
 
+# Replace configuration on uuid, http and chttpd bind address for Couchdb cluster setup
+- name: copy local.ini
+  become: yes
+  template: 
+    src: local.ini.j2
+    dest: "{{db_dir}}/local.ini"
 
-  #   - name: Run docker compose
-  # tags: 'wordpress'
-  # become: yes
-  # docker_compose:
-  #   project_src: "{{ wp_dir }}"
-  #   pull: yes
-  #   state: present
-  #   remove_orphans: yes
-  #   recreate: always
+- name: Replace into existing container
+  shell: sudo docker cp {{db_dir}}/local.ini couchdb_couchdb_1:/opt/couchdb/etc
+
+  # Cluster setup
+ 
+- name: Add thinkbox2 and 3 then finish cluster
+  when: inventory_hostname in groups['couchdbmaster']
+  shell: |
+    curl -X POST -H "Content-Type: application/json" http://admin:password@172.26.131.99:5984/_cluster_setup -d '{"action": "add_node", "host":"172.26.133.118", "port": 5984, "username": "admin", "password":"password"}'
+    curl -X POST -H "Content-Type: application/json" http://admin:password@172.26.131.99:5984/_cluster_setup -d '{"action": "add_node", "host":"172.26.130.152", "port": 5984, "username": "admin", "password":"password"}'
+    curl -X POST -H "Content-Type: application/json" http://admin:password@172.26.131.99:5984/_cluster_setup -d '{"action": "finish_cluster"}'
+  
+- name: Verify all cluster nodes are connected
+  when: inventory_hostname in groups['couchdbmaster']
+  shell: |
+    curl http://admin:password@172.26.131.99:5984/_membership
+  register: result
+
+# Print all nodes and cluster nodes, ensure the all_nodes and cluster_nodes lists match.
+- debug:
+    var: result
+    verbosity: 1
+
+
 
 

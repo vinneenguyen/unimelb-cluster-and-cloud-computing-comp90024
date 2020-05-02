@@ -13,7 +13,8 @@ services:
       COUCHDB_USER: {{ database_user }} 
       COUCHDB_PASSWORD: {{ database_password }}
       COUCHDB_SECRET: {{ couchdb_secret }}
-      NODENAME: {{ nodename }}
+      NODENAME: {{ ansible_host }}
+      ERL_FLAGS: "-setcookie {{cookie}}" 
     volumes:
-      - {{ db_dir }}/data:/opt/couchdb/data
-   
+      - ./{{ db_dir }}/data:/opt/couchdb/data
+    
