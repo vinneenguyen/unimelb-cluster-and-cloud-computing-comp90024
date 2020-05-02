@@ -13,7 +13,7 @@
 # ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml proxy_config.yaml  # Add proxy to etc/environment and docker environment
 # ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml common.yaml
 # ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml docker.yaml 
-ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml couchdb_setup.yaml
+ansible-playbook -i inventories/hosts_auto.ini -i inventories/group_vars/webservers.yaml couchdb_setup.yaml --skip-tags "remove_directory" # Create couchDB cluster, (CAUTION) comment skip-tags to remove couchDB data on instance
 
 
 # Use for Debugging 

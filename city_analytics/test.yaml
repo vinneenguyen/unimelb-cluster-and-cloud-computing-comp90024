@@ -3,5 +3,5 @@
 - hosts: webservers
   tasks:
     - debug: 
-        msg: System {{ inventory_hostname }} 
+        msg: System {{ hostvars[groups['couchdbgroup'][2]].ansible_host}}
       when: inventory_hostname in groups['couchdbmaster']
