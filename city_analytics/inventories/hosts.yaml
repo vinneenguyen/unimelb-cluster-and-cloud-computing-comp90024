@@ -21,6 +21,14 @@ all:
         thinkbox[1:4]:
  #       prototype-[1:2]:
 
+    couchdbgroup:       # Couchdbgroup is setup for couchDB database clustering
+      hosts:
+        thinkbox[1:3]:
+
+    couchdbmaster:      # One node serve as setup coordination node, in this case thinkbox1
+      hosts:
+        thinkbox[1:1]:
+
 
 # Ex 1: Ungrouped hosts, put them in 'all' or 'ungrouped' group, defines 4 hosts, one with 2 variables
 ##all:

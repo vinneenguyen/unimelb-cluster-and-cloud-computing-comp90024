@@ -1,4 +1,7 @@
 ---
+# As the instance is behind the University network, your instance will need to add proxy settings 
+# to access the internet. Need to amend /etc/environment after launching instances
+
 - name: Add proxy in etc/environment
   become: yes
   blockinfile:
@@ -11,7 +14,7 @@
       no_proxy="localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au"
 
 
-# Add proxy configuration 
+# Add proxy configuration for docker
 - name: Create directory /etc/systemd/system/docker.service.d
   become: yes
   file:
@@ -19,26 +22,20 @@
     recurse: yes
     state: directory
    
-
+# http-proxy.conf is copied from var folder and attached to /etc/systemd/system/docker.service.d
 - name: copy http-proxy.conf 
   become: yes
   copy: 
     src: vars/http-proxy.conf
     dest: /etc/systemd/system/docker.service.d
-  
+ 
+# Reload daemon  
 - name: reload daemon-reload
   become: yes
   systemd: 
     daemon-reload: yes
-
-
-# - name: Flush changes and Restart the docker 
-#   become: yes
-#   service:
-#     name: docker
-#     state: restarted
     
-
+# Reboot the instances to have new proxy settings to take effect
 - name: Reboot a machine
   become: yes
   reboot:

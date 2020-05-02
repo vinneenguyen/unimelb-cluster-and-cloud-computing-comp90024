@@ -1,1 +1,0 @@
-sudo docker run --name couch_master -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=aurin -e NODENAME=172.26.130.204 -v /home/ubuntu/common/data:/opt/couchdb/data -p 5984:5984 -p 4369:4369 -p 5986:5986 -p 9100-9200:9100-9200 -d ibmcom/couchdb3:'3.0.0'

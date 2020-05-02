@@ -1,0 +1,5 @@
+---
+- hosts: couchdbgroup
+  remote_user: root
+  roles:
+    - couchdb

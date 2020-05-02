@@ -1,0 +1,87 @@
+---
+
+# Remove existing directory (CAUTION: This will remove existing couchDB data on the instance)
+- name: Recursively remove directory
+  tags: 'remove_directory'
+  become: yes
+  file:
+    path: "{{ db_dir }}"
+    state: absent
+
+# Create couchDB directory on Instances
+- name: Create couchdb directory
+  tags: 'directory'
+  become: yes
+  file:
+    path: "{{ db_dir }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: yes
+    state: directory
+
+# Extract docker-compose.yaml file from template and place in couchDB folder
+# In docker-compose.yaml, ports 5984, 4369, 5986 and 9100:9200 are assigned
+# bind mount volume path is created using YYYY:MM:DD-HH:MM/data
+- name: Configure compose
+  tags: 'configure'  
+  become: yes
+  template:
+    src:  docker-compose.yaml.j2
+    dest: "{{ db_dir }}/docker-compose.yaml"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+# Install couchDB using docker_compose
+# Any services that are not defined in the compose file will be removed from the container
+# To add more services into the container, just include them in the docker-compose.yaml.j2
+- name: Run docker compose to build couchdb
+  tags: 'run_couch_db'
+  become: yes
+  docker_compose:
+    project_src: "{{ db_dir }}"
+    pull: yes
+    state: present
+    remove_orphans: yes  
+    recreate: always   
+
+# Replace vm.args configuration, change name to couchDB@PRIVATE_IP and set cookie for couchDB cluster setup
+- name: Replace vm.args    
+  become: yes
+  template: 
+    src: vm.args.j2
+    dest: "{{db_dir}}/vm.args"
+- name: Replace vm.args into existing container
+  shell: sudo docker cp {{db_dir}}/vm.args couchdb_couchdb_1:/opt/couchdb/etc
+
+
+# Copy and replace local.ini configuration, add uuid, http and chttpd bind address for couchDB cluster setup
+# UUID is generated online and set the same for the couchDB group
+- name: Copy local.ini
+  become: yes
+  template: 
+    src: local.ini.j2
+    dest: "{{db_dir}}/local.ini"
+- name: Replace into existing container
+  shell: sudo docker cp {{db_dir}}/local.ini couchdb_couchdb_1:/opt/couchdb/etc
+
+ 
+# Cluster setup, adding thinkbox2 and thinkbox3, using thinkbox 1 as setup coordination node
+- name: Add thinkbox2 and 3 then finish cluster
+  when: inventory_hostname in groups['couchdbmaster']
+  shell: |
+    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "add_node", "host":"{{ hostvars[groups['couchdbgroup'][1]].ansible_host}}", "port": 5984, "username": "{{database_user}}", "password":"{{database_password}}"}'
+    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "add_node", "host":"{{ hostvars[groups['couchdbgroup'][2]].ansible_host}}", "port": 5984, "username": "{{database_user}}", "password":"{{database_password}}"}'
+    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "finish_cluster"}'
+
+# Print all nodes and cluster nodes, ensure the all_nodes and cluster_nodes lists match.  
+# - name: Verify all cluster nodes are connected
+#   when: inventory_hostname in groups['couchdbmaster']
+#   shell: curl http://admin:password@{{ ansible_host }}:5984/_membership
+#   register: result
+# - debug:
+#     var: result
+#     verbosity: 0
+
+
+
+

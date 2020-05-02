@@ -1,0 +1,10 @@
+---
+- name: install couchdb using docker
+  hosts: couchdbgroup
+  vars_files:
+    - vars/couchdb.yaml
+  tasks:
+    - name: create couchdb
+      include_role:
+        name: couchdb
+      # loop: "{{ hostvars.values() | list }}"  # instances defined in inventories passed thru command line
