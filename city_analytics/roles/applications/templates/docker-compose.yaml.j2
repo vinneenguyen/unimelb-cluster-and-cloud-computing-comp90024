@@ -17,4 +17,3 @@ services:
       ERL_FLAGS: "-setcookie {{cookie}}" 
     volumes:
       - ./{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}/data:/opt/couchdb/data
-    

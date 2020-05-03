@@ -6,7 +6,7 @@
                                 # Because of the condition set when ansible_distribution == "Ubuntu"
 
   roles:
-    - role: openstack-common
+    - role: openstack-dependencies
     # - role: openstack-images            # Uncomment if want to retrieve image information
     - role: openstack-volume
     - role: openstack-security-group
@@ -20,7 +20,7 @@
 
   roles:
     - role: proxy
-    - role: wp-common
+    - role: wp-dependencies
     - role: wp-volumes
     - role: wp-docker
     - role: wp-wordpress

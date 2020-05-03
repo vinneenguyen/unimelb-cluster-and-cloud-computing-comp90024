@@ -77,7 +77,7 @@ all:
 # From above, the testing group contains: gamma1.example.org gamma2.example.org gamma3.example.org www001.example.com www002.example.com www003.example.com www004.example.com www005.example.com www006.example.com
 
 # Ex 4: all vars
-# keeping within 'all' group you can define common 'all' vars here with lowest precedence
+# keeping within 'all' group you can define dependencies 'all' vars here with lowest precedence
 
 
 ##all:

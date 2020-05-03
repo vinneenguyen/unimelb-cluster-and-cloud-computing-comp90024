@@ -1,6 +1,7 @@
 ---
+# vars file for couchdb
 
-# Couchdb variables
+
 db_dir: couchdb
 database_user: admin
 database_password: password

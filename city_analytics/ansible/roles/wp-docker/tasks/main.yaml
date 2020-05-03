@@ -10,7 +10,7 @@
   tags: 'docker'
   become: yes
   apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-common']
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-dependencies']
     state: latest
     install_recommends: no
     update_cache: yes

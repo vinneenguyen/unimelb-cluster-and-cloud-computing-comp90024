@@ -1,8 +1,8 @@
 ---
-- name: reinstall docker
+- name: Install docker
   hosts: webservers
   
   tasks:
-    - name: reinstall docker
+    - name: Install docker
       include_role:
         name: docker

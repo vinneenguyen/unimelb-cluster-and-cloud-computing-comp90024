@@ -1,6 +1,0 @@
----
-# Roles to install
-
-
-- src: geerlingguy.pip
-- src: geerlingguy.docker

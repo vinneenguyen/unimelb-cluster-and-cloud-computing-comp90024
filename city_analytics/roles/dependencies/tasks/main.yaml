@@ -1,0 +1,13 @@
+---
+# Install python3-pip and dependencies
+- name: Gather facts of remote host
+  setup:
+    gather_subset: all
+
+- name: Install dependencies
+  become: yes
+  apt:
+    name: ['python3-pip', 'apt-transport-https', 'build-essential', 'ca-certificates', 'curl', 'git', 'software-properties-common', 'unzip', 'vim']
+    state: latest
+    install_recommends: no
+    update_cache: yes

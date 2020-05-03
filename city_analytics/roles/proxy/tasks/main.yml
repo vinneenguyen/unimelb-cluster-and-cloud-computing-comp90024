@@ -25,7 +25,7 @@
 # http-proxy.conf is copied from var folder and attached to /etc/systemd/system/docker.service.d
 - name: copy http-proxy.conf 
   become: yes
-  copy: 
+  copy:
     src: vars/http-proxy.conf
     dest: /etc/systemd/system/docker.service.d
  
