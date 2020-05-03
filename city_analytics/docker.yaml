@@ -1,7 +1,6 @@
 ---
 - name: Install docker
   hosts: webservers
-  
   tasks:
     - name: Install docker
       include_role:

@@ -1,0 +1,7 @@
+---
+- name: cluster couchDB
+  hosts: couchdbgroup
+  tasks:
+    - name: cluster couchDB
+      include_role:
+        name: couchDB_setup

@@ -1,33 +1,36 @@
 ---
-
-# Remove existing directory (CAUTION: This will remove existing couchDB data on the instance)
-- name: Recursively remove directory
-  tags: 'remove_directory'
+# Remove existing containers (CAUTION: This will kill all the containers)
+- name: Prune everything
   become: yes
-  file:
-    path: "{{ db_dir }}"
-    state: absent
+  docker_prune:
+    containers: yes
+    images: yes
+    networks: yes
+    volumes: yes
+    builder_cache: yes
 
-# Create couchDB directory on Instances
-- name: Create couchdb directory
+# Create services directory on instances
+- name: Create services directory if it does not exist
   tags: 'directory'
   become: yes
   file:
-    path: "{{ db_dir }}"
+    path: "{{ services_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     recurse: yes
     state: directory
+    
 
-# Extract docker-compose.yaml file from template and place in couchDB folder
-# In docker-compose.yaml, ports 5984, 4369, 5986 and 9100:9200 are assigned
-# bind mount volume path is created using YYYY:MM:DD-HH:MM/data
-- name: Configure compose
+# Extract docker-compose.yaml file from template and place in services folder
+# In docker-compose.yaml, ports 5984, 4369, 5986 and 9100:9200 are assigned for couchDB
+# Bind mount volume path is created using YYYY:MM:DD-HH:MM/data
+- name: Services under couchdbgroup container
+  when: inventory_hostname in groups['couchdbmaster'] 
   tags: 'configure'  
   become: yes
   template:
     src:  docker-compose.yaml.j2
-    dest: "{{ db_dir }}/docker-compose.yaml"
+    dest: "{{ services_dir }}/docker-compose.yaml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
@@ -35,15 +38,18 @@
 # Any services that are not defined in the compose file will be removed from the container
 # To add more services into the container, just include them in the docker-compose.yaml.j2
 - name: Run docker compose to build couchdb
+  when: inventory_hostname in groups['couchdbmaster'] 
   tags: 'run_couch_db'
   become: yes
   docker_compose:
-    project_src: "{{ db_dir }}"
+    project_name: "{{ db_dir}}"
+    project_src: "{{ services_dir }}"
     pull: yes
     state: present
     remove_orphans: yes  
     recreate: always   
 
+<<<<<<< HEAD
 # Replace vm.args configuration, change name to couchDB@PRIVATE_IP and set cookie for couchDB cluster setup
 - name: Replace vm.args    
   become: yes
@@ -82,3 +88,5 @@
 # - debug:
 #     var: result
 #     verbosity: 0
+=======
+>>>>>>> 5b24aa957da7ab2387823d14f43dcd0821d31dd7

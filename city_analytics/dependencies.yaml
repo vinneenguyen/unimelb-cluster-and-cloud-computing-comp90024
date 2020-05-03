@@ -2,10 +2,10 @@
 # Install applications on servers
 
 
-- name: add applications
+- name: add dependencies
   hosts: webservers
 
   tasks:
-    - name: add applications
+    - name: add dependencies
       include_role:
         name: dependencies

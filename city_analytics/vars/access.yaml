@@ -1,4 +1,4 @@
 ---
 # Parameters for creating keypairs
 keypaths:
-  common: credentials/dependencies.pem  # local path to store private key file
+  common: credentials/common.pem  # local path to store private key file

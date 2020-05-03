@@ -1,7 +1,7 @@
 ---
-- name: install couchdb using docker
-  hosts: couchdbgroup
+- name: install applications under couchDB group using docker-compose
+  hosts: webservers
   tasks:
-    - name: create couchdb
+    - name: install applications
       include_role:
-        name: couchdb
+        name: applications

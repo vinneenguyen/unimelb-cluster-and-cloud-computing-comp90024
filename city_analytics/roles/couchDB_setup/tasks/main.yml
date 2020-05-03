@@ -1,0 +1,58 @@
+---
+
+# Replace vm.args configuration, change name to couchDB@PRIVATE_IP and set cookie for couchDB cluster setup
+- name: Replace vm.args    
+  become: yes
+  template: 
+    src: vm.args.j2
+    dest: "{{ services_dir }}/{{db_dir}}/vm.args"
+- name: Replace vm.args into existing container
+  shell: sudo docker cp {{services_dir}}/{{db_dir}}/vm.args {{ db_dir }}_couchdb_1:/opt/couchdb/etc
+
+
+# Copy and replace local.ini configuration, add uuid, http and chttpd bind address for couchDB cluster setup
+# UUID is generated online and set the same for the couchDB group
+- name: Copy local.ini
+  become: yes
+  template: 
+    src: local.ini.j2
+    dest: "{{ services_dir }}/{{db_dir}}/local.ini"
+- name: Replace into existing container
+  shell: sudo docker cp {{services_dir}}/{{db_dir}}/local.ini {{ db_dir }}_couchdb_1:/opt/couchdb/etc
+
+
+# Cluster setup, joining nodes where couchdbmaster node act as a setup coordination node
+- name: Cluster couchDB
+  when: inventory_hostname in groups['couchdbmaster'] and inventory_hostname != item
+  with_items: "{{ groups['couchdbgroup'] }}"
+  shell: |
+    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "add_node", "host":"{{ hostvars[item].ansible_host }}" , "port": 5984, "username": "{{database_user}}", "password":"{{database_password}}"}'
+    
+- name: Finish_cluster
+  when: inventory_hostname in groups['couchdbmaster']
+  shell: |
+    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "finish_cluster"}'
+
+# Print all nodes and cluster nodes, ensure the all_nodes and cluster_nodes lists match.  
+# - name: Verify all cluster nodes are connected
+#   when: inventory_hostname in groups['couchdbmaster']
+#   shell: curl http://admin:password@{{ ansible_host }}:5984/_membership
+#   register: result
+# - debug:
+#     var: result
+#     verbosity: 0
+
+# - name: Cluster couchDB
+#   when: inventory_hostname in groups['couchdbmaster'] and inventory_hostname != item
+#   with_items: "{{ groups['couchdbgroup'] }}"
+#   uri:
+#     url: http://admin:password@{{ ansible_host }}:5984/_cluster_setup
+#     method: POST
+#     action: "add node"
+#     host: "{{ hostvars[item].ansible_host }}" 
+#     port: 5984
+#     username: "{{ database_user }}"
+#     password: "{{ database_password }}"
+#     body_format: json
+#     headers:
+#       Content-Type: "application/json"
