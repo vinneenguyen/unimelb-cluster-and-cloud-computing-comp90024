@@ -23,11 +23,11 @@
     state: directory
    
 # http-proxy.conf is copied from var folder and attached to /etc/systemd/system/docker.service.d
-- name: copy http-proxy.conf 
+- name: Copy http-proxy.conf
   become: yes
-  copy:
-    src: vars/http-proxy.conf
-    dest: /etc/systemd/system/docker.service.d
+  template: 
+    src: http-proxy.conf.j2
+    dest: /etc/systemd/system/docker.service.d/http-proxy.conf
  
 # Reload daemon  
 - name: reload daemon-reload

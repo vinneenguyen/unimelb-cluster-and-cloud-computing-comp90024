@@ -1,7 +1,6 @@
 ---
 - name: add proxy
   hosts: webservers
-  
   tasks:
     - name: add proxy
       include_role:
