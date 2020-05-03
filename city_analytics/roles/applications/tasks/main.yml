@@ -73,6 +73,7 @@
     curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "add_node", "host":"{{ hostvars[groups['couchdbgroup'][2]].ansible_host}}", "port": 5984, "username": "{{database_user}}", "password":"{{database_password}}"}'
     curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "finish_cluster"}'
 
+
 # Print all nodes and cluster nodes, ensure the all_nodes and cluster_nodes lists match.  
 # - name: Verify all cluster nodes are connected
 #   when: inventory_hostname in groups['couchdbmaster']
