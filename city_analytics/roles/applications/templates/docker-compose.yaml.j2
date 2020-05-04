@@ -16,4 +16,4 @@ services:
       NODENAME: {{ ansible_host }}
       ERL_FLAGS: "-setcookie {{cookie}}" 
     volumes:
-      - ./{{ db_dir }}/{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}/data:/opt/couchdb/data
+      - /data/{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}:/opt/couchdb/data

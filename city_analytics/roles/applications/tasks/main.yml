@@ -25,7 +25,7 @@
 # In docker-compose.yaml, ports 5984, 4369, 5986 and 9100:9200 are assigned for couchDB
 # Bind mount volume path is created using YYYY:MM:DD-HH:MM/data
 - name: Services under couchdbgroup container
-  when: inventory_hostname in groups['couchdbmaster'] 
+  when: inventory_hostname in groups['couchdbgroup'] 
   tags: 'configure'  
   become: yes
   template:
@@ -38,11 +38,11 @@
 # Any services that are not defined in the compose file will be removed from the container
 # To add more services into the container, just include them in the docker-compose.yaml.j2
 - name: Run docker compose to build couchdb
-  when: inventory_hostname in groups['couchdbmaster'] 
+  when: inventory_hostname in groups['couchdbgroup'] 
   tags: 'run_couch_db'
   become: yes
   docker_compose:
-    project_name: "{{ db_dir}}"
+    project_name: "{{ db_dir }}"
     project_src: "{{ services_dir }}"
     pull: yes
     state: present

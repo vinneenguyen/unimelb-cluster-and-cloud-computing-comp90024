@@ -4,10 +4,34 @@
   setup:
     gather_subset: all
 
-- name: Install dependencies
+- name: Install pip
   become: yes
   apt:
-    name: ['python3-pip', 'apt-transport-https', 'build-essential', 'ca-certificates', 'curl', 'git', 'software-properties-common', 'unzip', 'vim']
+    name: ['python-pip']
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+# sudo apt-get update; sudo apt-get install python-pip
+
+- name: Update pip
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+
+- name: Install dependencies
+  tags: always
+  become: yes
+  apt:
+    name: ['apt-transport-https', 'build-essential', 'ca-certificates', 'curl', 'git', 'python-dev', 'python-pip', 'python-setuptools', 'software-properties-common', 'unzip', 'vim']
     state: latest
     install_recommends: no
     update_cache: yes
+
+- name: Update pip
+  tags: always
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
