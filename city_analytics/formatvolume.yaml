@@ -1,0 +1,7 @@
+---
+- name: format volume
+  hosts: webservers
+  tasks:
+    - name: format volume
+      include_role:
+        name: formatvolume

@@ -49,44 +49,4 @@
     remove_orphans: yes  
     recreate: always   
 
-<<<<<<< HEAD
-# Replace vm.args configuration, change name to couchDB@PRIVATE_IP and set cookie for couchDB cluster setup
-- name: Replace vm.args    
-  become: yes
-  template: 
-    src: vm.args.j2
-    dest: "{{db_dir}}/vm.args"
-- name: Replace vm.args into existing container
-  shell: sudo docker cp {{db_dir}}/vm.args couchdb_couchdb_1:/opt/couchdb/etc
 
-
-# Copy and replace local.ini configuration, add uuid, http and chttpd bind address for couchDB cluster setup
-# UUID is generated online and set the same for the couchDB group
-- name: Copy local.ini
-  become: yes
-  template: 
-    src: local.ini.j2
-    dest: "{{db_dir}}/local.ini"
-- name: Replace into existing container
-  shell: sudo docker cp {{db_dir}}/local.ini couchdb_couchdb_1:/opt/couchdb/etc
-
- 
-# Cluster setup, adding thinkbox2 and thinkbox3, using thinkbox 1 as setup coordination node
-- name: Add thinkbox2 and 3 then finish cluster
-  when: inventory_hostname in groups['couchdbmaster']
-  shell: |
-    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "add_node", "host":"{{ hostvars[groups['couchdbgroup'][1]].ansible_host}}", "port": 5984, "username": "{{database_user}}", "password":"{{database_password}}"}'
-    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "add_node", "host":"{{ hostvars[groups['couchdbgroup'][2]].ansible_host}}", "port": 5984, "username": "{{database_user}}", "password":"{{database_password}}"}'
-    curl -X POST -H "Content-Type: application/json" http://admin:password@{{ ansible_host }}:5984/_cluster_setup -d '{"action": "finish_cluster"}'
-
-
-# Print all nodes and cluster nodes, ensure the all_nodes and cluster_nodes lists match.  
-# - name: Verify all cluster nodes are connected
-#   when: inventory_hostname in groups['couchdbmaster']
-#   shell: curl http://admin:password@{{ ansible_host }}:5984/_membership
-#   register: result
-# - debug:
-#     var: result
-#     verbosity: 0
-=======
->>>>>>> 5b24aa957da7ab2387823d14f43dcd0821d31dd7
