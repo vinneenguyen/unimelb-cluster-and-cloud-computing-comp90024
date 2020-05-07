@@ -5,9 +5,9 @@
   become: yes
   template: 
     src: vm.args.j2
-    dest: "{{ services_dir }}/{{db_dir}}/vm.args"
+    dest: "{{ services_dir }}/vm.args"
 - name: Replace vm.args into existing container
-  shell: sudo docker cp {{services_dir}}/{{db_dir}}/vm.args {{ db_dir }}_couchdb_1:/opt/couchdb/etc
+  shell: sudo docker cp {{services_dir}}/vm.args {{ db_dir }}_couchdb_1:/opt/couchdb/etc
 
 
 # Copy and replace local.ini configuration, add uuid, http and chttpd bind address for couchDB cluster setup
@@ -16,9 +16,9 @@
   become: yes
   template: 
     src: local.ini.j2
-    dest: "{{ services_dir }}/{{db_dir}}/local.ini"
+    dest: "{{ services_dir }}/local.ini"
 - name: Replace into existing container
-  shell: sudo docker cp {{services_dir}}/{{db_dir}}/local.ini {{ db_dir }}_couchdb_1:/opt/couchdb/etc
+  shell: sudo docker cp {{services_dir}}/local.ini {{ db_dir }}_couchdb_1:/opt/couchdb/etc
 
 
 # Cluster setup, joining nodes where couchdbmaster node act as a setup coordination node
