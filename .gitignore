@@ -2,7 +2,7 @@
 .idea/
 
 # RStudio project configurations
-*.Rproj
+*.Rproj*
 
 # Windows config files
 *desktop.ini
