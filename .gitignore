@@ -5,6 +5,7 @@
 .Rproj.user/
 *.Rproj
 *.Rhistory
+*.RData
 
 # Windows config files
 *desktop.ini
