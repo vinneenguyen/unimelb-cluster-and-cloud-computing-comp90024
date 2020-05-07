@@ -2,8 +2,9 @@
 .idea/
 
 # RStudio project configurations
-*.Rproj*
+.Rproj.user/
+*.Rproj
+*.Rhistory
 
 # Windows config files
 *desktop.ini
-.Rproj.user
