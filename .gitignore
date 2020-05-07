@@ -1,6 +1,12 @@
 # Pycharm project configurations
 .idea/
 
+# RStudio project configurations
+*.Rproj
+
 # Windows config files
 *desktop.ini
+<<<<<<< HEAD
 .Rproj.user
+=======
+>>>>>>> 8372ff777f5aa4f34a1226213e470c740169207c
