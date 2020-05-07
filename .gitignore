@@ -1,5 +1,8 @@
 # Pycharm project configurations
 .idea/
 
+# RStudio project configurations
+*.Rproj
+
 # Windows config files
 *desktop.ini
