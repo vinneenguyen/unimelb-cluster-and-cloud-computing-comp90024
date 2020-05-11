@@ -36,15 +36,6 @@ One way to input credentials is through environment variables.
 source credentials/openrc.sh  # set credentials to environment variables
 ```
 
-### Install roles ###
-The following roles are required for installation of dependencies:  
-\- [Docker on Linux](https://galaxy.ansible.com/geerlingguy/docker)  
-\- [Pip on Linux](https://galaxy.ansible.com/geerlingguy/pip)  
-all by [Jeff Geerling](https://github.com/geerlingguy).  
-```shell script
-ansible-galaxy install -r roles/requirements.yml
-```
-
 Alternatively, `credentials/clouds_template.yaml` can be used. See the documentation inside file for details.  
 
 ### Enable use of dynamic inventory ###
