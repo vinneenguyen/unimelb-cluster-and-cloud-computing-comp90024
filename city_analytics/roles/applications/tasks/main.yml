@@ -1,6 +1,7 @@
 ---
 # Remove existing containers (CAUTION: This will kill all the containers)
 - name: Prune everything
+  tags: 'kill_container'
   become: yes
   docker_prune:
     containers: yes
@@ -28,11 +29,12 @@
   when: inventory_hostname in groups['couchdbgroup'] 
   tags: 'configure'  
   become: yes
-  template:
-    src:  docker-compose.yaml.j2
-    dest: "{{ services_dir }}/docker-compose.yaml"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+  template: src={{ item }}.j2 dest={{ services_dir }}/{{ item }}
+  with_items:
+    - docker-compose.yaml
+    - Dockerfile
+    - app.py
+    - requirements.txt
 
 # Install couchDB using docker_compose
 # Any services that are not defined in the compose file will be removed from the container

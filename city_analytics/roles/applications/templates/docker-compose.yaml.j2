@@ -17,3 +17,19 @@ services:
       ERL_FLAGS: "-setcookie {{cookie}}" 
     volumes:
       - /data/{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}:/opt/couchdb/data
+
+
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+
+  redis:
+    image: "redis:alpine"
+
+  
+
+  
+    
+
+
