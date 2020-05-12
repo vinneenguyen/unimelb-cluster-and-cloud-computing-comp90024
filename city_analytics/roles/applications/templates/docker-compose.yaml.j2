@@ -3,6 +3,7 @@ version: '3.7'
 services:
   couchdb:
     image: couchdb
+    container_name: {{ db_dir }}
     restart: always
     ports: 
      - 5984:5984
@@ -16,16 +17,14 @@ services:
       NODENAME: {{ ansible_host }}
       ERL_FLAGS: "-setcookie {{cookie}}" 
     volumes:
-      - /data/{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}:/opt/couchdb/data
+      - /external/db:/opt/couchdb/data
 
 
-  web:
+  geo:
     build: .
-    ports:
-      - "5000:5000"
 
-  redis:
-    image: "redis:alpine"
+
+
 
   
 

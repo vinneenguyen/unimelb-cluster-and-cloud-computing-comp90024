@@ -3,6 +3,6 @@
 - hosts: webservers
   tasks:
     - debug: 
-        msg: System {{ hostvars[item].ansible_host }} {{ansible_host}}
+        msg: System {{ hostvars[item].inventory_hostname }} {{inventory_hostname}}
       when: inventory_hostname in groups['couchdbmaster'] and inventory_hostname != item
       with_items: "{{ groups['couchdbgroup'] }}"

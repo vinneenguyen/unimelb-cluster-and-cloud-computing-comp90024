@@ -1,6 +1,6 @@
 ---
-- name: Install dependencies
-  tags: 'volumes'
+- name: Install xfsprogs
+  tags: 'format'
   become: yes
   apt:
     name: ['xfsprogs']
@@ -9,7 +9,7 @@
     update_cache: yes
 
 - name: Make file system
-  tags: 'volumes'
+  tags: 'format'
   become: yes
   filesystem:
     fstype: xfs
@@ -32,11 +32,14 @@
   become: yes
   file:
     path: "{{ item.item.mountpoint }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     recurse: yes
     state: directory
   when: item.stat.exists == false
   with_items:
     - "{{ directory_stats.results }}"
+
 
 - name: Mount device
   tags: 'volumes'
