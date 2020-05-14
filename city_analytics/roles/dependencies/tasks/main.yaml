@@ -4,23 +4,7 @@
   setup:
     gather_subset: all
 
-- name: Install pip
-  become: yes
-  apt:
-    name: ['python-pip']
-    state: latest
-    update_cache: yes
-  when: ansible_distribution == "Ubuntu"
-# sudo apt-get update; sudo apt-get install python-pip
-
-- name: Update pip
-  become: yes
-  pip:
-    name: ['pip']
-    state: latest
-
-
-- name: Install dependencies
+- name: Install cloud instance dependencies
   tags: always
   become: yes
   apt:

@@ -1,0 +1,16 @@
+---
+
+
+- name: Change external folder permission
+  become: yes
+  shell: |
+    sudo chmod 1777 /external
+    sudo chown -R root:root /external
+
+
+- name: Copy master directory to external drive
+  become: yes
+  copy: 
+    src: ../city_analytics
+    dest: /external
+  force: yes    #file must be replaced

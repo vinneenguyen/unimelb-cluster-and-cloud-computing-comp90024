@@ -32,8 +32,6 @@
   become: yes
   file:
     path: "{{ item.item.mountpoint }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
     recurse: yes
     state: directory
   when: item.stat.exists == false
