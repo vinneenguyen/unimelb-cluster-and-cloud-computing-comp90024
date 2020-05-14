@@ -38,7 +38,6 @@
   with_items:
     - "{{ directory_stats.results }}"
 
-
 - name: Mount device
   tags: 'volumes'
   become: yes

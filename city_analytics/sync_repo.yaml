@@ -8,4 +8,4 @@
   tasks:
     - name: copy directory
       include_role:
-        name: copy_master
+        name: sync_repo

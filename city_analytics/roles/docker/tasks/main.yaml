@@ -6,15 +6,6 @@
     name: ['docker', 'docker-engine', 'docker.io']
     state: absent
 
-- name: Install dependencies
-  tags: 'docker'
-  become: yes
-  apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-common']
-    state: latest
-    install_recommends: no
-    update_cache: yes
-
 - name: Add Docker apt repository key
   tags: 'docker'
   become: yes

@@ -1,6 +1,5 @@
 ---
 
-
 - name: Change external folder permission
   become: yes
   shell: |
