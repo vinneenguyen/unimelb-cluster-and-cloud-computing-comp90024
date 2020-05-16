@@ -9,9 +9,11 @@
 # ansible-playbook -i inventories/hosts.yaml volumes_attach.yaml  # attach volumes to instances
 # ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml inventory_export.yaml  # generate inventory file with IP addresses
 # ansible-playbook -i inventories/hosts_auto.ini proxy_config.yaml  # Add proxy to etc/environment and docker environment
-# ansible-playbook -i inventories/hosts_auto.ini dependencies.yaml
+# ansible-playbook -i inventories/hosts_auto.ini dependencies.yaml -> maybe removed???
 # ansible-playbook -i inventories/hosts_auto.ini formatvolume.yaml  # Format attached volume, *under construction
 # ansible-playbook -i inventories/hosts_auto.ini docker.yaml
+# copy master project directory to attached volume of instance clone.yaml
+
 ansible-playbook -i inventories/hosts_auto.ini applications.yaml  # Docker-compose application under 
 ansible-playbook -i inventories/hosts_auto.ini couchDB_setup.yaml  # Create couchDB cluster
 
