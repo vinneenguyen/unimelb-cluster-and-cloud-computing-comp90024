@@ -86,17 +86,60 @@ ansible -i inventories/hosts_auto.ini all -m ping  # test by pinging instances f
 ```
 *Note: New inventory file is stored at `inventories/hosts_auto.ini`*  
 
+### Proxies configuration ###
+As the instance is behind the University network, instances will need to add proxy settings to access the internet. Append block of proxy settings into /etc/environment for instances. Same needed for docker service, http-proxy.conf.j2 is copied into to /etc/systemd/system/docker.service.d. Daemon and docker are restarted to have new settings to take effect.
+```shell script
+ansible-playbook -i inventories/hosts_auto.ini proxy_config.yaml 
+```
+
+### Proxies configuration ###
+As the instance is behind the University network, instances will need to add proxy settings to access the internet. Append block of proxy settings into /etc/environment for instances. Same needed for docker service, http-proxy.conf.j2 is copied into to /etc/systemd/system/docker.service.d. Daemon and docker are restarted to have new settings to take effect.
+```shell script
+ansible-playbook -i inventories/hosts_auto.ini proxy_config.yaml 
+```
+
 ### Install dependencies ###
 The following packages are installed on servers:  
+\- [apt-transport-https] This APT transport allows the use of repositories accessed via the HTTP Secure protocol
+\- [build-essential] Packages needed to compile a Debian package
+\- [ca-certificates] program that updates the directory /etc/ssl/certs to hold SSL certificates and generates ca-certificates
+\- [curl] URL syntax to transfer data to and from servers.
+\- [git] A version control system
+\- [python-dev] Package that contains the header files for the Python C API
+\- [python-pip] Package installer for Python
+\- [python-setuptools] Facilitate packaging Python projects by enhancing the Python standard library distutils
+\- [software-properties-common] This software provides an abstraction of the used apt repositories
+\- [unzip] Unzip file
+\- [vim] My favorite editor
 \- [pip](https://pip.pypa.io/en/stable/)  
 \- [Docker](https://docs.docker.com/get-docker/)  
+
 ```shell script
 ansible-playbook -i inventories/hosts_auto.ini dependencies.yaml
 ```
 
-### Detach volumes from instances ###
+### Format External /dev/vdb Volume ###
+This command install XFS file system on the attached volume /dev/vdb. To avoid reinstalling file system again, install xfs and make file system tasks are tagged with format. Using --skip-tags on the command skip these tasks. The formatted volume is mounted on /external. 
 ```shell script
-ansible-playbook -i inventories/hosts.yaml volumes_detach.yaml
+ansible-playbook -i inventories/hosts_auto.ini formatvolume.yaml --skip-tags "format"
+```
+
+### Install Docker ###
+This playbook uninstall old docker, new docker installer is obtained from (https://download.docker.com/linux/ubuntu/gpg). Docker and Docker compose is installed after using apt and pip.
+```shell script
+ansible-playbook -i inventories/hosts_auto.ini docker.yaml
+```
+
+### Install Docker ###
+This playbook uninstall old docker, new docker installer is obtained from (https://download.docker.com/linux/ubuntu/gpg). Docker and Docker compose is installed after using apt and pip.
+```shell script
+ansible-playbook -i inventories/hosts_auto.ini docker.yaml
+```
+
+### Copy project folder to Cloud instances ###
+Execute following to copy city_analytics directory to cloud's external storage, if already exist, files will be overwritten. Prior that, /external permission is changed to allow read and write remotely. 
+```shell script
+ansible-playbook -i inventories/hosts_auto.ini sync_repo.yaml
 ```
 
 ### Delete instances ###
@@ -119,12 +162,42 @@ Execute the following series of orchestrations (described in playbooks):
 \- Create volumes  
 \- Attach volumes  
 \- Generate inventory file with IP addresses  
+\- Add proxy
 \- Install dependencies
+\- Format external volume
+\- Install docker
+\- Copy project repo to cloud
 ```shell script
 ./setup.sh
 ```
 
+
+### Create and Add security group for CouchDB ###
+Execute following to create a security group that opens internal ports 4369, 5000, 5986, 6379, 9100-9200
+```shell script
+ansible-playbook -i inventories/hosts.yaml db_security.yaml 
+```
+
+### CouchDB application ###
+Execute following to create a security group that opens internal ports 4369, 5000, 5986, 6379, 9100-9200
+```shell script
+ansible-playbook -i inventories/hosts.yaml db_security.yaml 
+```
+
 ---
+
+### Applications ###
+Execute the following series of orchestrations (described in playbooks):  
+\- Add security group
+\- CouchDB application
+
+```shell script
+./app.sh
+```
+
+---
+
+
 
 ### References ###
 [Running Ansible within Windows](https://www.jeffgeerling.com/blog/running-ansible-within-windows)  

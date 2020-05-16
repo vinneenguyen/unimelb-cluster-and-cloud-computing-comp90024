@@ -1,8 +1,8 @@
 ---
 # For testing purposes
-- hosts: webservers
+- hosts: localhost
   tasks:
     - debug: 
-        msg: System {{ hostvars[item].ansible_host }} {{ansible_host}}
-      when: inventory_hostname in groups['couchdbmaster'] and inventory_hostname != item
-      with_items: "{{ groups['couchdbgroup'] }}"
+        msg: "{{ item.security_groups }} + [ 'abc' ]"
+      loop: "{{ hostvars.values() | list }}" 
+      

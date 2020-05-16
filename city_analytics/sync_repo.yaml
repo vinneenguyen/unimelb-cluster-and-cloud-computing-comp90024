@@ -1,0 +1,11 @@
+---
+# Install applications on servers
+
+
+- name: copy directory
+  hosts: webservers
+
+  tasks:
+    - name: copy directory
+      include_role:
+        name: sync_repo

@@ -1,0 +1,22 @@
+---
+sg_name: couchDB_cluster
+sg_protocol: tcp
+sg:
+  - ports: 6379
+    port_min: 6379
+    port_max: 6379
+  - ports: 9100
+    port_min: 9100
+    port_max: 9200
+  - ports: 5986
+    port_min: 5986
+    port_max: 5986
+  - ports: 5000
+    port_min: 5000
+    port_max: 5000
+  - ports: 4369
+    port_min: 4369
+    port_max: 4369
+
+sg_new: "{{ item.security_groups }} + [ '{{ sg_name }}' ]"
+

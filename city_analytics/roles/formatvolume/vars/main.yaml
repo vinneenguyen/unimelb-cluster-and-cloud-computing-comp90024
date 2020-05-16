@@ -1,6 +1,6 @@
 ---
 volumes:
   - device: /dev/vdb
-    mountpoint: /data
+    mountpoint: /external
   # - device: /dev/vdc
   #   mountpoint: /var/lib/docker

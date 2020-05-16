@@ -1,6 +1,6 @@
 ---
-- name: Install dependencies
-  tags: 'volumes'
+- name: Install xfsprogs
+  tags: 'format'
   become: yes
   apt:
     name: ['xfsprogs']
@@ -9,7 +9,7 @@
     update_cache: yes
 
 - name: Make file system
-  tags: 'volumes'
+  tags: 'format'
   become: yes
   filesystem:
     fstype: xfs

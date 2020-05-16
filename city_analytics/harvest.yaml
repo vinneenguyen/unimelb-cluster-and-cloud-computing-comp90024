@@ -1,0 +1,9 @@
+---
+- name: harvester
+  hosts: couchdbmaster   # Might need to change to provide efficiency
+  vars_files:
+    - vars/couchdb.yaml
+  tasks:
+    - name: harvester
+      include_role:
+        name: harvester

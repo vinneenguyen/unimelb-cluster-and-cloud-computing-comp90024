@@ -1,0 +1,12 @@
+---
+- name: db security group
+  hosts: localhost
+  vars:
+    - state: present
+  tasks:
+    - name: db security group
+      include_role:
+        name: db_securitygroup
+      loop: "{{ hostvars.values() | list }}" 
+
+ 
