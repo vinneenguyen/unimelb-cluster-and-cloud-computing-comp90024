@@ -8,9 +8,9 @@ import json
 import time
 import sys
 
-# Connect to CouchDB
+
 try:
-	client = CouchDB("admin", "password", url='http://172.26.132.48:5984', connect=True)
+	client = CouchDB("{{ database_user }}", "{{ database_password }}", url="{{ thinkbox }}", connect=True)
 	session = client.session()
 except Exception as e:
     print('Connection unsuccessful')
@@ -94,7 +94,7 @@ while True:
 
 
 	def selector_sym(db,timestamp, regex, sym_name):
-		selector={'timestamp':{'$gte':timestamp},'text':{'$regex':regex}}
+		selector={'timestamp':{'$gt':timestamp},'text':{'$regex':regex}}
 		docs = db.get_query_result(selector)
 		number_doc=0
 		for tweet in docs:
@@ -108,7 +108,7 @@ while True:
 					
 			except Exception as e:
 				print('uh oh')
-		print('number of doc filtered', sym_name,' :', number_doc)
+		# print('number of doc filtered', sym_name,' :', number_doc)
 		return docs
 
 	def symptoms(db, symptoms_db,  timestamp):
@@ -138,176 +138,7 @@ while True:
 	covid_ddoc = DesignDocument(covid_db,'covid')
 	view=View(covid_ddoc,'symptoms_location')
 
-	time.sleep(2)
-
-
-	
-
-
-
-
-	#Create a designdocument for views
-
-
-	#client.disconnect()
-
-	# selector={'create_at':{'$gt':last_id},'text':{'$regex':}}
-	# docs = selector_sym(timestamp, '(?i)(fever)')
-	
-	# for tweet in docs:
-	# 	#print(tweet['id_str'])
-		
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'fever')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'fever')
-				
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(cough|dry cough)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'cough')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'cough')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'cough')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(sore throat)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'throat')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'throat')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'throat')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(fatigue|tiredness)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'fatigue')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'fatigue')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'fatigue')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(difficulty breathing)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'breathing')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'breathing')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'breathing')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(headache)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'headache')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'headache')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'headache')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(joint pain|bodyache)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'bodyache')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'bodyache')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'bodyache')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(smell loss|taste loss)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'smtloss')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'stloss')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'stloss')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(vomit)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'vomit')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'vomit')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'vomit')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
-
-
-	# selector={'id_str':{'$gt':last_id},'text':{'$regex':'(?i)(diarrhoea)'}}
-	# docs = db.get_query_result(selector)
-	# print(last_id,'diarrhoea')
-	# for tweet in docs:
-	# 	print(tweet['id_str'])
-	# 	try:
-	# 		if tweet['id_str'] in symptoms_db:
-	# 			update_doc(tweet,symptoms_db,'diarrhoea')
-								
-	# 		else:
-	# 			create_doc(tweet,symptoms_db,'diarrhoea')
-
-	# 	except Exception as e:
-	# 		print('uh oh')
+	time.sleep({{sleep}})
 
 
 	

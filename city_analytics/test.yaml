@@ -1,8 +1,8 @@
 ---
 # For testing purposes
-- hosts: localhost
+
+- name: CouchDB Views
+  hosts: webservers[3]
   tasks:
     - debug: 
-        msg: "{{ item.security_groups }} + [ 'abc' ]"
-      loop: "{{ hostvars.values() | list }}" 
-      
+        msg: "{{ hostvars.thinkbox2.ansible_host }}" 
