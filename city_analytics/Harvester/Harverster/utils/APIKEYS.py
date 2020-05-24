@@ -80,7 +80,12 @@ key_list = [{"consumer_key": "1IN6rVE2D5fXZ3uUSkaKj6sH7",
                 'consumer_key': 'WPOiyomOxUf0oB1n0mOGyyLFs',
                 'consumer_secret': '8sPNhBpzPDgefscDKU6bAXLzTNTiCyx7fgQs9x8zgyecrKz8cj',
                 'access_token': '886915377829105665-9Ed7FM0bMeSeReD9FePZYdOl2dURlXP',
-                'access_token_secret': '4BGkCVdANs20i5riW5kDbztKzVsC8z3eDogjGCnsKVb7j'}]
+                'access_token_secret': '4BGkCVdANs20i5riW5kDbztKzVsC8z3eDogjGCnsKVb7j'}, {
+                'consumer_key': 'irCPmhuFx4dcLcK6YsrzOXXYa',
+                'consumer_secret': 'mwdFyjK0CBuDSF4lrMJKnNlOQxafAnXblHEynJuFjlbyhDkv0v',
+                'access_token': '1261882567764000769-hUlP9daIp8oXXSDjb2ye0o4dyJHbgD',
+                'access_token_secret': 'j3wd47x1o4wXA6IDPFvY1rkoxK2XKUuI80tTgYTMO6x4g'}
+            ]
 
 
 def get_api(key_list, n, wait_on_rate_limit=False, wait_on_rate_limit_notify=False):
