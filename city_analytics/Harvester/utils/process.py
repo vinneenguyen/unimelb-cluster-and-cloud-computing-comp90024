@@ -9,10 +9,9 @@ input : a json
 output: a json in our format
 """
 
-pathSA4 = "C:\\Users\\Yuxuan\\Desktop\\python\\pycharm\\Twitter\\unimelb\\utils\\geospatial\\SA4_area_coordinates.json"
+pathSA4 = "SA4_area_coordinates.json"
 
-with open(
-        "C:\\Users\\Yuxuan\\Desktop\\python\\pycharm\\Twitter\\unimelb\\utils\\geospatial\\generate_localities.ipynb") as f:
+with open("generate_localities.ipynb") as f:
     for line in f:
         js = json.loads(line)
         city_to_SA4 = ast.literal_eval(js['cells'][5]['outputs'][0]['text'][1])

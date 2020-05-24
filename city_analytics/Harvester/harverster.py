@@ -1,6 +1,6 @@
 from threading import Thread
 import json
-import Twitter.unimelb.utils.collect as collect
+import utils.collect as collect
 import math
 
 
@@ -135,6 +135,6 @@ def main(user_file, input_parameter):
 
 
 if __name__ == "__main__":
-    user_file = "sources/users/all-unique-users.txt"
+    user_file = "sources/all-unique-users.txt"
     input_parameter = "sources/input_parameter"
     main(user_file, input_parameter)

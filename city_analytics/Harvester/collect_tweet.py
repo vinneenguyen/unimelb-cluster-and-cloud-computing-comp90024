@@ -1,7 +1,7 @@
 import time
-import Twitter.unimelb.utils.collect as collect
-import Twitter.unimelb.utils.process as process
-import Twitter.unimelb.utils.export as export
+import utils.collect as collect
+import utils.process as process
+import utils.export as export
 from cloudant.client import CouchDB
 import couchdb
 
@@ -32,11 +32,11 @@ def main(users):
 
 
 # couchDB server
-server_addr = "172.26.131.173"
+server_addr = "172.26.131.173" # todo dynamic ip
 client = CouchDB("admin", "password", url='http://' + server_addr + ':5984', connect=True)
-mydb1 = "test-covid"
-mydb2 = "test-covid-symptom"
-mydb3 = "test-covid-covidsafe"
+mydb1 = "test-covid" # todo change to tweet-covid
+mydb2 = "test-covid-symptom" # todo
+mydb3 = "test-covid-covidsafe" # todo
 
 # create databases if not exist
 export.create_db(mydb1, client)
@@ -54,7 +54,7 @@ except Exception as e:
     print(e)
 
 # get the new users file for current day
-path = "sources/users/new-users/" + time.strftime("%B-%Y") + "/new-user-" + time.strftime("%d") + ".txt"
+path = "new-users/" + time.strftime("%B-%Y") + "/new-user-" + time.strftime("%d") + ".txt"
 users = set()
 with open(path) as f:
     for line in f:

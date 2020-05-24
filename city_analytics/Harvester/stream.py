@@ -1,7 +1,7 @@
 from cloudant.client import CouchDB
-import Twitter.unimelb.utils.APIKEYS as keys
-import Twitter.unimelb.utils.process as process
-import Twitter.unimelb.utils.export as export
+import utils.APIKEYS as keys
+import utils.process as process
+import utils.export as export
 import tweepy
 import couchdb
 import json
@@ -11,7 +11,7 @@ import os
 users = set()
 key_len = len(keys.key_list)
 
-with open("sources/users/all-unique-users.txt") as f:
+with open("sources/all-unique-users.txt") as f:
     for line in f:
         users.add(line)
 
@@ -41,15 +41,15 @@ class MyStreamListener(tweepy.StreamListener):
             users.add(user_id)
             date = time.strftime("%d")
             # the folder path use to store new users
-            dir_path = os.path.join(os.path.abspath('.'), 'sources/users/new-users/' + time.strftime("%B-%Y"))
+            dir_path = os.path.join(os.path.abspath('.'), 'new-users/' + time.strftime("%B-%Y"))
             # this is called at the first time receiving new tweet each month, create a folder with respect to that
             # month to store new users for that month.
             if os.path.exists(dir_path) == False:
                 os.mkdir(dir_path)
                 print("folder: " + dir_path + " created!")
             # write new user ids into a file, the file is named by the date of current day
-            with open("sources/users/new-users/" + time.strftime("%B-%Y") + "/new-user-" + date + ".txt", 'a') as out:
-                with open("sources/users/all-unique-users.txt", 'a') as out2:
+            with open("new-users/" + time.strftime("%B-%Y") + "/new-user-" + date + ".txt", 'a') as out:
+                with open("sources/all-unique-users.txt", 'a') as out2:
                     out2.write(str(user_id) + "\n")
                     out.write(str(user_id) + "\n")
                     out.flush()
@@ -58,11 +58,11 @@ class MyStreamListener(tweepy.StreamListener):
         return True
 
 
-server_addr = "172.26.131.173"
+server_addr = "172.26.131.173" # todo dynamic ip
 client = CouchDB("admin", "password", url='http://' + server_addr + ':5984', connect=True)
-mydb1 = "test-covid"
-mydb2 = "test-covid-symptom"
-mydb3 = "test-covid-covidsafe"
+mydb1 = "test-covid" # todo
+mydb2 = "test-covid-symptom" # todo change to tweet-covid-symptom
+mydb3 = "test-covid-covidsafe" # todo
 
 # create databases if not exist
 export.create_db(mydb1, client)

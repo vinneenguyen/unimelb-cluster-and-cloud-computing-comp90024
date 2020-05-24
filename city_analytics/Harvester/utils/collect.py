@@ -1,7 +1,7 @@
 import tweepy
 import json
 import time
-import Twitter.unimelb.utils.APIKEYS as keys
+import utils.APIKEYS as keys
 
 # default keywords for our topic COVID-19
 default_keywords = ['coronavirus', 'covid', 'pandemic', 'epidemic', 'cases', 'confirmed', 'recovered', 'deaths',
