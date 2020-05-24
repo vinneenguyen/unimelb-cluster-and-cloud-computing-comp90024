@@ -13,8 +13,8 @@
 # ansible-playbook -i inventories/hosts_auto.ini dependencies.yaml
 # ansible-playbook -i inventories/hosts_auto.ini formatvolume.yaml --skip-tags "format" # Format attached volume, *under construction
 # ansible-playbook -i inventories/hosts_auto.ini docker.yaml
-# ansible-playbook -i inventories/hosts_auto.ini sync_repo.yaml --skip-tags "permission"
+ansible-playbook -i inventories/hosts_auto.ini sync_repo.yaml --skip-tags "permission"
 
 
 # Use for Debugging 
-ansible-playbook -i inventories/hosts_auto.ini test.yaml
+# ansible-playbook -i inventories/hosts_auto.ini test.yaml

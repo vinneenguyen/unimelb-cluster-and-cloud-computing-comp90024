@@ -2,4 +2,5 @@
 # vars file for couchdb
 
 harvester_dir: harvester
+thinkbox: "{{ hostvars.thinkbox3.ansible_host }}"
 

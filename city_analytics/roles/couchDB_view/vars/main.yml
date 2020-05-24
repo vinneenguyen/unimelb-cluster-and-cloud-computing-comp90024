@@ -3,4 +3,4 @@
 
 view_dir: views
 thinkbox: 'http://{{ hostvars.thinkbox3.ansible_host }}:5984'
-sleep: 5
+sleep: 10

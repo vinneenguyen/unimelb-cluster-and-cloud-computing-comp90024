@@ -62,6 +62,4 @@ for tweet in lines:
 #     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 #     auth.set_access_token(access_token, access_token_secret)
 #     stream = tweepy.Stream(auth, l)
-#     stream.filter(locations=[110.95, -54.83, 159.29, -11.35])            
-
-                                                                                                                                                   1,1           Top
+#     stream.filter(locations=[110.95, -54.83, 159.29, -11.35]) 

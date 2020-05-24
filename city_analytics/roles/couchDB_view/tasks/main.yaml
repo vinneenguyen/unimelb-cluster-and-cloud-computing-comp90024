@@ -12,7 +12,7 @@
 
 - name: View Container
   become: yes
-  template: src={{ item }}.j2 dest={{view_dir }}/{{ item }}
+  template: src={{ item }}.j2 dest={{ view_dir }}/{{ item }}
   with_items:
     - docker-compose.yaml
     - Dockerfile
