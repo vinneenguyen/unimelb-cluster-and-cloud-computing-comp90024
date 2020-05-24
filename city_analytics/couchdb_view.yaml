@@ -1,0 +1,10 @@
+---
+- name: CouchDB Views
+  hosts: webservers[3]
+  vars_files:
+    - vars/couchdb.yaml
+  tasks:
+    - name: CouchDB Views
+      include_role:
+        name: couchDB_view
+

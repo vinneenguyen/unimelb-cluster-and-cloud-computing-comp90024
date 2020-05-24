@@ -36,12 +36,12 @@
     daemon-reload: yes
 
 # Reload docker service
-- name: restart docker
-  become: yes
-  shell: systemctl restart docker
+# - name: restart docker
+#   become: yes
+#   shell: systemctl restart docker
     
 # Reboot the instances to have new proxy settings to take effect
-# - name: Reboot a machine
-#   become: yes
-#   reboot:
-#     reboot_timeout: 600
+- name: Reboot a machine
+  become: yes
+  reboot:
+    reboot_timeout: 600

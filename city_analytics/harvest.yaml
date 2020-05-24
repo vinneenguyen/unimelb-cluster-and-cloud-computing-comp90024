@@ -1,6 +1,6 @@
 ---
 - name: harvester
-  hosts: couchdbmaster   # Might need to change to provide efficiency
+  hosts: webservers[3]   
   vars_files:
     - vars/couchdb.yaml
   tasks:
