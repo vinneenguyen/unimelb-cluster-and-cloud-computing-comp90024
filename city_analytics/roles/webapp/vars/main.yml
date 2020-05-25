@@ -1,0 +1,5 @@
+---
+# vars file for couchdb
+
+web_dir: web
+

@@ -1,29 +1,23 @@
 version: '3.7'
 
 services:
-  collect:
+  stream:
     image: "python:3.7-alpine"
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: collect
-    command: python3 collect_tweet.py
-    
-    
-
-  stream:
     image: "python:3.7-alpine"
     container_name: stream
+    volumes:
+      - /external/harvester:/code
     command: python3 stream.py
 
   main:
     image: "python:3.7-alpine"
     container_name: main
+    volumes:
+      - /external/harvester:/code
     command: python3 main.py
-
-
-
-    
 
 
 

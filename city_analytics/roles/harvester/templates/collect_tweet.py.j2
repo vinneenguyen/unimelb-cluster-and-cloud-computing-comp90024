@@ -54,7 +54,7 @@ except Exception as e:
     print(e)
 
 # get the new users file for current day
-path = "new-users/" + time.strftime("%B-%Y") + "/new-user-" + time.strftime("%d") + ".txt"
+path = "new-users/" + time.strftime("%B-%Y") + "/new-user-" + time.strftime("%d-%H") + ".txt"
 users = set()
 with open(path) as f:
     for line in f:

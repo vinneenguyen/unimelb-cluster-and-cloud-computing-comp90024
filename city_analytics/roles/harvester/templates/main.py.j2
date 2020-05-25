@@ -8,7 +8,9 @@ def run_collect_tweet():
 
 # start collecting tweets from new users of that day
 # run everyday 11:55 pm
-schedule.every().day.at("23:55").do(run_collect_tweet)
+schedule.every().hour.at(":15").do(run_collect_tweet)
+#(schedule.every(10).minutes.do(run_collect_tweet))
+#schedule.every().day.at("12:10").do(run_collect_tweet)
 
 while True:
     schedule.run_pending()

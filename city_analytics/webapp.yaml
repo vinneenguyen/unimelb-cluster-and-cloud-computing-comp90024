@@ -1,0 +1,7 @@
+---
+- name: Web app
+  hosts: webservers[3]   
+  tasks:
+    - name: Web app
+      include_role:
+        name: webapp
