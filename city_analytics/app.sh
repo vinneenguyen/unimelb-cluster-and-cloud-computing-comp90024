@@ -6,4 +6,5 @@
 
 
 # ansible-playbook -i inventories/hosts_auto.ini couchdb_view.yaml
-ansible-playbook -i inventories/hosts_auto.ini harvest.yaml 
+# ansible-playbook -i inventories/hosts_auto.ini harvest.yaml 
+ansible-playbook -i inventories/hosts_auto.ini webapp.yaml 

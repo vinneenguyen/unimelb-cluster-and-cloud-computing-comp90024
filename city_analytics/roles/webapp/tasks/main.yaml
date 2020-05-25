@@ -1,34 +1,31 @@
 ---
 # Create services directory on instances
-- name: Create harvester directory if it does not exist
+- name: Create web directory if it does not exist
   tags: 'directory'
   become: yes
   file:
-    path: "{{ harvester_dir }}"
+    path: "/external/{{ web_dir }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     recurse: yes
     state: directory
 
-- name: Copy harvester to directory
+
+- name: Copy webapp to directory
   become: yes
   copy: 
-    src: ../city_analytics/Harvester/
-    dest: /external/harvester
+    src: ../city_analytics/webapp/
+    dest: /external/web
     force: yes    #file must be replaced
 
-
-- name: Copy harvester files
+- name: web Container
   become: yes
-  template: src={{ item }}.j2 dest=/external/{{ harvester_dir }}/{{ item }}
+  template: src={{ item }}.j2 dest=/external/{{ web_dir }}/{{ item }}
   with_items:
-    - collect_tweet.py
-    - Dockerfile
-    - harverster.py
-    - main.py
-    - requirements.txt
-    - stream.py
     - docker-compose.yaml
+    - Dockerfile
+    - web.py
+    - requirements.txt
 
 
 # Any services that are not defined in the compose file will be removed from the container
@@ -36,9 +33,9 @@
 - name: Run docker compose to build harvester
   become: yes
   docker_compose:
-    project_src: "/external/{{ harvester_dir }}"
+    project_src: "/external/{{ web_dir }}"
     pull: yes
     state: present
-    remove_orphans: no 
+    remove_orphans: yes  
     recreate: always
     build: yes

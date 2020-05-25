@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style>
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+#search {
+    background-color:#eeeeee;
+    width:100px;
+    float:left;
+    padding:35px;        
+}
+#buttons{
+    position: absolute;
+    left: 255px;
+    top: 185px;
+}
+#map1 {
+    width: 750px;
+    float: left;
+    padding: 50px 30px 20px 80px;    
+}
+#map2 {
+    width:750px;
+    float:left;
+    padding: 50px 30px 20px 80px;    
+}
+#map3 {
+    width:750px;
+    float:left;
+    padding: 50px 30px 20px 80px;    
+}
+#map4 {
+    width:750px;
+    float:left;
+    padding: 50px 30px 20px 80px;    
+}
+#tweets {
+    width:350px;
+    float:right;
+    padding:10px;    
+}
+#des1 {
+    position: absolute;
+    left:15px;
+    top:500px;
+    background-color:black;
+    width:150px;
+    color:white;
+    float:left;
+    text-align:left;
+    padding:5px;    
+}
+#des2 {
+    position: absolute;
+    left:15px;
+    top:500px;
+    background-color:black;
+    width:150px;
+    color:white;
+    float:left;
+    text-align:left;
+    padding:5px;       
+}
+#des3 {
+    position: absolute;
+    left:15px;
+    top:500px;
+    background-color:black;
+    width:150px;
+    color:white;
+    float:left;
+    text-align:left;
+    padding:5px;      
+}
+#des4 {
+    position: absolute;
+    left:15px;
+    top:500px;
+    background-color:black;
+    width:150px;
+    color:white;
+    float:left;
+    text-align:left;
+    padding:5px;    
+}
+</style>
+
+<script type="text/javascript">
+function myFunction1(){
+  var mp1=document.getElementById("map1");
+  var mp2=document.getElementById("map2");
+  var mp3=document.getElementById("map3");
+  var mp4=document.getElementById("map4");
+  var des1=document.getElementById("des1");
+  var des2=document.getElementById("des2");
+  var des3=document.getElementById("des3");
+  var des4=document.getElementById("des4");
+  mp1.style.display="block";
+  mp2.style.display="none";
+  mp3.style.display="none";
+  mp4.style.display="none";
+  des1.style.display="block";
+  des2.style.display="none";
+  des3.style.display="none";
+  des4.style.display="none";
+}
+function myFunction2(){
+  var mp1=document.getElementById("map1");
+  var mp2=document.getElementById("map2");
+  var mp3=document.getElementById("map3");
+  var mp4=document.getElementById("map4");
+  var des1=document.getElementById("des1");
+  var des2=document.getElementById("des2");
+  var des3=document.getElementById("des3");
+  var des4=document.getElementById("des4");
+  mp1.style.display="none";
+  mp2.style.display="block";
+  mp3.style.display="none";
+  mp4.style.display="none";
+  des1.style.display="none";
+  des2.style.display="block";
+  des3.style.display="none";
+  des4.style.display="none";
+}
+function myFunction3(){
+  var mp1=document.getElementById("map1");
+  var mp2=document.getElementById("map2");
+  var mp3=document.getElementById("map3");
+  var mp4=document.getElementById("map4");
+  var des1=document.getElementById("des1");
+  var des2=document.getElementById("des2");
+  var des3=document.getElementById("des3");
+  var des4=document.getElementById("des4");
+  mp1.style.display="none";
+  mp2.style.display="none";
+  mp3.style.display="block";
+  mp4.style.display="none";
+  des1.style.display="none";
+  des2.style.display="none";
+  des3.style.display="block";
+  des4.style.display="none";
+}
+function myFunction4(){
+  var mp1=document.getElementById("map1");
+  var mp2=document.getElementById("map2");
+  var mp3=document.getElementById("map3");
+  var mp4=document.getElementById("map4");
+  var des1=document.getElementById("des1");
+  var des2=document.getElementById("des2");
+  var des3=document.getElementById("des3");
+  var des4=document.getElementById("des4");
+  mp1.style.display="none";
+  mp2.style.display="none";
+  mp3.style.display="none";
+  mp4.style.display="block";
+  des1.style.display="none";
+  des2.style.display="none";
+  des3.style.display="none";
+  des4.style.display="block";
+}
+</script>
+</head>
+
+<body>
+
+<!-- header -->
+<div id = "header">
+<h1>Analysis of the impact of COVID-19 on people's tweets...</h1>
+</div>
+
+
+<!-- header -->
+<div id = "search">
+<p>Enter the data you want to view, then click "Submit"</p>
+
+<form action = "http://localhost:5000/data" method = "post" >
+  Enter: <input type = "text" name = "nm"> <br>
+  <input type = "submit" value="submit">
+</form>
+</div>
+
+<div id = "buttons">
+<input type="button" id="bt1" value="COVID-19" onclick = "myFunction1()"/>
+<input type="button" id="bt2" value="button2" onclick = "myFunction2()"/>
+<input type="button" id="bt3" value="button3" onclick = "myFunction3()"/>
+<input type="button" id="bt4" value="button4" onclick = "myFunction4()"/>
+</div>
+
+<div id = "map1" style="display: block;">
+<iframe src="/get_map" width="100%" height="600" style="border:none;">
+</iframe>
+</div>
+
+
+
+<div id = "tweets">
+<a class="twitter-timeline" data-width="330" data-height="600" href="https://twitter.com/WHO?ref_src=twsrc%5Etfw">Tweets by WHO</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<div id = "map2" style="display: none;">
+<iframe src="/get_map" width="100%" height="600" style="border:none;">
+</iframe>
+</div>
+
+<div id = "map3" style="display: none;">
+<iframe src="/get_map" width="100%" height="600" style="border:none;">
+</iframe>
+</div>
+
+<div id = "map4" style="display: none;">
+<iframe src="/get_map" width="100%" height="600" style="border:none;">
+</iframe>
+</div>
+
+<div id = "des1" style="display: block;">
+<p>some description 1 some description 1 some description 1 some description 1
+</p>
+</div>
+
+<div id = "des2" style="display: none">
+<p>some description 2 some description 2some description 2some description 2
+</p>
+</div>
+
+<div id = "des3" style="display: none">
+<p>some description 3 some description 3 some description 3 some description 3
+</p>
+</div>
+
+<div id = "des4" style="display: none">
+<p>some description 4 some description 4 some description 4 some description 4
+</p>
+</div>
+
+</body>
+</html>
+
+
+<!-- https://www.google.com/ -->
