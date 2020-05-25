@@ -10,14 +10,28 @@
     recurse: yes
     state: directory
 
-- name: Harvester Container
+- name: Copy harvester to directory
+  become: yes
+  copy: 
+    src: ../city_analytics/Harvester/
+    dest: harvester
+    force: yes    #file must be replaced
+
+
+- name: Copy harvester files
   become: yes
   template: src={{ item }}.j2 dest={{ harvester_dir }}/{{ item }}
   with_items:
-    - docker-compose.yaml
+    - collect_tweet.py
     - Dockerfile
-    - app.py
+    - harverster.py
+    - harversterDockerfile
+    - main.py
+    - mainDockerfile
     - requirements.txt
+    - stream.py
+    - streamDockerfile
+    - docker-compose.yaml
 
 
 # Any services that are not defined in the compose file will be removed from the container
@@ -28,6 +42,6 @@
     project_src: "{{ harvester_dir }}"
     pull: yes
     state: present
-    remove_orphans: yes  
+    remove_orphans: no 
     recreate: always
     build: yes

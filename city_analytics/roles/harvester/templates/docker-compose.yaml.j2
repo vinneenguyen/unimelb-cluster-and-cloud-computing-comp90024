@@ -1,17 +1,32 @@
 version: '3.7'
 
 services:
-  harvest:
-    build: .
-    container_name: {{ harvester_dir }}
+  collect:
+    image: "python:3.7-alpine"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: collect
+    command: python3 collect_tweet.py
+    
+    
+
+  stream:
+    image: "python:3.7-alpine"
+    container_name: stream
+    command: python3 stream.py
+
+  main:
+    image: "python:3.7-alpine"
+    container_name: main
+    command: python3 main.py
+
+
+
     
 
 
 
 
-  
-
-  
-    
 
 
