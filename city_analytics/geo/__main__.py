@@ -90,7 +90,7 @@ def _do_covidsafe():
     area_col = "area_code"
     var_col = "variable"
     val_col = "count"
-    stat_col = "count"
+    stat_col = "rate"
     data = view_covid(name, partition_key=partition_key, area_col=area_col, var_col=var_col, val_col=val_col,
                       docid=docid, dbname=dbname, ip=ip, username=USERNAME, password=PASSWORD)
     var_levels = data[var_col].unique()  # variable levels
@@ -138,7 +138,7 @@ def _do_symptoms():
     var_levels = data[var_col].unique()  # variable levels
     data = pd.pivot_table(data, values=val_col, index=[area_col], columns=[var_col], fill_value=0).reset_index()
     data[stat_col] = data[var_levels].sum(axis=1)
-    # display(data)
+    display(data)
 
     # Tweet count by symptom for top areas
     outfile = RESULTDIR / "symptoms_top_areas_sa4.png"  # output graph
@@ -173,7 +173,7 @@ def main():
 
 
 if __name__ == "__main__":
-    cyc = 900  # seconds
+    cyc = 60  # seconds
     while True:
         main()
         print(f"Next execution scheduled at {datetime.now() + timedelta(seconds=cyc)}")
