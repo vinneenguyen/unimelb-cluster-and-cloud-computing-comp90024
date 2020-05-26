@@ -4,36 +4,55 @@
 <head>
 <style>
   body {
-    background-color: #D3D1D1
+    background-color: #000000
     
   }
+p{
+  line-height: 16px
+}
+p.thick {
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+}
 #header {
     
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    color: #BDBDBD;
     text-align:center;
-    padding: 20px
+    padding: 20px;
     
 }
 #data1{
     position: absolute;
     left: 10px;
     top: 150px;
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    color: #BDBDBD;
     text-align:center;
     width:180px;
-    padding: 10px
 }
 #data2{
     position: absolute;
     left: 10px;
     top: 300px;
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    color: #BDBDBD;
     text-align:center;
     width:180px;
-    padding: 10px
+}
+#data3{
+    position: absolute;
+    left: 10px;
+    top: 450px;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    color: #BDBDBD;
+    text-align:center;
+    width:180px;
 }
 #buttons{
     position: absolute;
@@ -42,42 +61,42 @@
 }
 #map1 {
     position: absolute;
-    left:255px;
+    left:240px;
     top:150px;
-    outline:#7B7776 solid thin;
-    background-color: white;
-    width: 750px;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    width: 780px;
     float: left;
         
 }
 #map2 {
     position: absolute;
-    left:255px;
+    left:240px;
     top:150px;
-    outline:#7B7776 solid thin;
-    background-color: white;
-    width: 750px;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    width: 780px;
     float: left;
         
 }
 #map3 {
     position: absolute;
-    left:255px;
+    left:240px;
     top:150px;
-    outline:#7B7776 solid thin;
-    background-color: white;
-    width: 750px;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    width: 780px;
     float: left;
     
        
 }
 #map4 {
     position: absolute;
-    left:255px;
+    left:240px;
     top:150px;
-    outline:#7B7776 solid thin;
-    background-color: white;
-    width: 750px;
+    outline:#363636 solid thin;
+    background-color: #222222;
+    width: 780px;
     float: left;
     
        
@@ -86,57 +105,58 @@
     position: absolute;
     left:1050px;
     top:150px;
-    outline:#7B7776 solid thin;
+    outline:#363636 solid thin;
     background-color: white;
-    
+  
     width:380px;
     
         
 }
 #des1 {
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
     position: absolute;
-    left:15px;
-    top:460px;
+    left:10px;
+    top:600px;
     width:180px;
     float:left;
-    text-align:left;
-    padding:5px;     
+    text-align:center;
+    color: #BDBDBD;
+        
         
 }
 #des2 {
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
     position: absolute;
-    left:15px;
-    top:460px;
+    left:10px;
+    top:600px;
     width:180px;
     float:left;
-    text-align:left;
-    padding:5px;       
+    text-align:center;
+    color: #BDBDBD;       
 }
 #des3 {
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
     position: absolute;
-    left:15px;
-    top:460px;
+    left:10px;
+    top:600px;
     width:180px;
     float:left;
-    text-align:left;
-    padding:5px;      
+    text-align:center;
+    color: #BDBDBD;      
 }
 #des4 {
-    outline:#7B7776 solid thin;
-    background-color: white;
+    outline:#363636 solid thin;
+    background-color: #222222;
     position: absolute;
-    left:15px;
-    top:460px;
+    left:10px;
+    top:600px;
     width:180px;
     float:left;
-    text-align:left;
-    padding:5px;    
+    text-align:center;
+    color: #BDBDBD;   
 }
 </style>
 
@@ -227,17 +247,25 @@ function myFunction4(){
 <!-- header -->
 <div id = "data1">
 <p>
-The number of negative tweets related to covid</p>
-<p>
+The total number of tweets related to covid-19:</p>
+<p class = "thick">
 {{data1}}  
 </p>
 </div>
 
 <div id = "data2">
 <p>
-The number of negative tweets related to covid</p>
-<p>
+The total number of tweets related to covidsafe:</p>
+<p class = "thick">
 {{data2}}  
+</p>
+</div>
+
+<div id = "data3">
+<p>
+The total number of tweets related to symptoms:</p>
+<p class = "thick">
+{{data3}}  
 </p>
 </div>
 
