@@ -1,10 +1,11 @@
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, send_from_directory
 from cloudant.client import CouchDB
 from cloudant.design_document import DesignDocument
 from cloudant.view import View
 import json
+import os
 
-app = Flask(__name__, static_folder='../georesults', template_folder='../georesults')
+app = Flask(__name__, template_folder='static')
 
 def _access_covid_nums():
     client = CouchDB("admin", "password", url='http://172.26.131.173:5984', connect=True)
@@ -17,19 +18,19 @@ def _access_covid_nums():
     view=View(ddoc,'sentiment_location',partition_key='name')
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
 
     view=View(ddoc,'sentiment_location',partition_key='geo')
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
 
     view=View(ddoc,'sentiment_location',partition_key='none')
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
     
     return total
@@ -45,19 +46,19 @@ def _access_covidsafe_nums():
     view=View(ddoc,'sentiment_location',partition_key='name')
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
 
     view=View(ddoc,'sentiment_location',partition_key='geo')
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
 
     view=View(ddoc,'sentiment_location',partition_key='none')
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
     
     return total
@@ -78,10 +79,27 @@ def _access_symptoms_nums():
     total = 0
 
     for i in view(reduce=True,group=True,group_level=1)['rows']:
-        print(i['value'])
+        #print(i['value'])
         total = total + i['value']
     
     return total
+
+@app.context_processor  
+def inject_url():
+    data = {
+        "url_for": dated_url_for,
+    }
+    return data
+
+def dated_url_for(endpoint, **values):
+  filename = None
+  if endpoint == 'static':
+    filename = values.get('filename', None)
+  if filename:
+    file_path = os.path.join(app.root_path, endpoint, filename)
+    values['v'] = int(os.stat(file_path).st_mtime)  
+    return url_for(endpoint, **values)
+
 
 @app.route('/')
 def index():
@@ -129,8 +147,10 @@ def login():
 
 """
 if __name__ == '__main__':
+   app.jinja_env.auto_reload = False
    app.run(
       #host='0.0.0.0',
-      #port= 6666,
+      #port= 5000,
       debug=True
+
     )
