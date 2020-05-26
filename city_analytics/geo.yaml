@@ -1,0 +1,7 @@
+---
+- name: Geo
+  hosts: webservers[3]   
+  tasks:
+    - name: Geo
+      include_role:
+        name: geo

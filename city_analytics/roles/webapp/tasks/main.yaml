@@ -1,39 +1,67 @@
 ---
 # Create services directory on instances
-- name: Create web directory if it does not exist
-  tags: 'directory'
-  become: yes
-  file:
-    path: "/external/{{ web_dir }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    recurse: yes
-    state: directory
+# - name: Create web directory if it does not exist
+#   tags: 'directory'
+#   become: yes
+#   file:
+#     path: "/external/{{ web_dir }}"
+#     owner: "{{ ansible_user }}"
+#     group: "{{ ansible_user }}"
+#     recurse: yes
+#     state: directory
 
 
-- name: Copy webapp to directory
+# - name: Create harvester directory if it does not exist
+#   tags: 'directory'
+#   become: yes
+#   file:
+#     path: "front"
+#     owner: "{{ ansible_user }}"
+#     group: "{{ ansible_user }}"
+#     recurse: yes
+#     state: directory
+
+
+# - name: Copy geo to directory
+#   become: yes
+#   copy: 
+#     src: ../city_analytics/geo/
+#     dest: /external/city_analytics/geo
+#     force: yes    #file must be replaced
+
+# - name: Copy geodata to directory
+#   become: yes
+#   copy: 
+#     src: ../city_analytics/geodata
+#     dest: /external/city_analytics/
+#     force: yes    #file must be replaced
+
+- name: Copy result to directory
   become: yes
   copy: 
-    src: ../city_analytics/webapp/
-    dest: /external/web
+    src: ../city_analytics/georesults
+    dest: /external/city_analytics/
     force: yes    #file must be replaced
+
 
 - name: web Container
   become: yes
-  template: src={{ item }}.j2 dest=/external/{{ web_dir }}/{{ item }}
+  template: src={{ item }}.j2 dest=/external/front/{{ item }}
   with_items:
     - docker-compose.yaml
     - Dockerfile
-    - web.py
     - requirements.txt
+    - geo-Dockerfile
+    - geo-requirements.txt
 
 
 # Any services that are not defined in the compose file will be removed from the container
 # To add more services into the container, just include them in the docker-compose.yaml.j2
-- name: Run docker compose to build harvester
+- name: Run docker compose to build web
   become: yes
   docker_compose:
-    project_src: "/external/{{ web_dir }}"
+    project_src: "/external/front"
+    files: docker-compose.yaml
     pull: yes
     state: present
     remove_orphans: yes  
