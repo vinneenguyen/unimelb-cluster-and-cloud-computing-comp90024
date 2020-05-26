@@ -1,0 +1,123 @@
+\section{User Guide}
+This project is built completely upon OpenStack cloud computing platform, in which context this documentation shall proceed to be interpreted. The targeted operating system (on servers) is Unix-like operating system, in which the project is tested. In other operating systems (like Mac, Windows), commands might not work as expected. On the other hand, the control operating system (on local node) must be either Unix-like or macOS, as required by \href{https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html}{Ansible}.  
+
+Start by cloning the repository \href{https://github.com/nxv1987/UniMelb---Cluster-and-Cloud-Computing-COMP90024-2020-SM1}{Cluster and Cloud Computing 2020} which contains the source code of the project. After cloning, set working directory to the project directory named 'city\_analytics'.  
+
+\subsection{Requirements}
+The deployment of the system requires these programs to be installed on the local machine: \href{https://www.python.org/}{Python}, \href{https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html}{Ansible}, \href{https://docs.openstack.org/newton/user-guide/common/cli-install-openstack-command-line-clients.html}{OpenStack Client}, \href{https://docs.openstack.org/nova/latest/#installation}{OpenStack Compute (nova)}, \href{https://docs.openstack.org/openstacksdk/latest/user/}{OpenStack SDK}.  
+
+\textit{Note: Installing \href{https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html}{Ansible} with \href{https://pip.pypa.io/en/stable/}{pip} may be simpler and thus the more preferable way than some other methods.}  
+
+\subsection{Provide credentials for connection}
+\textit{Note: if it is the first time you are granted access to the cloud service or you did not register for the service with
+a password, you may have to reset your password for valid authentication.}  
+
+One way to input credentials is by running a bash script to set environment variables.  
+\begin{lstlisting}[language=bash]
+source credentials/openrc.sh
+\end{lstlisting}
+
+Alternatively, 'credentials/clouds\_template.yaml' can be used. See the documentation inside file for details.  
+
+\subsection{Set up servers}
+Run the following command to invoke a series of orchestrations that will create and configure cloud instances.  
+\begin{lstlisting}[language=bash]
+./setup.sh
+\end{lstlisting}
+
+The series of orchestrations (described in playbooks) include the following:  
+\begin{itemize}
+  \item Enable dynamic inventory  
+  \item Create security groups  
+  \item Generate keypairs  
+  \item Launch instances  
+  \item Create volumes  
+  \item Attach volumes  
+  \item Generate inventory file with IP addresses  
+  \item Add proxy
+  \item Install dependencies
+  \item Format external volume
+  \item Install docker
+  \item Copy project repo to cloud
+\end{itemize}
+
+Below are detailed description and invocation of each individual task.  
+
+\subsubsection{Enable the use of dynamic inventory}
+Dynamic inventory is available with the use of the script 'inventories/dynamic.py'. For a comprehensive demonstration,
+see \href{https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html#inventory-script-example-openstack}{dynamic inventory example}.  
+
+To make the script executable:  
+\begin{lstlisting}[language=bash]
+chmod +x inventories/dynamic.py
+\end{lstlisting}
+
+To test function of the script:  
+\begin{lstlisting}[language=bash]
+inventories/dynamic.py --list
+\end{lstlisting}
+
+\subsubsection{Create security groups}
+The parameters set for security groups are defined in 'vars/security.yaml'.  
+\begin{lstlisting}[language=bash]
+ansible-playbook security_groups.yaml
+\end{lstlisting}
+
+\subsubsection{Generate keypairs}
+The parameters set for the keypairs are defined in 'vars/access.yaml'.  
+\begin{lstlisting}[language=bash]
+ansible-playbook keypairs.yaml
+\end{lstlisting}
+For each keypair generated, the public key is stored in the cloud and the private key locally with access permission changed to 600. In our case, a private key has been placed at 'credentials/common.pem'.  
+
+\subsubsection{Launch compute instances}
+Instances are created using the public key stored in the cloud that has the same name as the private key, then added to the appointed security groups.  
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts.yaml instances.yaml
+\end{lstlisting}
+
+The common parameters shared between instances are defined in 'inventories/group\_vars/webservers.yaml'.  
+
+\subsubsection{Create volumes}
+The parameters set for volumes are defined in 'inventories/group\_vars/webservers.yaml'. The name of each volume is defined as the name of an instance it is meant for prefixed with 'vol'. This can be changed in the parameter file.  
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts.yaml volumes.yaml
+\end{lstlisting}
+
+\subsubsection{Attach volumes to instances}
+The volumes and instances are attached based on the matching of their names.  
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts.yaml volumes_attach.yaml
+\end{lstlisting}
+
+\subsubsection{Export inventory file with IP addresses}
+Since instances were created with dynamic IP addresses, it is necessary to obtain those IP addresses for later use
+(e.g establishing SSH connection).  
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/dynamic.py -i inventories/hosts.yaml
+inventory_export.yaml
+\end{lstlisting}
+New inventory file is established at 'inventories/hosts\_auto.ini'.  
+
+To test auto-generated IP addresses, try pinging instances for response:  
+\begin{lstlisting}[language=bash]
+ansible -i inventories/hosts_auto.ini all -m ping
+\end{lstlisting}
+
+\subsubsection{Miscellaneous commands}
+To delete instances:  
+
+\textit{\textbf{Warning: this command should be used with high caution as it will delete all instances currently available in connected cloud projet.}}  
+\begin{lstlisting}[language=bash]
+nova list | awk '$2 && $2 != "ID" {print $2}' | xargs -n1 nova delete
+\end{lstlisting}
+Source: \href{https://maestropandy.wordpress.com/2016/08/24/openstack-delete-bulk-instances/}{Openstack - Delete Bulk Instances}  
+
+
+
+
+%\subsection{Viewing results}
+%Once the application is running, run the following command under ~/geo to run the web application.
+%\begin{lstlisting}[language=bash]
+%python3 web.py
+%\end{lstlisting}

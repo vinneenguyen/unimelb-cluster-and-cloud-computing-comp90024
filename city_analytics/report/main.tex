@@ -13,7 +13,7 @@
 \usepackage[english]{babel}
 \usepackage[backend=biber,sorting=none]{biblatex}
 \usepackage{titlesec}
-\usepackage{hyperref}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
 \usepackage{csquotes}
 \usepackage{lipsum}
 \usepackage{graphicx}
@@ -44,29 +44,28 @@
 \thispagestyle{empty}
 
 % TITLE PAGE
-\import{content/}{title.tex}
+\import{contents/}{title.tex}
 
-\import{content/}{tableofcontent.tex}
+\import{contents/}{tableofcontent.tex}
 
 \setcounter{page}{1}
 
-\import{content/}{introduction.tex}
+\import{contents/}{introduction.tex}
 
-\import{content/}{project_management.tex}
+\import{contents/}{results.tex}
 
-\import{content/}{system_design.tex}
+\import{contents/}{system_design.tex}
 
-\import{content/}{couchdb.tex}
+\import{contents/}{couchdb.tex}
 
-\import{content/}{harvestor.tex}
+\import{contents/}{harvestor.tex}
 
-\import{content/}{scenarios.tex}
+\import{contents/}{user_guide.tex}
 
-\import{content/}{result.tex}
+\import{contents/}{discussion.tex}
 
-\import{content/}{cloud.tex}
+\import{contents/}{project_management.tex}
 
- 
 \newpage
 \printbibliography
  
