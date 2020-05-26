@@ -12,8 +12,8 @@ from utils.couch import view_covid
 from utils.plots import geomap
 
 # Global constants
-DATADIR = Path("../geodata")
-RESULTDIR = Path("../georesults")
+DATADIR = Path("data")
+RESULTDIR = Path("static")
 GEOFILE = DATADIR / "aurin_datasource-AU_Govt_ABS-UoM_AURIN_DB_3_sa4_aggregated_pop_and_dwelling_counts_census_2016.json"
 INVFILE = "../inventories/hosts_auto.ini"  # inventory file
 DBGROUP = "couchdbgroup"  # db cluster
