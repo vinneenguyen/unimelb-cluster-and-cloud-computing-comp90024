@@ -10,7 +10,7 @@ def main(users):
     users_id = []
     cnt = 0
     key_start = 0
-    key_end = 4
+    key_end = 3
     key_index = key_start
     for user in users:
         cnt += 1
@@ -34,9 +34,9 @@ def main(users):
 # couchDB server
 server_addr = "172.26.131.173" # todo dynamic ip
 client = CouchDB("admin", "password", url='http://' + server_addr + ':5984', connect=True)
-mydb1 = "test-covid" # todo change to tweet-covid
-mydb2 = "test-covid-symptom" # todo
-mydb3 = "test-covid-covidsafe" # todo
+mydb1 = "tweet-covid" #
+mydb2 = "tweet-covid-symptom" #
+mydb3 = "tweet-covid-covidsafe" #
 
 # create databases if not exist
 export.create_db(mydb1, client)
@@ -54,10 +54,12 @@ except Exception as e:
     print(e)
 
 # get the new users file for current day
-path = "new-users/" + time.strftime("%B-%Y") + "/new-user-" + time.strftime("%d") + ".txt"
+path = "new-users/" + time.strftime("%B-%Y") + "/new-user-" + time.strftime("%d-%H") + ".txt"
 users = set()
 with open(path) as f:
     for line in f:
         users.add(line)
-
-main(users)
+try:
+    main(users)
+except Exception as e:
+    print(e)

@@ -39,7 +39,7 @@ class MyStreamListener(tweepy.StreamListener):
         user_id = js["user"]["id_str"]
         if user_id not in users:
             users.add(user_id)
-            date = time.strftime("%d")
+            date = time.strftime("%d-%H")
             # the folder path use to store new users
             dir_path = os.path.join(os.path.abspath('.'), 'new-users/' + time.strftime("%B-%Y"))
             # this is called at the first time receiving new tweet each month, create a folder with respect to that
@@ -60,9 +60,9 @@ class MyStreamListener(tweepy.StreamListener):
 
 server_addr = "172.26.131.173" # todo dynamic ip
 client = CouchDB("admin", "password", url='http://' + server_addr + ':5984', connect=True)
-mydb1 = "test-covid" # todo
-mydb2 = "test-covid-symptom" # todo change to tweet-covid-symptom
-mydb3 = "test-covid-covidsafe" # todo
+mydb1 = "tweet-covid" #
+mydb2 = "tweet-covid-symptom" #
+mydb3 = "tweet-covid-covidsafe" #
 
 # create databases if not exist
 export.create_db(mydb1, client)
@@ -79,7 +79,7 @@ except Exception as e:
     print('Connection unsuccessful')
     print(e)
 
-api = keys.get_api(keys.key_list, 19)
+api = keys.get_api(keys.key_list, 0)
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth=api.auth, listener=myStreamListener)
