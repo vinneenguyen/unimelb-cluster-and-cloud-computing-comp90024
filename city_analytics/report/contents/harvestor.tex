@@ -1,7 +1,7 @@
 \section{Harvester}
 \subsection{Harvester Architecture}
 
-The harvester collects tweets from two major sources, one is tweet streaming and one is an online COVID-19 dataset. The streaming uses the python package tweepy to create a tweet listener, and the listener collects tweets under certain filtering conditions in real time. The second source makes the use of a online data website, IEEE, this website is updated daily with a worldwide summary of COVID related tweet ids during that day.
+The harvester collects tweets from two major sources, one is tweet streaming and one is an online COVID-19 dataset. The streaming uses the python package tweepy to create a tweet listener, and the listener collects tweets under certain filtering conditions in real time. The second source makes the use of a online data website, IEEE, this website is updated daily with a worldwide summary of the IDs of COVID related tweets during that day.
 \subsubsection{Data Collection Stage}
 \paragraph{Streaming}
 
@@ -9,7 +9,7 @@ The streaming firstly create a listener to monitor the tweets posted in real tim
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{city_analytics/City_analytics_report/images/stream.png}
+\includegraphics[scale=0.4]{city_analytics/report/images/stream.png}
 \caption{streaming}
 \label{fig:stream}
 \end{figure}
@@ -24,7 +24,7 @@ Besides, another assumption made here is that most of the user's followers are a
 The online dataset contains a large list of tweet ids of the tweets related to COVID-19 around the world. The dataset has been used as a source to collect past tweets which cannot be collected by streaming. The flowchart below demonstrates the process of this method.
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{city_analytics/City_analytics_report/images/online.png}
+\includegraphics[scale=0.7]{city_analytics/report/images/online.png}
 \caption{online dataset}
 \label{fig:stream}
 \end{figure}
@@ -35,7 +35,7 @@ When deploy on could, the streaming process has been slightly reduced to as foll
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.4]{city_analytics/City_analytics_report/images/deployment.png}
+\includegraphics[scale=0.4]{city_analytics/report/images/deployment.png}
 \caption{deploy}
 \label{fig:stream}
 \end{figure}
@@ -59,19 +59,23 @@ The fundamental source for this harvester is a list of unique user IDs. When a t
 
 A second layer to prevent duplication is the key used store tweets in couchDB. Every tweet has a unique ID, no two different tweets have the same ID, and this ID for new tweets keeps growing as people keep tweeting. Thus, when designing the couchDB databases, including the tweet ID as one part of the partition key is able to efficiently prevent duplicated tweets from storing all of them into the databases.
 \subsubsection{Error Handling}
-In the harvester design, the main issue need to be aware of is Twitter has set up strict rate limits for developer accounts. If the limits cannot be handled properly, the account might be banned as a result of keeping hitting the limit.
+\paragraph{RateLimitError}In the harvester design, the main issue need to be aware of is Twitter has set up strict rate limits for developer accounts. If the limits cannot be handled properly, the account might be banned as a result of keeping hitting the limit.
 The package tweepy allows users to set up a parameter and wait for 15 minutes once the API reaches the limit. However, by doing this the efficiency of the harvester will be greatly reduced because most of time the harvester is waiting instead of running. Thus, we used multiple accounts to keep it running.
 
 The API used in this harvester is user timeline which returns a list of tweets of a specific user since a specific date. By testing, one account reaches its limit after running for around 5 to 7 minutes. Thus theoretically, three accounts is enough to keep the harvester running. But in practice, we use four accounts for one harvester in order to ensure a certain tolerance. These accounts are running in a rotating cycle, once a account reaches its limit, change to another key and continue running.
 
+\paragraph{ResourceConflict}
+When collecting data, more or less we inevitably get some duplicate tweets. Repeatedly storing same data into couchDB will raise an error ResourceConflict. Since tweet ID is unique, there is no need to store two tweets with same ID again, the harvester will ignore the tweet when raising a ResourceConflict error.
+
 \subsubsection{Sentiment Analysis}
-Sentiment reflects Sentiment analysis is achieved by analysing the content of tweets using a python library Textblob. For each tweet, 
+Sentiment reflects the user's attitude when sending the tweet. Sentiment analysis is achieved by analysing the content of tweets using a python library Textblob. For each tweet, the result can be either positive, neutral or negative.
+
 \subsubsection{Simplify Tweet Structure}
 Tweets from Twitter API have a complicated structure with lots of information. However, not all of the information is useful for this project. Cutting off some useless entities can not only reduce the space required to store those tweets, but most importantly can also reduce a significant amount of time used to query the tweets. Therefore, we only keep the most important information for us and the simplified tweet structure is illustrated as below:
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{city_analytics/City_analytics_report/images/simplifiedtweet.png}
+\includegraphics[scale=0.7]{city_analytics/report/images/simplifiedtweet.png}
 \caption{simplified tweet}
 \label{fig:stream}
 \end{figure}
@@ -85,7 +89,7 @@ Therefore, in this project, harvester is parameterized so it is able to deal wit
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{city_analytics/City_analytics_report/images/harvester_input.png}
+\includegraphics[scale=0.8]{city_analytics/report/images/harvester_input.png}
 \caption{input parameter}
 \label{fig:input parameter}
 \end{figure}
@@ -94,8 +98,10 @@ Therefore, in this project, harvester is parameterized so it is able to deal wit
 The harvester takes topic, keywords and accounts as input. For any given topic, the harvester creates multiple threads to harvest tweets using the keywords provided. The number of threads depends on the number of twitter developer accounts provided. By testing, four accounts are enough to guarantee a thread to keep running without reaching its limit. Therefore, more keys means the harvester can create more threads so the collecting time will be reduced. Keys for threads are not uniformly distributed, one rule used here is try to give each thread 4 keys before create another thread, for instance, 4 accounts 1 thread, 6 accounts 2 thread (one with 4 accounts and one with 2 accounts), 10 accounts 3 threads (two threads with 4 accounts and one with 2 accounts) etc. Accordingly, load for each thread are not uniformly distributed and is proportional to the number of keys each thread are allocated. Therefore, thread with less keys will be allocated with less loads to make sure all threads will finish their tasks in a relative close point in time. For the thread with less than 4 keys, the thread may need to sleep for a specific amount of time to prevent it from keep hitting the limit.
 
 
-\subsection{limitation}
-\subsubsection{not enough accounts, rate limit of api}
+\subsection{Limitation}
+\subsubsection{Rate limit of API}
 
-\subsubsection{few users turn on location}
-\subsection{harvester results}
+The harvester efficiency is mainly restricted by the API limit. Fewer keys in rotation means more likely to reach the limits. In contrast, more keys means we can divide the IDs into several portions and run them separately with multi threads. 
+
+\subsubsection{Few users turn on location service}
+As people are paying more attention to their privacy, only a few users would like to turn on the location service when using an application, which makes it is difficult to collect enough data with exact coordinates. We found that only 1\% of collected tweets have exact geo coordinates which may result in decreased accuracy of the analysis results.
