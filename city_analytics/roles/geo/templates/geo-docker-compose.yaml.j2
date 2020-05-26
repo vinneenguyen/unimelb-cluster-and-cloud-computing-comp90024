@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  geoapp:
+    image: "python:3.8-slim"
+    volumes:
+      - /external:/code
+    build:
+      context: .
+      dockerfile: geo-Dockerfile
+    container_name: geoapp
+    command: tail -F anything
+
+   
+
+
+ 
+
+

@@ -37,7 +37,7 @@ def create_views(client):
 	except:
 		symptoms_db = client.create_database('symptoms')
 		ddoc_symptoms = DesignDocument(symptoms_db,'symptoms')
-		ddoc_symptoms.add_view('symptoms_location','function (doc) {\n for(var i in doc.symptoms){\n if(doc.symptoms[i]=="cough"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="fever"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="throat"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="fatigue"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="breathing"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="headache"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="bodyache"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="stloss"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="vomit"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="diarrhoea"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}}}','_count')
+		ddoc_symptoms.add_view('symptoms_location','function (doc) {\n for(var i in doc.symptoms){\n if(doc.symptoms[i]=="cough"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="fever"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="throat"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="fatigue"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="breathing"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="headache"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="bodyache"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="smell and taste loss"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="vomit"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}\n if(doc.symptoms[i]=="diarrhoea"){\n emit([doc.symptoms[i],doc.SA4,doc.SA4_source],1);}}}','_count')
 		view=View(ddoc_symptoms,'symptoms_location')
 		#Create a mapreduce function to group the documents by symptoms and location
 
@@ -139,7 +139,7 @@ def symptoms(db, symptoms_db):
 	selector_sym(db,timestamp,regex='(?i)(difficulty breathing)',sym_name='breathing')
 	selector_sym(db,timestamp,regex='(?i)(headache)',sym_name='headache')
 	selector_sym(db,timestamp,regex='(?i)(joint pain|bodyache)',sym_name='bodyache')
-	selector_sym(db,timestamp,regex='(?i)(smell loss|taste loss)',sym_name='stloss')
+	selector_sym(db,timestamp,regex='(?i)(smell loss|taste loss)',sym_name='smell and taste loss')
 	selector_sym(db,timestamp,regex='(?i)(vomit|nausea)',sym_name='vomit')
 	selector_sym(db,timestamp,regex='(?i)(diarrhoea|diarrhea)',sym_name='diarrhoea')
 	
