@@ -1,3 +1,5 @@
+# author: Vinh Nguyen
+
 import time
 from datetime import datetime, timedelta
 import configparser
