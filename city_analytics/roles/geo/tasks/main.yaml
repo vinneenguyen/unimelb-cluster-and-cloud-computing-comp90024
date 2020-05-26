@@ -1,0 +1,40 @@
+# ---
+# - name: Create front directory if it does not exist
+#   tags: 'directory'
+#   become: yes
+#   file:
+#     path: "{{ front_dir }}"
+#     owner: "{{ ansible_user }}"
+#     group: "{{ ansible_user }}"
+#     recurse: yes
+#     state: directory
+
+# - name: Copy geo to directory
+#   become: yes
+#   copy: 
+#     src: ../city_analytics/geo/
+#     dest: /external/city_analytics/geo
+#     force: yes    #file must be replaced
+
+
+- name: geo Container
+  become: yes
+  template: src={{ item }}.j2 dest=/external/{{ item }}
+  with_items:
+    - geo-docker-compose.yaml
+    - geo-Dockerfile
+    - geo-requirements.txt
+
+
+# Any services that are not defined in the compose file will be removed from the container
+# To add more services into the container, just include them in the docker-compose.yaml.j2
+- name: Run docker compose to build geo
+  become: yes
+  docker_compose:
+    project_src: "/external"
+    files: geo-docker-compose.yaml
+    pull: yes
+    state: present
+    remove_orphans: yes  
+    recreate: always
+    build: yes

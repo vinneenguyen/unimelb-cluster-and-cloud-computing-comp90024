@@ -1,0 +1,5 @@
+---
+# vars file for couchdb
+
+front_dir: front
+

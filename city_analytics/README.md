@@ -92,12 +92,6 @@ As the instance is behind the University network, instances will need to add pro
 ansible-playbook -i inventories/hosts_auto.ini proxy_config.yaml 
 ```
 
-### Proxies configuration ###
-As the instance is behind the University network, instances will need to add proxy settings to access the internet. Append block of proxy settings into /etc/environment for instances. Same needed for docker service, http-proxy.conf.j2 is copied into to /etc/systemd/system/docker.service.d. Daemon and docker are restarted to have new settings to take effect.
-```shell script
-ansible-playbook -i inventories/hosts_auto.ini proxy_config.yaml 
-```
-
 ### Install dependencies ###
 The following packages are installed on servers:  
 \- [apt-transport-https] This APT transport allows the use of repositories accessed via the HTTP Secure protocol

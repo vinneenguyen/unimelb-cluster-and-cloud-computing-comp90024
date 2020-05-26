@@ -2,22 +2,29 @@ version: '3.7'
 
 services:
   web:
-    build: .
+    image: "python:3.7-alpine"
+    volumes:
+      - /external/city_analytics:/code
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
      - "5000:5000"
-    container_name: {{ web_dir }}
+    container_name: web
+    command: python3 web.py
+
+  geo:
+    image: "python:3.8-slim"
+    container_name: geo
     volumes:
-      - /external/web:/code
-
-   
-    
-
-
-
-
-  
+      - /external/city_analytics:/code
+    build:
+      context: .
+      dockerfile: geo-Dockerfile
+    command: python3 __main__.py
 
   
     
+
 
 
