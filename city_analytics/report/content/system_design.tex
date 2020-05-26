@@ -1,0 +1,27 @@
+\section{System design and architecture}
+
+
+
+Our system design and architecture is built in a way that any core components can be run on any nodes at the UniMelb Research Cloud. The main components are CouchDB database to store tweets, harvesters and front-end web application to visualize our scenarios. In order to attain flexibility of packing and running these components, containerisation using Docker containers are used. Following figure illustrates our system architecture. 
+
+
+
+
+
+With this flexibility in our design, we can collapsed all components running on a single cloud instance or distribute them to the number of instances available. For this project, we are given 4 cloud instances and 250 Gb volume of storage. In order to maximise the performance for our application, naturally we decided to use all the instances. For clarity purposes, these instances will be identified as Thinkbox 1, Thinkbox 2, Thinkbox 3 and Thinkbox 4. 
+
+A 3-node clustered CouchDB is setup on Thinkbox 1,2 and 3 due to the high CPU loading which will be further discussed in CouchDB section. Thinkbox 4 will be running 
+
+
+
+
+
+
+
+
+
+
+
+ 
+\subsection{Docker}
+Containers, like Docker, allow developers to isolate and run multiple applications on a single operating system, rather than dedicating a Virtual Machine for each application on the server. The use of these more lightweight containers leads to lower costs, better resource usage, and higher performance.
