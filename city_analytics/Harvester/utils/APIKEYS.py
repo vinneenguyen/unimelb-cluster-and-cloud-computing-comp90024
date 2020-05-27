@@ -12,10 +12,10 @@ key_list = [{"consumer_key": "1IN6rVE2D5fXZ3uUSkaKj6sH7",
              "consumer_secret": "TtqUjoRCWv4SDDjabPqTzwO6RF3vgI21UvoOdkvdjPKstcoaLw",
              "access_token": "1250402484226387968-siuKgew1AZL1dcUCgVunQYlXLUKSmB",
              "access_token_secret": "zM6XC1BLlLC9luxjo2ge9SzboMPj9mVNal9hjiX0TYfNx"},
-            {"consumer_key': 'irCPmhuFx4dcLcK6YsrzOXXYa",
-             "consumer_secret': 'mwdFyjK0CBuDSF4lrMJKnNlOQxafAnXblHEynJuFjlbyhDkv0v",
-             "access_token': '1261882567764000769-hUlP9daIp8oXXSDjb2ye0o4dyJHbgD",
-             "access_token_secret': 'j3wd47x1o4wXA6IDPFvY1rkoxK2XKUuI80tTgYTMO6x4g"}]
+            {"consumer_key": "irCPmhuFx4dcLcK6YsrzOXXYa",
+             "consumer_secret": "mwdFyjK0CBuDSF4lrMJKnNlOQxafAnXblHEynJuFjlbyhDkv0v",
+             "access_token": "1261882567764000769-hUlP9daIp8oXXSDjb2ye0o4dyJHbgD",
+             "access_token_secret": "j3wd47x1o4wXA6IDPFvY1rkoxK2XKUuI80tTgYTMO6x4g"}]
 
 
 def get_api(key_list, n, wait_on_rate_limit=False, wait_on_rate_limit_notify=False):
