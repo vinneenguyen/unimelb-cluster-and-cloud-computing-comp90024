@@ -1,5 +1,3 @@
-# author: Vinh Nguyen
-
 import folium
 
 

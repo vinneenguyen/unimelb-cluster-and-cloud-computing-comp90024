@@ -1,5 +1,3 @@
-# author: Vinh Nguyen
-
 from cloudant.client import CouchDB
 from cloudant.design_document import DesignDocument
 from cloudant.view import View
