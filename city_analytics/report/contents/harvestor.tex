@@ -1,4 +1,4 @@
-\section{Harvester}
+\section{Tweet Harvester}
 \subsection{Harvester Architecture}
 
 The harvester collects tweets from two major sources, one is tweet streaming and one is an online COVID-19 dataset. The streaming uses the python package tweepy to create a tweet listener, and the listener collects tweets under certain filtering conditions in real time. The second source makes the use of a online data website, IEEE, this website is updated daily with a worldwide summary of the IDs of COVID related tweets during that day.
@@ -36,11 +36,11 @@ When deploy on could, the streaming process has been slightly reduced to as foll
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{city_analytics/report/images/deployment.png}
-\caption{deploy}
-\label{fig:stream}
+\caption{harvester deployment}
+\label{fig:harvester deployment}
 \end{figure}
 
-A new user file will be created daily to save the new users for that day. The harvester will start collecting tweets from those new users at a fixed time at the end of each day (23:57) and save them to couchDB. Followers are not considered when deploying on cloud because of the limitation of the numbers of accounts and the limits of Twitter API.
+A new user file will be created hourly to save the new users for that day. The harvester will start collecting tweets from those new users at a fixed time at the end of hour (:58) and save them to couchDB. Followers are not considered when deploying on cloud because of the limitation of the numbers of accounts and the limits of Twitter API.
 
 \subsection{Detail Implementation}
 
@@ -77,7 +77,7 @@ Tweets from Twitter API have a complicated structure with lots of information. H
 \centering
 \includegraphics[scale=0.7]{city_analytics/report/images/simplifiedtweet.png}
 \caption{simplified tweet}
-\label{fig:stream}
+\label{fig:simplified tweet}
 \end{figure}
 
 
@@ -90,8 +90,8 @@ Therefore, in this project, harvester is parameterized so it is able to deal wit
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{city_analytics/report/images/harvester_input.png}
-\caption{input parameter}
-\label{fig:input parameter}
+\caption{input parameter for any new topic}
+\label{fig:input parameter for any new topic}
 \end{figure}
 
 

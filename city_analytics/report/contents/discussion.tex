@@ -1,4 +1,27 @@
+
 \section{Discussion}
 
-every puts in idea
+One of the many challenges in setting up Instances on Melbourne Research Cloud is not being able to get a fix internal IP address. For such reason, our database might turn obsolete if all instances died where replication cannot take place due to the new IP addresses do not match the old IP address. 
+
+\subsection{Unimelb Research Cloud}
+In this part, the advantage and limitation of Unimelb Research Cloud
+\paragraph{Pros of Unimelb Research Cloud}
+\begin{itemize}
+\item Cloud is based on OpenStack that is open source cloud technology so it's easily to operate and deploy on the cloud  using Ansible playbook
+\item It provides many associated services like image service and object storage service and it's for free to the researches. Thus, it makes easy for them to use some cloud-computational tools.
+\item Platform design is simple and clear to create a instance or add security rules. 
+\item Cloud has the support of creating volumes with volume volume snapshot and volume storage. The requirement for volumes is easily to attach with the virtual instance.
+\item Cloud eliminates the requirements for specific hardware, especially the server. Cloud instances are easy to deploy when the demand is increasing without worrying the capacity of the server, and shut down as demand decreases to save sources. 
+\item Cloud has high computing power, computing power can be easily increased by either scaling up horizontally by adding more machines or vertically by changing to a more powerful instance.
+\end{itemize}
+\paragraph{Cons of Unimelb Research Cloud}
+\begin{itemize}
+   \item Cloud instances are deployed in the remote servers, data transmission largely depends on public internet, therefore data security is an important issue and require additional works to encrypted the data during transmission. 
+   \item Web-interface of cloud can sometimes get out of hand when performing critical operations on the cloud.
+   
+\end{itemize}
+
+\paragraph{}
+\subsection{Image creation}
+Visualizations are done on a Leaflet map via \href{https://python-visualization.github.io/folium/}{folium}, which makes it easy to bind statistical data for choropleth maps. The process in general is quite efficient, except for the fact that the data is manipulated in \href{https://pandas.pydata.org/}{pandas}, which can be a drag-down on performance when dealing a large dataset.  
 

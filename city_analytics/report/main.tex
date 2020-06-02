@@ -8,12 +8,11 @@
 \usepackage{textcomp}
 \usepackage{comment}
 \usepackage{fullpage} % changes the margin
-\usepackage{graphicx}
 \usepackage{import}
 \usepackage[english]{babel}
 \usepackage[backend=biber,sorting=none]{biblatex}
 \usepackage{titlesec}
-\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
 \usepackage{csquotes}
 \usepackage{lipsum}
 \usepackage{graphicx}
@@ -35,6 +34,7 @@
 \usepackage{booktabs}
 \usepackage[table,xcdraw]{xcolor}
 
+\graphicspath{ {./images/} }
 \addbibresource{references.bib}
 
 \setlength{\parskip}{0.3em}
@@ -48,6 +48,9 @@
 
 \import{contents/}{tableofcontent.tex}
 
+\listoffigures
+\newpage
+
 \setcounter{page}{1}
 
 \import{contents/}{introduction.tex}
@@ -60,11 +63,13 @@
 
 \import{contents/}{harvestor.tex}
 
+\import{contents/}{geoapp.tex}
+
 \import{contents/}{user_guide.tex}
 
 \import{contents/}{discussion.tex}
 
-\import{contents/}{project_management.tex}
+\import{contents/}{credits.tex}
 
 \newpage
 \printbibliography

@@ -1,6 +1,19 @@
 \section{CouchDB}
+CouchDB is one of the noSQL open source databases which stores data in JSON format. The replication capabilities is perfect for our frail network. 
+
 \subsection{Cluster Setup}
- From CouchDB documentation (CITE THIS), cluster of 3 nodes work well, 8 shards 2 replicas 
+ Like all other setup, this entire installation is deployed and executed using Ansible and Docker. This ensures we can achieve automation and extensibility, for example it can adapt to different number of clusters with least manual configuration. Following \url{https://docs.couchdb.org/en/stable/setup/cluster.html} documentation, port 5984 is bind to a reachable IP address. (0.0.0.0) is configured in our script. Port 9100,9200 and 4369 are opened internally to allow accessibility among all instances. In the vm.args file, the -name couchdb@\{\{ ansible\_host \}\} and -setcookie \{\{ cookie \}\} is configured. An online generated UUID and [cluster], q=8 and n=2 is replaced in local.ini file. With this configuration, all databases will be created with 8 shards and 2 replicas. 
+
+  
+ \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{city_analytics/report/images/shardscovid.png}
+    \caption{Shard Management}
+    \label{fig:shard}
+\end{figure}
+
+Each database has 24 shards, and are distributed across three nodes, which means that it is possible to recover all databases if one node fails. Sharding and clustering is beneficial as it allow us to have a distributed map/reduce computation. 
+
 
 \subsection{Database} 
 After installation and initial start-up of three nodes in the cluster, we need to make sure three nodes can be joined with each other before creating databases. 
@@ -47,7 +60,7 @@ To reduce the query time and update graph in page faster, the view about timesta
 
 \subsection{View initialization}
 
-To make the server run more smoothly and stable, we used python-cloudant to access couchDB. Design documents and views were directly created in the python file. So we created one mapreduce function in each database. In 'tweet-covid', and 'tweet-covid-covidsafe', we selected sentiment and SA4 as key and counted the number of tweet in same sentiment and same area. In 'symptoms', symptom, SA4 source and SA4 was treated as key and do the same reduce function as other databases. 
+To make the server run more smoothly and stable, we used python-cloudant to access couchDB and directly run python file to create design document and views. So we created one mapreduce function in each database. In 'tweet-covid', and 'tweet-covid-covidsafe', we selected sentiment and SA4 as key and counted the number of tweet in same sentiment and same area. In 'symptoms', symptom, SA4 source and SA4 was treated as key and do the same reduce function as other databases. 
 
 \begin{figure}[H]
     \centering
@@ -56,4 +69,11 @@ To make the server run more smoothly and stable, we used python-cloudant to acce
     \label{fig:my_label}
 \end{figure}
 
-After creating views, 
+After creating views, checking view results using by python-cloudant is easy. We can construct view by call a view function using the name of design document and view.Using the view callable directly and setting different parameters like group or group\_level is the way to get the view results and put results into json. When we want to get the latest view, we only need to call view again.(All couchdb code is put in the GitHub)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{city_analytics/report/images/viewcode.png}
+    \caption{views results code in python file}
+    \label{fig:my_label}
+\end{figure}

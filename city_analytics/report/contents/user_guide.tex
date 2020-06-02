@@ -1,5 +1,5 @@
 \section{User Guide}
-This project is built completely upon OpenStack cloud computing platform, in which context this documentation shall proceed to be interpreted. The targeted operating system (on servers) is Unix-like operating system, in which the project is tested. In other operating systems (like Mac, Windows), commands might not work as expected. On the other hand, the control operating system (on local node) must be either Unix-like or macOS, as required by \href{https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html}{Ansible}.  
+This project is built completely upon OpenStack cloud computing platform, in which context this documentation shall proceed to be interpreted. The targeted operating system (on servers) is Unix-like operating system, in which the project is tested. In other operating systems (like Mac, Windows), commands might not work as expected. On the other hand, the control operating system (on local node) must be either Unix-like or macOS, as required by \href{https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html}{Ansible}. In this project, we rely on Ansible for all our configuration management and application-deployment tasks.  
 
 Start by cloning the repository \href{https://github.com/nxv1987/UniMelb---Cluster-and-Cloud-Computing-COMP90024-2020-SM1}{Cluster and Cloud Computing 2020} which contains the source code of the project. After cloning, set working directory to the project directory named 'city\_analytics'.  
 
@@ -104,6 +104,43 @@ To test auto-generated IP addresses, try pinging instances for response:
 ansible -i inventories/hosts_auto.ini all -m ping
 \end{lstlisting}
 
+\subsubsection{Proxies configuration}
+As the instance is behind the University network, instances will need to add proxy settings to access the internet. Append block of proxy settings into /etc/environment for instances. Same needed for docker service, http-proxy.conf.j2 is copied into to /etc/systemd/system/docker.service.d. Daemon and docker are restarted to have new settings to take effect.
+
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini proxy_config.yaml 
+\end{lstlisting}
+
+\subsubsection{Dependencies for instances}
+The following dependencies are installed on servers: 
+apt-transport-https, build-essential, ca-certificates, curl, python-dev, git, python-pip, python-setuptools, software-properties-common, unzip and vim
+
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini dependencies.yaml
+\end{lstlisting}
+
+\subsubsection{Format External /dev/vdb Volume}
+This command install XFS file system on the attached volume /dev/vdb. To avoid reinstalling file system again, install xfs and make file system tasks are tagged with format. Using --skip-tags on the command skip these tasks. The formatted volume is mounted on /external. 
+
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini formatvolume.yaml
+--skip-tags "format"
+\end{lstlisting}
+
+\subsubsection{Docker Installation}
+This playbook uninstall old docker, new docker installer is obtained from \href{https://download.docker.com/linux/ubuntu/gpg}{docker installer}). Docker and Docker compose is installed after using apt and pip.
+
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini docker.yaml
+\end{lstlisting}
+
+\subsubsection{Upload Project Folder to Cloud Instances}
+Execute following to copy city\_analytics directory to cloud's external storage, if already exist, files will be overwritten. Prior that, /external permission is changed to allow read and write remotely. 
+
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini sync_repo.yaml
+\end{lstlisting}
+
 \subsubsection{Miscellaneous commands}
 To delete instances:  
 
@@ -114,7 +151,49 @@ nova list | awk '$2 && $2 != "ID" {print $2}' | xargs -n1 nova delete
 Source: \href{https://maestropandy.wordpress.com/2016/08/24/openstack-delete-bulk-instances/}{Openstack - Delete Bulk Instances}  
 
 
+\subsection{Setup Application}
+Following shell script invokes the ansible playbook commands to launch each applications on the instances. 
 
+\begin{lstlisting}[language=bash]
+./app.sh
+\end{lstlisting}
+
+\subsubsection{Create and Add security group for CouchDB }
+Execute following to create a security group that opens internal ports 4369, 5000, 5986, 6379, 9100-9200
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts.yaml db_security.yaml 
+\end{lstlisting}
+
+\subsubsection{Create CouchDB instances }
+Install CouchDB under couchDB group using docker-compose and bind to external volume. Tag is used to skip killing container task
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini applications.yaml
+#--skip-tags "kill_container"
+\end{lstlisting}
+
+\subsubsection{Create CouchDB Cluster }
+Cluster 3 instances CouchDB
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini couchDB_setup.yaml  
+\end{lstlisting}
+
+\subsubsection{Create CouchDB Views}
+This command creates and update views periodically 
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini couchdb_view.yaml 
+\end{lstlisting}
+
+\subsubsection{Harvester}
+Harvester can be deployed under any instances using following playbook by just changing the variable.
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini harvest.yaml 
+\end{lstlisting}
+
+\subsubsection{Web App}
+Both geo and web app applications are install through this playbook
+\begin{lstlisting}[language=bash]
+ansible-playbook -i inventories/hosts_auto.ini webapp.yaml 
+\end{lstlisting}
 
 %\subsection{Viewing results}
 %Once the application is running, run the following command under ~/geo to run the web application.
