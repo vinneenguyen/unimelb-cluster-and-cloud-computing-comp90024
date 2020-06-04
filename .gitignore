@@ -7,6 +7,9 @@
 *.Rhistory
 *.RData
 
+# Mac/OSX meta-data
+*.DS_Store
+
 # Windows config files
 *desktop.ini
 
