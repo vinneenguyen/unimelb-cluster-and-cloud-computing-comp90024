@@ -1,0 +1,179 @@
+Run #1
+
+
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+jpe8zea6ddf7        nginx.1             nginx:alpine        manager             Running             Running 2 minutes ago                       
+ru0kpbedf1ey        nginx.2             nginx:alpine        worker1             Running             Running 2 minutes ago                       
+7r3xody8qb98        nginx.3             nginx:alpine        worker2             Running             Running 2 minutes ago                       
+Pause 5s ...
+
+
+Run #2
+
+
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+jpe8zea6ddf7        nginx.1             nginx:alpine        manager             Running             Running 2 minutes ago                       
+ru0kpbedf1ey        nginx.2             nginx:alpine        worker1             Running             Running 2 minutes ago                       
+7r3xody8qb98        nginx.3             nginx:alpine        worker2             Running             Running 2 minutes ago                       
+Pause 5s ...
+
+
+Run #3
+
+
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+jpe8zea6ddf7        nginx.1             nginx:alpine        manager             Running             Running 2 minutes ago                       
+ru0kpbedf1ey        nginx.2             nginx:alpine        worker1             Running             Running 2 minutes ago                       
+7r3xody8qb98        nginx.3             nginx:alpine        worker2             Running             Running 2 minutes ago                       
+Pause 5s ...
+
+
+Run #4
+
+
+ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+jpe8zea6ddf7        nginx.1             nginx:alpine        manager             Running             Running 2 minutes ago                       
+ru0kpbedf1ey        nginx.2             nginx:alpine        worker1             Running             Running 2 minutes ago                       
+7r3xody8qb98        nginx.3             nginx:alpine        worker2             Running             Running 2 minutes ago                       
+Pause 5s ...
+
+
+Run #5
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 1 second ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 1 second ago                       
+ru0kpbedf1ey        nginx.2             nginx:alpine               worker1             Running             Running 2 minutes ago                       
+7r3xody8qb98        nginx.3             nginx:alpine               worker2             Running             Running 2 minutes ago                       
+Pause 5s ...
+
+
+Run #6
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 6 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 7 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Ready               Ready 1 second ago                           
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Running 1 second ago                         
+7r3xody8qb98        nginx.3             nginx:alpine               worker2             Running             Running 2 minutes ago                        
+Pause 5s ...
+
+
+Run #7
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 11 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 12 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 2 seconds ago                         
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 3 seconds ago                        
+7r3xody8qb98        nginx.3             nginx:alpine               worker2             Running             Running 2 minutes ago                         
+Pause 5s ...
+
+
+Run #8
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 17 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 17 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 8 seconds ago                         
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 8 seconds ago                        
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Ready               Ready 2 seconds ago                           
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Running 3 seconds ago                         
+Pause 5s ...
+
+
+Run #9
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 22 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 23 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 13 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 14 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 4 seconds ago                         
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 5 seconds ago                        
+Pause 5s ...
+
+
+Run #10
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 28 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 29 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 19 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 20 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 10 seconds ago                        
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 11 seconds ago                       
+Pause 5s ...
+
+
+Run #11
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 34 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 34 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 25 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 25 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 16 seconds ago                        
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 17 seconds ago                       
+Pause 5s ...
+
+
+Run #12
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 39 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 40 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 31 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 31 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 22 seconds ago                        
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 22 seconds ago                       
+Pause 5s ...
+
+
+Run #13
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 46 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 46 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 37 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 37 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 28 seconds ago                        
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 28 seconds ago                       
+Pause 5s ...
+
+
+Run #14
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 51 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 52 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 42 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 43 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 34 seconds ago                        
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 34 seconds ago                       
+Pause 5s ...
+
+
+Run #15
+
+
+ID                  NAME                IMAGE                      NODE                DESIRED STATE       CURRENT STATE             ERROR               PORTS
+ifh5qts9bv49        nginx.1             alwynpan/comp90024:demo1   manager             Running             Running 57 seconds ago                        
+jpe8zea6ddf7         \_ nginx.1         nginx:alpine               manager             Shutdown            Shutdown 57 seconds ago                       
+c2y8pi7jrxce        nginx.2             alwynpan/comp90024:demo1   worker1             Running             Running 48 seconds ago                        
+ru0kpbedf1ey         \_ nginx.2         nginx:alpine               worker1             Shutdown            Shutdown 48 seconds ago                       
+09e1l3hyz4rf        nginx.3             alwynpan/comp90024:demo1   worker2             Running             Running 39 seconds ago                        
+7r3xody8qb98         \_ nginx.3         nginx:alpine               worker2             Shutdown            Shutdown 40 seconds ago                       
+Pause 5s ...
+
+

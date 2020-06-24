@@ -1,0 +1,80 @@
+14:14:03	 From --- : One more question, will we been taught how to build a visualisation web in the coming weeks?
+14:14:36	 From Alwyn Pan : You mean the UI?
+14:14:41	 From ---  : Yes..
+14:14:53	 From Richard Sinnott : No we don’t teach this. You may want someone to start looking into Javascript libraries now
+14:15:01	 From ---  : Okay
+14:16:57	 From Richard Sinnott : Or you could even just use a Jupyter notebook if it came down to it… may simplify your lives
+14:17:37	 From ---  : Can we use 3rd part extensions which generate the interactive maps?
+14:17:47	 From ---  : party*
+14:18:01	 From Richard Sinnott : Historically students have developed solutions at either ends of the UI spectrum - hard coded HTML with JPEG. Images to fully interactive solutions
+14:18:27	 From ---  : I see, so flexibility depends on the skillset of the team.
+14:18:31	 From Richard Sinnott : You can use whatever libraries you want on the UI side
+14:18:48	 From ---  : Thanks
+14:18:49	 From ---  : thank you.
+14:19:23	 From Richard Sinnott : @saket - yes. The focus is Cloud computing and not HCI but a nice front end obviously helps and will give you some extra marks at the end of the day
+14:19:47	 From --- : Noted, thanks.
+14:21:35	 From --- : Is there a reason do deploy couchdb using docker?
+14:21:41	 From --- : to*
+14:22:23	 From Richard Sinnott : You can do it without Docker (historically that was the way we taught Cloud but Docker/containers are widely adopted these days)
+14:22:53	 From Farzad Khodadadi : Plus, because we already demonstrated how to use docker, it can be seen as a refresher
+14:23:30	 From ---  : can this step be done using  docker-compose as well as as shell script?
+14:23:34	 From ---  : I see, what are the pros and cons in using this stack as opposed to deploying couchdb on the host.
+14:25:12	 From Richard Sinnott : @saket - it is more flexible, rapid and allows you to have more services running on your resources that can be managed in a more flexible manner
+14:27:28	 From Richard Sinnott : @abdul - Luca is just showing you a basic recipe for setting up a Dockerized. CouchDB cluster. There are other solutions that are possible too
+14:30:03	 From Richard Sinnott : To note that DesignDocs are used to create views of data
+14:32:08	 From ---  : I see thanks, just another question i see that the volume of the master couch is mapped to the system, so does all the files relating to the db live on the host instead of the docker?
+14:32:42	 From ---  : Can I run these commands on windows command if I want to install it on my local computer?
+14:32:45	 From Alwyn Pan : You mean bind mount?
+14:33:09	 From Alwyn Pan : You need to save the data on the host, otherwise if your docker container dies for whatever reason, your data will die with it
+14:33:38	 From Richard Sinnott : @saket - depends on how you have set up your storage, e.g. on the server or attached storage etc
+14:33:45	 From Alwyn Pan : @Nahid no, it don't think it will work on windows cmd
+14:33:59	 From ---  : If we are using python to harvest the tweets and storing them in a JSON file, can we automatically add them to the database or do we need to append them manually in this manner ? 
+14:34:18	 From ---  : @Alwyn yeah i see that from the docker-compose file so does this mean when the container dies you could still extract and build the db again from the directory on the host?
+14:34:31	 From Richard Sinnott : @nahid - suggest you use the Cloud for doing this. Windows may/will throw issues
+14:34:50	 From ---  : Thanks Richard.
+14:35:05	 From Farzad Khodadadi : @Nahid: It’s better to enable Linux subsystem for Windows on your machine and then basically you’ll have access to a Ubuntu Linux
+14:35:39	 From ---  : I’ll do that @Farzad, thanks.
+14:35:54	 From Richard Sinnott : @jarvis - yes you can automatically add them to the database (you may want to do things with them first before pushing them into the database, e.g. filter and throw away tweets that aren’t useful, run sentiment analysis and give the tweet a happiness score etc)
+14:36:27	 From ---  : Got it. Thanks a lot 
+14:36:49	 From Farzad Khodadadi : @Saket: Yes you can do that.
+14:37:07	 From ---  : How to tell whether the couchDB cluster works well? I built a couchDB cluster on 3 instances, and when update/add/delete database in one node, the other two can see the same results. But the couchDB on every instance doesn’t show “_replicator” or “ “_user” files (can only see the database created); is this indicating something not right?
+14:37:25	 From Richard Sinnott : Note that CouchDB has a http front end - helps with pushing data into the database and for the front end
+14:38:10	 From Farzad Khodadadi : You can use CouchDB’s admin dashboard to troubleshoot issues with the cluster. Also you can check the log files
+14:38:31	 From Richard Sinnott : @qiuxia - that is one for Luca I guess. I’ll ask him later on
+14:44:18	 From ---  : could you design a regex to filer those words?
+14:45:19	 From Alwyn Pan : @Abdul I think you can
+14:45:21	 From Richard Sinnott : @abdul - you can do any kind of processing on the data (even before it is handled by couchDB)
+14:48:27	 From --- : One question. we have been required to run the Ansible script to automatically set up the database and the web. So how can we generate the tweet data in the demo day? for example we have harvesting tweets and store them into the couchDB before demonstration. Could we leave the data volume which contains the tweets data in MRC and just attach the volume to the instance when doing live demonstration in the last day?
+14:49:46	 From ---  : or could we just store the final results for the UI? (then we can just pull it down from the git)
+14:50:02	 From Richard Sinnott : @Ryan - you don’t have to set up the entire system via Ansible and have it running with millions of tweets harvested automatically.
+14:51:03	 From Richard Sinnott : @Ryan - demonstrating how the system “could be” scripted to be up and running or even how N-new harvesters could be set up and integrated into the running systems (connecting to CouchDB etc) is fine
+14:51:55	 From Richard Sinnott : Also - you may want to just collect N-million tweets and create views of the data as the basis for your UI. Having the UI updated in real-time is a nice to have but not essential
+14:52:33	 From ---  : Got it. Thanks :)
+14:53:22	 From Richard Sinnott : Luca’s demo also doesn’t show some of the challenges with creating views with millions of documents… it can be time consuming to do this!
+14:53:44	 From Richard Sinnott : Hence static views are ok for the demonstration/UI
+14:55:52	 From Richard Sinnott : You can easily put tweets onto a map interface, e.g. google maps with a few lines of Javascript
+14:55:54	 From ---  : OK.
+14:56:01	 From Richard Sinnott : I.e. no need for QGIS etc
+14:56:28	 From Richard Sinnott : (Assuming the tweets have a lat/long of course!!!)
+15:00:01	 From ---  : I have a docker running with couchdb and have mapped the db volume to my host directory but the folder which i have mapped the volume to is empty even when the db is created and has data in it.
+15:01:51	 From Alwyn Pan : @Saket, is it empty or has data in it?
+15:02:07	 From ---  : @Alwyn its empty.
+15:02:21	 From Alwyn Pan : You may have mapped to the wrong directory inside the docker
+15:02:26	 From Alwyn Pan : Which image did you use?
+15:03:03	 From ---  : couchdb
+15:03:20	 From ---  : https://hub.docker.com/_/couchdb 
+15:03:48	 From Alwyn Pan : Which directory did you map?
+15:04:33	 From ---  : -v /home/couchdb/data:/opt/couchdb/data
+15:05:13	 From Alwyn Pan : That's the correct directory
+15:05:31	 From Alwyn Pan : Can you get into the docker and see if there are data in /opt/couchdb/data?
+15:05:46	 From ---  : yeah i did that, there is data.
+15:06:29	 From Farzad Khodadadi : @Saket: I’d suggest posting this issue that your reporting in Canvas so we can investigate in more details
+15:06:43	 From ---  : @farzad noted. Thanks.
+15:13:05	 From ---  : can a container running another app, be added to the same instance as a couchdb cluster?
+15:13:36	 From ---  : i.e. running wordpress
+15:14:29	 From Alwyn Pan : Not sure about what do you mean by as a couched cluster
+15:15:04	 From Farzad Khodadadi : @Abdul :I think as long as your container has docudb installed it and the required ports are open, then you should be able to join it to an existing couchdb cluster
+15:15:06	 From Alwyn Pan : Did you mean if you can run other containers on the same instance that runs the couchdb cluster?
+15:15:43	 From ---  : @Alwyn yes that's what I meant
+15:15:54	 From Richard Sinnott : @abdul - you can have many docker containers doing different things running on the same server
+15:16:01	 From Alwyn Pan : Yes, you can. Container is all about isolation

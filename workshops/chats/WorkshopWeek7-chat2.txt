@@ -1,0 +1,69 @@
+14:16:19	 From Richard Sinnott : MRC gateway does not block that port. Maybe a config issue with couchDB
+14:17:44	 From Alwyn Pan : @Ryan, are you talking about access 5984 from other instance / your computer?
+14:20:23	 From --- : yes yes
+14:21:13	 From Alwyn Pan : You need to open ports in the security group, by default, Cloud Service Providers block all ingress connections.
+14:21:44	 From Alwyn Pan  To  Richard Sinnott(privately) : Sorry, sent to you in private by mistake :)
+14:21:48	 From Richard Sinnott  To  Alwyn Pan(privately) : He said he’d set up the security group properly…!?
+14:21:51	 From ---  : Yes, I have open that ingress port in security port.
+14:22:38	 From Alwyn Pan  To  Richard Sinnott(privately) : @Ryan, I'd suggest to post this on Discussion board so we can have a look. OK?
+14:22:52	 From Alwyn Pan : @Ryan, I'd suggest to post this on Discussion board so we can have a look. OK?
+14:23:13	 From ---  : sure sure, thank you :)
+14:23:27	 From Alwyn Pan  To  Richard Sinnott(privately) : Sorry ... I don't know why but zoom keep jumps to your name and send messages in private mode ...
+14:23:51	 From Richard Sinnott  To  Alwyn Pan(privately) : No idea… will delete these when uploading chat! ;)
+14:27:06	 From --- : so, we just need to modify the script only to create the cluster 
+14:27:13	 From Richard Sinnott : Note _replicator/_user when you have set the clustered database. If you don’t see this then something has gone awry (this was a student issue on Canvas)
+14:28:01	 From Richard Sinnott : @shaik - if you follow this recipe then you will have a clustered database set up (with some tweets that have been prepared)
+14:28:28	 From ---  : thank you
+14:28:28	 From ---  : One question, I have set up the cluster as yesterday demonstrated. But then I access the http://ip:port/_membership, it returns {"all_nodes":["nonode@nohost"],"cluster_nodes":["nonode@nohost”]}.. What is this issue?
+14:28:33	 From Richard Sinnott : This workshop shows how to set up a clustered database and do some basic things with couchDB
+14:31:45	 From Richard Sinnott : This is probably one for Luca… I’ll ask him at the end of the workshop.
+14:32:23	 From ---  : Thanks! each execution the remote replies {"ok":true}.. but still shows {"all_nodes":["nonode@nohost"],"cluster_nodes":["nonode@nohost”]} in _membership.
+14:33:13	 From Richard Sinnott : @Ryan - I think you need to replace nonode@nohost with couchdb@localhost. I’ll ask Luca to advise
+14:33:47	 From --- : sure, thanks
+14:33:49	 From Alwyn Pan : @Ryan are you running Mac / Windows or Linux?
+14:41:23	 From ---  : No worries 
+14:42:00	 From Richard Sinnott : This is running on the Cloud?
+14:42:09	 From Alwyn Pan : @Ryan, you need to make sure other instance can access these ports too. Apart from 5984 there are other ports need to be opened to form a cluster
+14:42:24	 From ---  : yes, its running on the cloud 
+14:42:25	 From Alwyn Pan : Have a look this page and ensure the ports are opened correctly
+14:42:31	 From Alwyn Pan : https://docs.couchdb.org/en/stable/setup/cluster.html
+14:43:35	 From ---  : OK, I will check again..
+14:43:37	 From Alwyn Pan : @Shubam, we need to have more info for debugging. Post it on LMS might be easier. OK?
+14:43:37	 From ---  : Thanks..
+14:43:55	 From Richard Sinnott : @shubham - Are you using Tweepy or Twitter4J?  You will want multiple harvesters running and cycle through them
+14:44:04	 From ---  : Yes I'll post the error output there @alwyn
+14:45:01	 From ---  : @richard Tweepy. So what I was doing is to wait for rate limit, put the harvester in sleep and then start it again 
+14:45:19	 From ---  : Is this fine ?
+14:45:47	 From Richard Sinnott : @shubham - you should have multiple harvesters running that collect data, then pause, then start collecting again in a coordinated fashion
+14:46:27	 From Richard Sinnott : You should have these harvesters collecting data for different areas too, e.g. if you just ask for data from Melbourne, then you may well get the same tweets by each harvester
+14:46:36	 From ---  : oh, Okay got it. I was using different harvesters on different instances. all of them had different filters. 
+14:46:41	 From Alwyn Pan : https://developer.twitter.com/en/docs/basics/rate-limiting
+14:47:13	 From Alwyn Pan : Have a look this page for the rate limit and it also lists a few tips to get around the limits
+14:47:39	 From Alwyn Pan : You don't want your account to be blacklisted for sure.
+14:48:23	 From ---  : Okay, I'll have a look at this. I used this and some other docs to not get blacklisted. Using wait on rate limit is one way of doing that. Will have to use something else I suppose 
+14:49:37	 From Alwyn Pan : Have a look this one as well: https://github.com/tweepy/tweepy/issues/237
+14:50:00	 From Alwyn Pan : A few stack overflow links there which might be helpful
+14:50:15	 From ---  : I'll have a look. Thanks a lot 
+14:55:38	 From ---  : Hi, Alwyn Pan. I have exposed all the ports needed (4369, 5984, 9100-9200) but when I set the master node it stills shows node@nohost in __membership after all script executed. The nodename is the ip of the instance which I set, and can be shown by ‘printenv’.
+14:58:37	 From Alwyn Pan : @Ryan, post it on the LMS, we will have a look.
+14:59:08	 From Alwyn Pan : By expose, did you mean you expose on the Docker container level or the security group level?
+14:59:21	 From ---  : both
+14:59:33	 From Richard Sinnott : @Ryan - Luca may be able to answer this (at end of workshop). He’s the CouchDB expert
+14:59:52	 From ---  : OK :)
+15:01:22	 From ---  : Is there a reason why whenever I try filtering with a Chinese word in the track the streaming python  program doesn't return anything ? 
+15:02:31	 From Richard Sinnott : No Chinese tweets? How are you identifying Chinese words? Language code?
+15:03:22	 From ---  : just a word, like "food "translated in Chinese , and then using this in filter function
+15:04:37	 From Richard Sinnott : Chances are there are no tweets that mention that specific word. I would suggest you harvest tweets with language code = Chinese and then filter the results, i.e. be generic as much as possible
+15:05:22	 From Richard Sinnott : If you are interest in Chinese food then have a bunch of keywords for processing results, e.g. Peking duck, Egg Foo Young etc etc
+15:05:42	 From ---  : I tried doing that with the language set as Chinese simplified and Chinese traditional. the json file remains empty. I searched online and it was being said that such language filters don't usually work. 
+15:05:46	 From Richard Sinnott : *yung
+15:06:46	 From Richard Sinnott : Hmmm… need to check the Twitter APIs
+15:08:17	 From Alwyn Pan : Also to note, very few Chinese people use Twitter
+15:08:53	 From Richard Sinnott : Best solution is to collect any data to start with and then refine once you know what you might get to support your scenarios
+15:09:00	 From ---  : Damn, the entire assignment of ours is based around that 
+15:09:15	 From ---  : Yes , I am currently harvesting all data and then will filter it out 
+15:23:29	 From ---  : follow
+15:23:39	 From ---  : but I set up in different instances
+15:23:44	 From ---  : yes
+15:23:46	 From ---  : sure sure
+15:25:21	 From ---  : Thanks

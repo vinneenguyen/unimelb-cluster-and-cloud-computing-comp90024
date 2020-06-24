@@ -1,0 +1,12 @@
+FROM python:latest
+
+ARG OPENSTACKSDK_VER=0.46.0
+ENV OPENSTACKSDK_VER=${OPENSTACKSDK_VER}
+ENV REQUESTS_VER=2.18.0
+
+COPY [ "entrypoint2.sh", "/" ]
+
+RUN pip install openstacksdk==${OPENSTACKSDK_VER}; \
+    chmod +x /entrypoint2.sh
+
+ENTRYPOINT [ "/entrypoint2.sh" ]

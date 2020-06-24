@@ -1,0 +1,58 @@
+14:11:19	 From Richard Sinnott : mpi4py
+14:11:59	 From Farzad Khodadadi : Hi all
+14:12:20	 From --- : After setting password, can we use spartan?
+14:12:46	 From --- : I have already set password but not able to login
+14:13:39	 From Alwyn Pan : Try `ssh <your username>@spartan.hpc.unimelb.edu.au`
+14:13:59	 From Farzad Khodadadi : Yes --- , after resetting your password, you should be able to login via SSH
+14:14:54	 From --- : Well I have few questions on yesterday's demo
+14:14:56	 From --- : tinytwitter.json has ']}' missing in the end...should I edit the file or handle it while coding?
+14:15:50	 From --- : In slide no. 4, what does revert arrow means?
+14:15:51	 From Farzad Khodadadi : Those ]} are missing on purpose, so that you are challenged to handle them
+14:16:04	 From --- : ohk thanks!
+14:18:02	 From --- : yes
+14:18:50	 From --- : ok
+14:19:05	 From --- : Would you please explain what you meant by saying that our code should handle emojis in the json file?
+14:20:16	 From --- : Alright, thanks
+14:20:45	 From --- : yes 
+14:20:45	 From --- : Yes
+14:20:46	 From --- : Yes
+14:21:05	 From --- : Are we recommended to use GitHub, GitLab, or Bitbucket?
+14:21:22	 From Farzad Khodadadi :  choose whatever suits you best
+14:21:48	 From Farzad Khodadadi : Github offers good perks for students, for instance, free domain for a year, private repositories, etc.
+14:21:54	 From ---  : In slide 11, why are we committing first before making any changes?
+14:22:04	 From ---  : i think to save those changes
+14:22:53	 From ---  : thankyou
+14:23:05	 From ---  : You suggested that we should design a structure to deal with huge data. Does it consider reading the file chunk by chunk, dropping useless data, etc?
+14:23:06	 From ---  : I just have a question regarding the workshops. Is the Friday workshop only for asking questions?
+14:23:28	 From ---  : Also can you explain pull and push request?
+14:23:45	 From ---  : which libraries of python r more useful in this subject?
+14:23:49	 From ---  : regarding the corruption in the data that we have to handle all the possible corruptions are present in the tinytwitter.json so that we can code for the larger dataset according to that?
+14:24:11	 From Alwyn Pan : They are basically the same, just in different Git provider they have different names
+14:24:45	 From ---  : Thank you.
+14:24:46	 From Farzad Khodadadi : I’ll explain pull and push shortl
+14:24:49	 From ---  : Looks great approach
+14:25:45	 From ---  : What's the difference b/w clone and checkout?
+14:26:49	 From ---  : If pull means getting from Remote to Local then why others have to review my code?
+14:27:01	 From ---  : Considering slide no. 15
+14:27:45	 From Alwyn Pan : Do you mean "Pull Request" in GitHub / Bitbucket
+14:28:09	 From Alwyn Pan : "Merge Request" in GitLab?
+14:29:10	 From Alwyn Pan : "Pull" is different from "Pull Request"
+14:30:26	 From ---  : ohh thankyou
+14:32:18	 From ---  : what is the next week workshop abt?
+14:32:54	 From ---  : Richard, you suggested that we should design a structure to deal with the huge json data, last session. Does it include reading the file chunk by chunk, dropping useless data, etc?
+14:33:55	 From Farzad Khodadadi : That sounds like a possible approach of doing this 
+14:35:49	 From ---  : When we are using git stash, what exactly is happening in the background? Also, when merging, what are possible ways to avoid code conflict?
+14:38:50	 From ---  : Thank you
+14:40:53	 From ---  : Is anyone using Putty to access spartan?
+14:41:47	 From ---  : I am using Putty
+14:42:09	 From Farzad Khodadadi : Putty is one of the many available SSH clients for Windows. You are not limited to using that only, but because it’s free and doesn’t need installation, etc, it’s preferred
+14:42:50	 From ---  : are you able to login @Shiv
+14:48:03	 From ---  : India
+14:49:21	 From ---  : For the karaage account I did not tick the option for “personal cluster account” how do I enable this option?
+14:49:31	 From ---  : How can we get data from social media if you can explain that would be great
+14:49:59	 From ---  : Oh, alright thank you
+14:54:32	 From ---  : Thanks Richard and Farzad.
+14:54:32	 From ---  : thank you
+14:54:43	 From ---  : Thank you
+14:54:48	 From ---  : Thank you.
+14:55:00	 From ---  : Thank you
